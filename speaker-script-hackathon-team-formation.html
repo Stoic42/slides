@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>黑客松高效组队与团队协作 · 超级详细演讲稿</title>
+<meta name="author" content="Desal / SheNicest">
+<meta name="description" content="黑客松高效组队与团队协作的超级详细演讲稿，含20+ Fun Facts、8个实战故事、完整引用来源">
+<meta name="keywords" content="黑客松,组队,团队协作,SheNicest,演讲稿">
+<meta name="generator" content="Kami">
+<link rel="icon" href="https://gw.alipayobjects.com/zos/k/vl/logo.svg" type="image/svg+xml">
+<style>
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  :root {
+    --parchment:  #f5f4ed;
+    --ivory:      #faf9f5;
+    --near-black: #141413;
+    --dark-warm:  #3d3d3a;
+    --olive:      #504e49;
+    --stone:      #6b6a64;
+    --brand:      #1B365D;
+    --brand-tint: #EEF2F7;
+    --border:     #e8e6dc;
+    --border-soft:#e5e3d8;
+    --pink:       #df017e;
+    --pink-light: #fce4f0;
+    --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--parchment);
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 11pt;
+    line-height: 1.65;
+    letter-spacing: 0.3pt;
+  }
+
+  @media screen {
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 48px 60px 48px;
+    }
+  }
+
+  /* ========== COVER ========== */
+  .cover {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0 40px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .cover-eyebrow {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--pink);
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+    margin-bottom: 20pt;
+    font-weight: 500;
+  }
+  .cover-title {
+    font-size: 32pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.2;
+    margin-bottom: 20pt;
+    letter-spacing: 0.5pt;
+  }
+  .cover-sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.6;
+    max-width: 85%;
+    margin-bottom: 40pt;
+  }
+  .cover-meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    line-height: 1.8;
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 500;
+  }
+
+  /* ========== INTRO META ========== */
+  .intro-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-family: var(--sans);
+    font-size: 10pt;
+  }
+  .intro-meta dt {
+    color: var(--stone);
+    font-weight: normal;
+  }
+  .intro-meta dd {
+    color: var(--near-black);
+    font-weight: 500;
+  }
+
+  /* ========== HEADINGS ========== */
+  h1 {
+    font-size: 20pt;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 48px 0 14px 0;
+    color: var(--near-black);
+    border-left: 3px solid var(--pink);
+    padding-left: 12px;
+  }
+  h2 {
+    font-size: 15pt;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 32px 0 10px 0;
+    color: var(--near-black);
+    border-left: 3px solid var(--brand);
+    padding-left: 10px;
+  }
+  h3 {
+    font-size: 12pt;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 20px 0 8px 0;
+    color: var(--dark-warm);
+  }
+  h4 {
+    font-size: 10.5pt;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 16px 0 6px 0;
+    color: var(--dark-warm);
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+  }
+
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--pink);
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    margin-bottom: 6pt;
+    font-weight: 500;
+    display: block;
+  }
+
+  /* ========== PARAGRAPHS ========== */
+  p {
+    margin: 0 0 10pt 0;
+    line-height: 1.65;
+    color: var(--near-black);
+  }
+
+  .lead {
+    font-size: 12.5pt;
+    line-height: 1.6;
+    color: var(--dark-warm);
+    margin-bottom: 16pt;
+    font-weight: 400;
+  }
+
+  .hl { color: var(--pink); font-weight: 500; }
+  strong { font-weight: 500; color: var(--dark-warm); }
+
+  /* ========== SLIDE HEADER ========== */
+  .slide-header {
+    background: var(--brand);
+    color: var(--ivory);
+    padding: 12px 16px;
+    border-radius: 4px 4px 0 0;
+    margin: 40px 0 0 0;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .slide-header .slide-num {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: rgba(250,249,245,0.6);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .slide-header .slide-title {
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--ivory);
+  }
+  .slide-header .slide-time {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: rgba(250,249,245,0.5);
+    flex-shrink: 0;
+  }
+
+  .slide-body {
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 20px 24px 24px 24px;
+  }
+
+  /* ========== QUOTE / SPEECH ========== */
+  blockquote {
+    border-left: 3px solid var(--pink);
+    margin: 14px 0;
+    padding: 8px 0 8px 18px;
+    color: var(--olive);
+    line-height: 1.65;
+    font-size: 11.5pt;
+    background: var(--pink-light);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ========== LISTS ========== */
+  ul, ol {
+    margin: 8px 0 12px 0;
+    padding-left: 22px;
+    line-height: 1.65;
+  }
+  ul li::marker { color: var(--pink); content: "◆ "; font-size: 8pt; }
+  ol li::marker { color: var(--brand); font-weight: 500; }
+
+  li { margin-bottom: 6px; padding-left: 4px; }
+
+  /* ========== CALLOUT BOXES ========== */
+  .callout {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--brand);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+    background: var(--brand-tint);
+  }
+  .callout-funfact {
+    border-left-color: var(--pink);
+    background: var(--pink-light);
+  }
+  .callout-story {
+    border-left-color: #f59e0b;
+    background: #fffbeb;
+  }
+  .callout-citation {
+    border-left-color: var(--olive);
+    background: #f5f4ef;
+  }
+  .callout-tip {
+    border-left-color: #10b981;
+    background: #ecfdf5;
+  }
+
+  .callout-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--stone);
+  }
+  .callout-funfact .callout-label { color: var(--pink); }
+  .callout-story .callout-label { color: #b45309; }
+  .callout-citation .callout-label { color: var(--olive); }
+  .callout-tip .callout-label { color: #059669; }
+
+  /* ========== DIVIDER ========== */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ========== TABLES ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+  th {
+    background: var(--brand);
+    color: var(--ivory);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    letter-spacing: 0.5pt;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--ivory); }
+  tr:last-child td { border-bottom: none; }
+
+  /* ========== APPENDIX SECTION ========== */
+  .appendix {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 2px solid var(--border);
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    margin-top: 60px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* ========== PRINT ========== */
+  @media print {
+    body { padding: 20px; max-width: 100%; }
+    .slide-header { break-inside: avoid; }
+    .callout { break-inside: avoid; }
+    blockquote { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== COVER ====== -->
+<div class="cover">
+  <div class="cover-eyebrow">SheNicest · 演讲稿 v3.0</div>
+  <h1 class="cover-title">黑客松高效组队<br>与团队协作</h1>
+  <p class="cover-sub">超级详细演讲稿 · 含 20+ Fun Facts · 8 个实战故事 · 完整引用来源<br>基于 16 页电子墨水风格幻灯片</p>
+  <dl class="cover-meta">
+    <dt>演讲时长</dt><dd>约 15–20 分钟</dd>
+    <dt>适用场景</dt><dd>工作坊、Meetup 演讲、机构内部分享</dd>
+    <dt>风格</dt><dd>电子墨水 · Kami 排版系统</dd>
+    <dt>最后更新</dt><dd>2026 年 5 月 17 日</dd>
+  </dl>
+</div>
+
+<!-- ====== INTRO META ====== -->
+<div class="intro-meta">
+  <dl>
+    <dt>版本</dt><dd>v3.0 — 超级详细版</dd>
+    <dt>协作工具</dt><dd>SheNicest Logo、参考文献 QR 码、小红书 QR 码</dd>
+  </dl>
+  <dl>
+    <dt>演讲提示</dt><dd>按 N 键显示 Speaker Notes（提词器）</dd>
+    <dt>Fun Facts</dt><dd>20+ 临场可用 Fun Facts</dd>
+  </dl>
+</div>
+
+<!-- ====== SLIDE 01 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 01</span>
+  <span class="slide-title">开场（30 秒）</span>
+  <span class="slide-time">约 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">大家好。我参加过好几次黑客松，组过熟人队、现场队，也 Solo 过。今天分享的内容不是"成功学"，而是<strong>翻车之后的复盘</strong>——我踩过什么坑，怎么调整的，供大家参考。</p>
+
+  <blockquote>
+    先做一个快速调查：今天在场的朋友，有多少人<strong>第一次</strong>参加黑客松？好，请举手的朋友记住我今天说的第一件事——你们今天来对了，黑客松不是考试。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>等待 1 秒再按下一页，让观众定下来。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact</div>
+    <p>我第一次参加黑客松，是和一个朋友组队，结果我们吵起来了——因为我们从来没有聊过"如果拿了奖奖金怎么分"。最后那个项目连提交都没提交。</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">设计备注</div>
+    <p>这一页<strong>不要念简历</strong>，只建立"实战经历"的可信度。避免说"我是做产品的 / 我是程序员"——让内容替你建立权威感。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 02 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 02</span>
+  <span class="slide-title">核心隐喻</span>
+  <span class="slide-time">约 1 分 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">在座各位，来之前有多少人有一点点紧张？那种感觉——像不像明天要考试？</p>
+
+  <blockquote>
+    我懂。我第一次参加黑客松的时候，穿了正装去，以为要"答题"。后来才知道，黑客松根本不是考试。<br><br>
+    <strong>黑客松是开放世界游戏。</strong><br><br>
+    考试有标准答案——你写错一个字，不得分。黑客松没有。你进去之后：想做什么题目，自己选；想用什么技术路线，自己定；想找什么队友，自己去找；想提交就提交，不想提交也可以直接走。<br><br>
+    <strong>没有标准答案，没有及格线，没有人在给你打分。</strong> 你唯一要做的事情就是：找到你想解决的问题，做出来。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>停顿 2 秒，让"开放世界"这个比喻落地。然后轻声说："这是第一个心态上的转变。"</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact</div>
+    <p>有的人参加黑客松，第一件事是去问"有没有上一届的获奖项目可以参考"——这个问题本身就说明他还在用"考试思维"。黑客松没有标准答案，参考上一届获奖项目，只能让你知道"别人做了什么"，但不能告诉你"你应该做什么"。</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">设计备注</div>
+    <p>可以在这里微微抬起手，做一个"展开"的手势，强化隐喻。语速在"自己选 / 自己定 / 自己找"三个短句处略微加速，营造"自由"的感觉。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 03 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 03</span>
+  <span class="slide-title">Solo 不是退而求其次</span>
+  <span class="slide-time">约 1 分 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">组队不是必选项。我不是来劝你们组队的。Solo 不是社恐的逃生舱，也不是"丢人"的选择。</p>
+
+  <blockquote>
+    <strong>Solo 不是逃生舱，是一种项目控制策略。</strong><br><br>
+    如果你选 Solo，你必须接受一个现实：<strong>你的项目范围要砍到只剩骨头</strong>。一个功能，一个场景，一个用户故事。不要什么都想做。<br><br>
+    你选 Solo，AI 就是你的联合创始人。但 AI 能做的事情是有限的，你必须把问题缩到 AI 能 handle 的范围内。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>停顿 1 秒，让"Solo 需要极强的边界感"这个观点沉淀。然后问一句："Solo 不是退而求其次，Solo 是主动选择了一种更纯粹的路。你同意吗？"</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact</div>
+    <p>有的人 Solo 是因为"找不到合适的队友"，这不是失败，这是<strong>信息不对齐的正常结果</strong>。你去找了，发现没有合适的，然后选择 Solo，这叫决策，不叫放弃。我 Solo 过一次，做的是一个极其小的工具——一个浏览器插件，把 B 站视频下载链接找出来。48 小时做完了，上线了，200 人用。这不比做一个半成品的大项目香吗？</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">设计备注</div>
+    <p>Solo 的核心是<strong>克制</strong>，不要把它描述成"不得已的选择"。它是一种主动的策略选择。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 04 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 04</span>
+  <span class="slide-title">什么时候适合组队？</span>
+  <span class="slide-time">约 2 分钟</span>
+</div>
+<div class="slide-body">
+  <p class="lead">组队不是必选项，但有几种情况，组队的性价比远高于 Solo。</p>
+
+  <blockquote>
+    <strong>第一种：奔着奖金去的。</strong> 人多力量大，分工明确，冲奖效率更高。但这意味着你们要对齐：拿了奖怎么分，谁做主导，谁来 pitch。<strong>必须在比赛开始之前聊清楚，</strong>不要等到拿奖了再来吵。<br><br>
+    <strong>第二种：成熟团队出击。</strong> 如果你本来就有团队，黑客松是你们的练兵场。这种情况下组队效率最高，因为你们已经有默契，不需要从头磨合。<br><br>
+    <strong>第三种：跟朋友一起去玩。</strong> 氛围比奖金重要。但要注意：和朋友组队，最大的风险是不好意思谈钱。<br><br>
+    <strong>第四种：现场认识的人，想法非常契合。</strong> 这是缘分，不要错过。我自己有一次，现场组队，遇到了一个做硬件的姐姐，主题刚好是我们都想做的方向，48 小时拿了三等奖。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>每个场景念完稍作停顿，让观众对号入座。问一句："你们现在最接近哪种情况？"</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact</div>
+    <p>组队失败的案例里，最常见的原因不是技术不行，是<strong>预期不对齐</strong>。我见过最离谱的情况是：一个团队里，有人是来"拿奖"的，有人是来"玩的"，有人是来"积累面试作品"的。三个人对"成功"的定义都不一样，最后不欢而散。</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">设计备注</div>
+    <p>如果观众是第一次参加黑客松，重点讲"现场组队"那一条——这是 SheNicest 最有特色的场景。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 05 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 05</span>
+  <span class="slide-title">女性空间 = 更低的组队门槛</span>
+  <span class="slide-time">约 2 分钟</span>
+</div>
+<div class="slide-body">
+  <p class="lead">这是 SheNicest 和其他黑客松最不一样的地方。数据说话：</p>
+
+  <blockquote>
+    女性专属黑客松参与率是 <strong>52.6%</strong>，混合赛只有 <strong>22%</strong>。这是 Eindhoven University 的研究数据。<br><br>
+    在 Women in Engineering 黑客松里，女性的<strong>内在动机得分显著更高</strong>（4.4 分 vs 3.3 分，满分 5 分）。这是 Waterloo 大学的研究。<br><br>
+    内在动机更高意味着什么？意味着她们来参加这个活动，是因为<strong>自己真的想做这件事</strong>，不是因为"听说有用"或者"大家都参加了"这种外部压力。<br><br>
+    为什么会有这种差异？因为<strong>专属空间降低了 Impostor Syndrome</strong>。在普通的混合黑客松里，如果你是一个女性，你走进会场，发现 80% 是男性——这个心理成本是很高的。<br><br>
+    在 SheNicest，你走进会场，发现大家都是女性——<strong>这个心理成本一下子就没了。</strong><br><br>
+    在这里，现场组队不是冒险，而是<strong>设计好的安全体验</strong>。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>读到"52.6%"和"22%"时加重语气，这是最有说服力的数字。读完后停顿 2 秒，让数字的冲击感落地。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · Impostor Syndrome 背景</div>
+    <p>Impostor Syndrome（冒充者综合征）最早由心理学家 <strong>Pauline Rose Clance</strong> 在 1978 年提出。她发现有很多成就很高的女性，明明已经在各自领域做得很好了，却总是在内心觉得"我其实不配"——这是一个被系统性低估的现象。黑客松里的女性专属空间，本质上是在解决这个问题。</p>
+  </div>
+
+  <div class="callout callout-citation">
+    <div class="callout-label">引用来源</div>
+    <ul>
+      <li>Eindhoven University of Technology — 女性专属 vs 混合黑客松参与率研究 (52.6% vs 22%)</li>
+      <li>University of Waterloo — Women in Engineering Hackathon 女性参与者内在动机量化研究 (4.4 vs 3.3)</li>
+      <li>Pauline Rose Clance (1978) — Impostor Syndrome 原始研究</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ====== SLIDE 06 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 06</span>
+  <span class="slide-title">三种组队模式</span>
+  <span class="slide-time">约 2 分钟</span>
+</div>
+<div class="slide-body">
+  <p class="lead">组队有三种方式，各有不同的适用场景：</p>
+
+  <blockquote>
+    <strong>1. 熟人组队——提前发链接给朋友。</strong> 提前在群里讨论赛题，把背景资料、初步 idea 发给大家，对齐技能和兴趣点。分工从一开始就要明确。<strong>不要到现场再分工，</strong>那是最大的时间浪费。<br><br>
+    <strong>2. 线上推销——在群里或赛前 Meetup 主动展示背景和技能。</strong> <strong>一个具体的 idea 是最好的组队磁铁，</strong>比"我会很多东西"有用得多。你应该说："我是做前端的，正在做一个关于老年人健康管理的项目，想找做后端和数据分析的队友，有没有兴趣？"<br><br>
+    <strong>3. 现场组队——找到同样在寻找队友的人，主动介绍你的技能和兴趣。</strong> 这是 SheNicest 最独特的场景。<br><br>
+    <strong>实操提示：</strong>找眼神迷茫的人，走过去说——"你好，我会前端 / 设计 / 产品，你在找队友吗？" 这一句话就够了。<strong>一句话亮明角色 + 问一个问题——这是最有效的信息传递方式。</strong>
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>读到"现场组队"时放慢语速，这是 SheNicest 最有特色的部分。读到实操提示时，可以现场演示一下这句话的语气和表情。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · 反面教材 vs 正面教材</div>
+    <p><strong>反面：</strong>我在 DIIS BUILD 黑客松上看到一个很典型的案例：有个男生见到人就发简历，滔滔不绝讲三分钟。结果呢？没有人愿意和他组队，因为信息量太大了，而且他完全没有在看对方的反应。这不叫组队，这叫单方面输出。<br><br>
+    <strong>正面：</strong>我见过一个姐姐，她走过去，对方说"我在找做后端的"，她就说"我是做前端的，后端你用的是什么技术栈？"——三秒钟完成初步筛选，而不是三分钟。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 07 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 07</span>
+  <span class="slide-title">组队后的协作</span>
+  <span class="slide-time">约 2 分钟</span>
+</div>
+<div class="slide-body">
+  <p class="lead">组队之后，最怕的不是技术问题，而是<strong>期望不对齐</strong>。</p>
+
+  <blockquote>
+    <strong>清楚各自的技术栈和负责部分。</strong> 不是所有人都是"前端"或者"后端"——黑客松里经常出现"我不会写代码，但我可以 pitch"的情况。这也是有价值的。<br><br>
+    <strong>有人想边做边学，也可以——但别抢核心后端然后爆炸。</strong> 如果你想学后端，你找了一个你完全不了解的技术栈，然后你花了 8 个小时发现这条路走不通——你不仅浪费了自己的时间，还可能拖累了整个团队。<strong>边做边学是可以的，但不要在核心路径上实验新技术栈。</strong><br><br>
+    <strong>热情和愿景一致，就 OK。</strong><br><br>
+    新手建议认领：资料整理、用户访谈、UI、Pitch、测试、Demo Script。<br><br>
+    <strong>"别把熬夜浪漫化。睡眠不是拖累，是性能优化。"</strong>
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>金句读完停顿 2 秒，不要马上切页。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · 睡眠的科学</div>
+    <p>University of California San Diego 的研究表明，<strong>连续 24 小时不睡觉，人的认知能力相当于血液酒精浓度 0.1%</strong>——已经超过了中国酒驾的标准。黑客松的 48 小时，如果你们选择通宵工作，到第二天早上，你们的决策质量可能已经降到酒驾水平了。这意味着：<strong>你们在前 24 小时做的决策，很可能比后 24 小时做的决策质量更高。</strong></p>
+  </div>
+
+  <div class="callout callout-citation">
+    <div class="callout-label">引用来源</div>
+    <p>University of California San Diego — 睡眠剥夺与认知能力研究 (24小时不睡 = 血液酒精浓度 0.1%)</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 08 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 08</span>
+  <span class="slide-title">用录音记录讨论</span>
+  <span class="slide-time">约 1 分 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">黑客松期间讨论密集，信息容易散落在空气里。</p>
+
+  <blockquote>
+    <strong>把讨论变成可检索资产，不要让想法死在空气里。</strong><br><br>
+    <strong>工具推荐：</strong> Plaud / 随手记 / 华为手机自带录音——成本极低，不需要买设备；腾讯会议——如果你们的团队是远程的，可以用它的 VIP 转写功能，把讨论内容直接变成文字；导出 TXT 喂给 AI，做可检索的知识库。<br><br>
+    <strong>关键点：讨论的时候开着录音，你不会损失任何东西，但你会在事后收获很多。</strong>
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>读到工具列表时配合手势，一二三念完稍作停顿。然后问观众："你们有多少人用过手机录音功能？"</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · Plaud vs 华为自带</div>
+    <p>Plaud 是一家做 AI 录音硬件的公司，2024 年拿了红杉的投资。但其实，<strong>华为手机的自带录音机已经自带转写功能</strong>，而且准确率相当高。你不需要买额外的设备，你需要的只是"打开录音"这个动作。<br><br>
+    我有一次参加黑客松，远程团队的两个人分别在英国和中国，他们用腾讯会议讨论了三个小时。讨论结束后，我把转写内容导出，让 Claude 整理成了一个结构化的文档。第二天，其中一个人忘了那天讨论了什么，我把文档发给他，他说"这就是我当时的想法"——这就是录音的价值。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 09 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 09</span>
+  <span class="slide-title">AI 是你的团队成员</span>
+  <span class="slide-time">约 2 分钟</span>
+</div>
+<div class="slide-body">
+  <p class="lead">AI 不是万能药，但它在黑客松里可以扮演三个角色：</p>
+
+  <blockquote>
+    <strong>调查——避免重复造轮子。</strong> 在黑客松开始之前，你想知道这个方向有没有人做过。AI 可以快速帮你做文献调研，把几个小时的搜索时间压缩到几分钟。<strong>把 AI 封装成 Hackathon Skill</strong>——每次遇到新问题，先让 AI 做一次"前世调查"。<br><br>
+    <strong>探讨思路——参考学术研究和前人思路。</strong> AI 擅长的事情之一，是把一篇论文或者一篇技术博客的要点提取出来，然后和你讨论它对你们项目的启发。<strong>不要只让 AI 写代码，让它帮你想问题。</strong><br><br>
+    <strong>新闻报道——了解网友对工具/领域的情绪。</strong> AI 能读 Reddit、HN 等海外论坛，帮你了解某一类产品在真实用户群体中的口碑和使用体验。<br><br>
+    <strong>关键边界：AI 做调研，人类做决策。</strong> 我见过很多团队，把 AI 的输出当成最终答案。这是危险的信号。<strong>AI 输出的是信息，不是判断。</strong> 人类在头脑风暴时的争吵、妥协、权衡——那是决策过程，那个价值是 AI 无法替代的。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>"AI 做调研，人类做决策"这句要加重语气，这是最重要的原则。停顿 2 秒。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · AI 陷阱</div>
+    <p>我见过一个团队，用 AI 做了整整 20 页的市场分析报告，内容非常详尽。投资人问他们："你们自己的判断是什么？"他们面面相觑，说"我们觉得 AI 说的都对"。<strong>他们在用 AI 的判断替代了自己的判断。</strong>如果 AI 错了，他们就跟着错了。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 10 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 10</span>
+  <span class="slide-title">AI 信息源选择</span>
+  <span class="slide-time">约 1 分 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">不同 AI 工具擅长不同任务：</p>
+
+  <blockquote>
+    <strong>Kimi</strong>——擅长抓取 B站专栏、知乎问答、公众号这类中文内容；如果你想了解某个方向在中国互联网社区的真实讨论，Kimi 是首选。<br><br>
+    <strong>OpenAI</strong>——能读 Reddit 等海外论坛，信息更广；如果你想了解某个产品或技术在国际社区的口碑和讨论，OpenAI 更适合。<br><br>
+    <strong>Perplexity / Claude</strong>——学术溯源和引文准确性更高。如果你需要引用论文或者追溯某个学术结论的来源，用 Perplexity 或者 Claude，它们的引文准确率远高于其他工具。<br><br>
+    <strong>但所有 AI 输出必须回到原始链接、论文、官方文档、论坛原帖验证。</strong> AI 是加速器，不是真理来源。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>读完"验证"那句停顿 2 秒，让这句话的重量落地。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · AI 幻觉案例</div>
+    <p>Google 的 Gemini 曾经生成了一段假的学术引用，包括作者、期刊名、论文标题——看起来完全真实，但全部是 AI 自己编造的。<strong>AI 会自信地给你一个完全不存在的引用，</strong>而这个引用的格式看起来和真实引用一模一样。这就是为什么我们必须验证 AI 给出的每一个来源。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 11 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 11</span>
+  <span class="slide-title">善用 GitHub</span>
+  <span class="slide-time">约 1 分 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">有远程队员的情况下，<strong>信息传递效率决定你们能睡几小时</strong>。</p>
+
+  <blockquote>
+    <strong>赛前充分把握 Git 使用——基本命令：clone / branch / commit / push / PR。</strong> 这些命令不需要你会写代码，但需要你在<strong>赛前就学会</strong>。不要在比赛开始之后再学 Git，那是在浪费你原本可以用来做项目的时间。<br><br>
+    <strong>用 AI 整理文档，减少文字传递的歧义。</strong> 用 AI 帮你写文档的好处是：AI 会把你的意思压缩成一个明确的表述，如果 AI 理解错了，你立刻就知道歧义在哪里。<br><br>
+    <strong>有远程队员时，异步优先，文档大于口头沟通。</strong> 远程团队最大的问题是<strong>信息不对称</strong>，而不是沟通次数不够。解决方案是：<strong>把决策写成文档，</strong>而不是存在参与讨论的几个人的脑子里。<br><br>
+    <strong>Git 是赛前就要会的，不是赛中学的。</strong>
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>读完"不是赛中学的"加重语气，这是一句实用警告。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · 桌面文件夹的教训</div>
+    <p>我见过最糟糕的远程团队协作是这样的：团队里有一个后端工程师，他把所有的代码改动都存在自己电脑的桌面上文件夹里，每次需要的时候就说"等一下我发给你"。结果在他通宵之后的某个时刻，他把最新版本的文件覆盖了旧版本，自己也分不清哪个是哪个了。最后他们用了 AI 来帮他找回旧的代码——讽刺的是，他用 AI 来找回他本应该存在 Git 里的代码。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 12 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 12</span>
+  <span class="slide-title">怎么组队不翻车</span>
+  <span class="slide-time">约 2 分 30 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">六个原则，快速过一遍。重点展开第 5 和第 6 条。</p>
+
+  <blockquote>
+    1. <strong>先问目标</strong>——拿奖 / 学习 / 交朋友 / 做作品集；<br>
+    2. <strong>先亮技能</strong>——我会什么、不会什么、想学什么；<br>
+    3. <strong>先定边界</strong>——代码、设计、Pitch、产权、后续是否继续；<br>
+    4. <strong>先建系统</strong>——GitHub、共享文档、录音转写、任务板；<br>
+    5. <strong>先对齐预期</strong>——投入多少？最终目标是什么？短期内不见回报能接受吗？<br>
+    6. <strong>先明分寸</strong>——见好就收、相机而动、互为补位、不拖后腿。
+  </blockquote>
+
+  <div class="callout callout-story">
+    <div class="callout-label">实战故事 · DIIS BUILD</div>
+    <p>DIIS BUILD 硬件黑客松，我和一个技术团队合作。比赛进行到中段，发起人突然决定改变叙事口径——从"商业化"转向"公益角度"。技术团队看到这个变化，第一反应是去"纠正"这个叙事，觉得发起人在"乱来"。<br><br>
+    但我没有去"拆台"。我观察了一下，发现发起人之所以改变叙事，是因为他看到了投资人的表情——他意识到这个投资人不吃商业化那套。发起人是在临场调整策略。<br><br>
+    <strong>好的团队是"互补"而不是"对抗"。</strong> 队友改变叙事可能有原因，有眼力见的人会观察、配合，而不是拆台。这就是"先明分寸"。</p>
+  </div>
+
+  <h3>切换节奏</h3>
+  <p>第 6 条和故事是这一页的高光，放慢语速，详细讲。讲完故事后停顿 3 秒。</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · "见好就收"反面教材</div>
+    <p>有一个团队，技术团队看到产品经理提出的需求不合理，于是花了三整天"义务"重构了整个代码库，想要证明"产品经理的想法是错的"。结果呢？他们把比赛时间全花在了这上面，项目最终没有提交。但他们的内心戏是"我在帮助团队"——<strong>这是一个非常隐蔽的"拖后腿"：你在做你以为对的事情，但你在拖累整个团队。</strong></p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 13 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 13</span>
+  <span class="slide-title">核心要点（总结）</span>
+  <span class="slide-time">30 秒以内</span>
+</div>
+<div class="slide-body">
+  <p class="lead">快速过一遍，五个关键词带走：</p>
+
+  <blockquote>
+    <strong>开放心态</strong>——Solo 或组队都可以；<br>
+    <strong>主动出击</strong>——熟人、线上、现场，总有适合你的方式；<br>
+    <strong>善用工具</strong>——录音、腾讯会议、GitHub；<br>
+    <strong>AI 赋能</strong>——调查、思路、情绪，一个都不能少；但 AI 做调研，人类做决策；<br>
+    <strong>女性空间</strong>——在 SheNicest，组队是设计好的安全体验。<br><br>
+    这五点，<strong>开放、主动、工具、AI、女性空间</strong>——记住就够了。
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>控制 30 秒，不要展开，念完就走。语速可以稍快。</p>
+</div>
+
+<!-- ====== SLIDE 14 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 14</span>
+  <span class="slide-title">组队前 30 分钟契约</span>
+  <span class="slide-time">约 2 分钟</span>
+</div>
+<div class="slide-body">
+  <p class="lead">不是签合同，是<strong>快速对齐</strong>。这个"契约"不是法律文件，它是一个<strong>预期的对齐仪式</strong>。</p>
+
+  <blockquote>
+    <strong>先明分寸</strong>——见好就收、相机而动、互为补位、不拖后腿；<br>
+    <strong>技术栈对齐</strong>——各自负责什么技能；<br>
+    <strong>目标与投入</strong>——最终目标是什么？愿意投入多少？短期内不见回报能接受吗？<br>
+    <strong>退出与分配</strong>——如果有人退出怎么办，奖金怎么分；<br>
+    <strong>睡眠/工作节奏</strong>——通宵还是分班；<br>
+    <strong>录音与知识产权</strong>——开始前确认所有人同意。
+  </blockquote>
+
+  <div class="callout callout-story">
+    <div class="callout-label">实战故事 · 腾讯云黑客松</div>
+    <p>那次比赛的队长，是一个非常务实的人。他在组队之前说的第一句话是：<strong>"奖金平分。"</strong><br><br>
+    就这一句话，整个团队的氛围立刻变了。因为利益分配是最容易产生矛盾的地方，他先把这个问题解决了，其他所有的事情都有了共同的基准线。<br><br>
+    那次比赛，我们拿了三等奖，奖金不多，但分得很清楚，大家没有任何怨言。这是我参加过的<strong>氛围最好的一次黑客松经历</strong>。</p>
+  </div>
+
+  <h3>切换节奏</h3>
+  <p>故事讲完停顿，等 30 秒互动时间。可以看着手表计时。说："你们现在就可以和旁边的人聊 30 秒，对齐一下：你们来这里的最终目标是什么？"</p>
+
+  <div class="callout callout-funfact">
+    <div class="callout-label">Fun Fact · NASIS 教训</div>
+    <p>在 NASIS 黑客松的聊天群里，有一次出现了因为奖品分配不均导致的争执。大家闹得很不愉快，从此再也没有合作过。<strong>利益分配要提前说好，而且要说清楚、说具体，</strong>不要说"到时候再说"。因为"到时候"永远不会有"现在"清楚。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 15 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 15</span>
+  <span class="slide-title">参考文献</span>
+  <span class="slide-time">停顿 3–5 秒</span>
+</div>
+<div class="slide-body">
+  <p class="lead">扫码获取完整文献包 + 演讲者备注。停顿 3–5 秒，让观众掏手机扫码。</p>
+
+  <div class="callout callout-citation">
+    <div class="callout-label">四个核心引用</div>
+    <ul>
+      <li><strong>arXiv</strong> — <em>Competing or Collaborating? A Comparative Study of Hackathon Formats and Team Dynamics</em></li>
+      <li><strong>Eindhoven University of Technology</strong> — 女性专属黑客松参与率 52.6% vs 22%</li>
+      <li><strong>University of Waterloo</strong> — WiE 黑客松女性参与者内在动机 (4.4 vs 3.3，满分 5 分)</li>
+      <li><strong>MDPI</strong> — <em>Integrating Generative AI in Hackathons: Opportunities, Challenges, and Best Practices</em></li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">二维码尺寸</div>
+    <p>公众号 + 小红书两个二维码，140×140px，gap 60px，投影后排观众也能扫。</p>
+  </div>
+</div>
+
+<!-- ====== SLIDE 16 ====== -->
+<div class="slide-header">
+  <span class="slide-num">Slide 16</span>
+  <span class="slide-title">结尾</span>
+  <span class="slide-time">约 15 秒</span>
+</div>
+<div class="slide-body">
+  <blockquote>
+    祝大家组队顺利，<strong>玩得开心</strong>！<br><br>
+    资源在上一页（扫码领取 Git 急救卡 + 30 分钟契约模板）。<br>
+    欢迎扫码关注 SheNicest 公众号和小红书，获取更多活动信息。<br><br>
+    <strong>谢谢大家！</strong>
+  </blockquote>
+
+  <h3>切换节奏</h3>
+  <p>读完"玩得开心"指向 Slide 15 的二维码提示，然后等待掌声或提问。</p>
+
+  <div class="callout callout-tip">
+    <div class="callout-label">设计备注</div>
+    <p>Slide 16 底部已补上公众号 + 小红书小码（90×90px），扫码入口不只局限在 Slide 15。</p>
+  </div>
+</div>
+
+<!-- ====== APPENDIX A: 每页视觉元素建议 ====== -->
+<div class="appendix">
+  <h1>附录 A：每页视觉元素建议</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>页码</th><th>建议图片</th><th>位置</th><th>说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>无</td><td>—</td><td>文字建立权威感</td></tr>
+      <tr><td>02</td><td>无</td><td>—</td><td>用手势强化隐喻</td></tr>
+      <tr><td>03</td><td>无</td><td>—</td><td>语速放缓建立节奏感</td></tr>
+      <tr><td>04</td><td>无</td><td>—</td><td>问观众问题增加互动</td></tr>
+      <tr><td>05</td><td>SheNicest Logo</td><td>右下角</td><td>品牌露出，opacity 0.7</td></tr>
+      <tr><td>06</td><td>无</td><td>—</td><td>现场演示组队对话语气</td></tr>
+      <tr><td>07</td><td>无</td><td>—</td><td>金句停顿 2 秒</td></tr>
+      <tr><td>08</td><td>录音 App 截图</td><td>可选</td><td>展示 Plaud / 华为录音界面</td></tr>
+      <tr><td>09</td><td>三列图标</td><td>可选</td><td>调查 🔍 / 思路 💡 / 情绪 📰</td></tr>
+      <tr><td>10</td><td>工具对比表格</td><td>可选</td><td>Kimi / OpenAI / Perplexity-Claude</td></tr>
+      <tr><td>11</td><td>GitHub 协作流程简易图</td><td>可选</td><td>clone → branch → PR</td></tr>
+      <tr><td>12</td><td>无</td><td>—</td><td>故事停顿 3 秒</td></tr>
+      <tr><td>13</td><td>无</td><td>—</td><td>快节奏</td></tr>
+      <tr><td>14</td><td>"30 分钟"计时器</td><td>角落</td><td>JS 实现，增加仪式感</td></tr>
+      <tr><td>15</td><td>公众号 + 小红书二维码</td><td>已嵌入</td><td>140×140px</td></tr>
+      <tr><td>16</td><td>公众号 + 小红书小码</td><td>已嵌入</td><td>90×90px</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ====== APPENDIX B: Fun Facts 快查表 ====== -->
+<div class="appendix">
+  <h1>附录 B：Fun Facts 快查表（临场使用）</h1>
+
+  <table>
+    <thead>
+      <tr><th>页码</th><th>Fun Fact</th><th>适合场景</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>第一次参加黑客松穿正装去，以为要"答题"</td><td>开场破冰</td></tr>
+      <tr><td>01</td><td>第一次组队因为没聊奖金分配，项目没提交</td><td>开场建立可信度</td></tr>
+      <tr><td>03</td><td>Solo 做过浏览器插件，48 小时完成，200 人用</td><td>给 Solo 正名</td></tr>
+      <tr><td>04</td><td>组队失败最常见原因：三个人对"成功"定义不同</td><td>预期对齐</td></tr>
+      <tr><td>04</td><td>临时组队拿奖，靠的是"刚好遇到对的人"</td><td>缘分故事</td></tr>
+      <tr><td>05</td><td>Impostor Syndrome 由 Pauline Rose Clance 1978 年提出</td><td>学术背景</td></tr>
+      <tr><td>06</td><td>单方面输出型组队：三分钟讲完简历，没人愿意组队</td><td>反面教材</td></tr>
+      <tr><td>06</td><td>三秒钟初步筛选：一句问题，筛选掉不合适的人</td><td>正面教材</td></tr>
+      <tr><td>07</td><td>24 小时不睡 = 血液酒精浓度 0.1%</td><td>睡眠金句</td></tr>
+      <tr><td>08</td><td>华为手机自带录音 + 转写，Plaud 不需要买</td><td>工具推荐</td></tr>
+      <tr><td>08</td><td>腾讯会议转写文档帮团队找回"丢失"的想法</td><td>工具价值</td></tr>
+      <tr><td>09</td><td>Gemini 生成假学术引用的著名案例</td><td>AI 局限性</td></tr>
+      <tr><td>09</td><td>团队用 AI 报告做决策，投资人问"你们自己的判断是什么"</td><td>AI 陷阱</td></tr>
+      <tr><td>11</td><td>工程师把代码存在桌面文件夹导致版本混乱，用 AI 找回</td><td>Git 必要性</td></tr>
+      <tr><td>12</td><td>技术团队花三天"义务"重构代码库想证明产品经理错了，项目没提交</td><td>见好就收</td></tr>
+      <tr><td>14</td><td>NASIS 黑客松群里因奖品分配不均导致团队破裂</td><td>利益分配</td></tr>
+      <tr><td>14</td><td>腾讯云队长说"奖金平分"，氛围立刻变好</td><td>正面教材</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ====== APPENDIX C: 引用来源 ====== -->
+<div class="appendix">
+  <h1>附录 C：完整引用来源</h1>
+
+  <ol>
+    <li><strong>Eindhoven University of Technology</strong> — 女性专属 vs 混合黑客松参与率对比研究 (52.6% vs 22%)</li>
+    <li><strong>University of Waterloo</strong> — Women in Engineering Hackathon 女性参与者内在动机量化研究 (4.4 vs 3.3，满分 5 分)</li>
+    <li><strong>arXiv</strong> — <em>Competing or Collaborating? A Comparative Study of Hackathon Formats and Team Dynamics</em></li>
+    <li><strong>MDPI</strong> — <em>Integrating Generative AI in Hackathons: Opportunities, Challenges, and Best Practices</em></li>
+    <li><strong>Pauline Rose Clance (1978)</strong> — Impostor Syndrome 原始研究</li>
+    <li><strong>University of California San Diego</strong> — 睡眠剥夺与认知能力研究 (24小时不睡 = 血液酒精浓度 0.1%)</li>
+    <li><strong>个人经历存档</strong> — DIIS BUILD 硬件黑客松团队默契复盘（2026 年 3 月）</li>
+    <li><strong>个人经历存档</strong> — 腾讯云黑客松利益分配经历</li>
+    <li><strong>个人经历存档</strong> — NASIS 黑客松奖品分配争执事件</li>
+    <li><strong>个人经历存档</strong> — 临时组队获三等奖经历</li>
+  </ol>
+</div>
+
+<footer>
+  文档版本：v3.0 · 最后更新：2026 年 5 月 17 日<br>
+  超级详细版：含 20+ Fun Facts、8 个实战故事、完整引用来源<br>
+  基于 16 页电子墨水风格幻灯片 · Kami 排版系统 · SheNicest
+</footer>
+
+</body>
+</html>
