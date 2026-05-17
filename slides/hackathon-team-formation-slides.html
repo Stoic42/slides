@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>黑客松高效组队与团队协作</title>
+  <style>
+    @font-face {
+      font-family: "ChaohuaType";
+      src: url("fonts/朝华打字机-subset.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "ChaohuaTitle";
+      src: url("fonts/朝华标题A-subset.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --pink: #ff3f94;
+      --pink-dim: rgba(255, 63, 148, 0.6);
+      --ink: #f9d8e8;
+      --ink-dim: rgba(249, 216, 232, 0.5);
+      --bg: #0a0a0f;
+      --bg-paper: #12101a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "ChaohuaType", "PingFang SC", monospace;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    .slide-number {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      font-size: 14px;
+      color: var(--pink-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .slide-title {
+      font-family: "ChaohuaTitle", "PingFang SC", sans-serif;
+      font-size: 56px;
+      color: #fff;
+      text-shadow: 0 0 40px var(--pink-dim);
+      margin-bottom: 50px;
+      letter-spacing: 0.05em;
+    }
+
+    .slide-subtitle {
+      font-size: 28px;
+      color: var(--ink-dim);
+      margin-bottom: 30px;
+    }
+
+    .slide-content {
+      font-size: 24px;
+      line-height: 1.8;
+      text-align: left;
+      max-width: 900px;
+    }
+
+    .slide-content ul {
+      list-style: none;
+    }
+    .slide-content li {
+      margin-bottom: 20px;
+      padding-left: 30px;
+      position: relative;
+    }
+    .slide-content li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      color: var(--pink);
+    }
+
+    .highlight {
+      color: var(--pink);
+      font-weight: bold;
+    }
+
+    .big-quote {
+      font-size: 36px;
+      color: #fff;
+      text-align: center;
+      max-width: 800px;
+      line-height: 1.6;
+      text-shadow: 0 0 30px var(--pink-dim);
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+    }
+    .col-card {
+      background: var(--bg-paper);
+      border: 1px solid var(--pink-dim);
+      border-radius: 8px;
+      padding: 30px;
+      text-align: left;
+    }
+    .col-card h3 {
+      font-family: "ChaohuaTitle", sans-serif;
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .col-card p {
+      font-size: 20px;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+    }
+    .col-check {
+      background: var(--bg-paper);
+      border: 1px solid var(--pink-dim);
+      border-radius: 8px;
+      padding: 24px 28px;
+      text-align: left;
+      font-size: 22px;
+    }
+    .col-check::before {
+      content: "✓ ";
+      color: var(--pink);
+      font-weight: bold;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 100;
+    }
+    nav button {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--pink-dim);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    nav button.active {
+      background: var(--pink);
+      border-color: var(--pink);
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--pink);
+      transition: width 0.3s ease;
+      z-index: 100;
+    }
+
+    .qr-placeholder {
+      width: 120px;
+      height: 120px;
+      border: 2px dashed var(--pink-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--ink-dim);
+      margin-top: 30px;
+    }
+
+    .tag-line {
+      font-size: 18px;
+      color: var(--ink-dim);
+      text-align: center;
+    }
+
+    /* Speaker notes */
+    .speaker-note {
+      display: none;
+    }
+    body.speaker-mode .speaker-note {
+      display: block;
+      position: absolute;
+      bottom: 80px;
+      left: 80px;
+      right: 80px;
+      font-size: 16px;
+      color: var(--ink-dim);
+      border-top: 1px solid var(--pink-dim);
+      padding-top: 10px;
+      line-height: 1.5;
+    }
+    body.speaker-mode .slide::before {
+      content: attr(data-note);
+      display: block;
+      position: absolute;
+      bottom: 80px;
+      left: 80px;
+      right: 80px;
+      font-size: 16px;
+      color: var(--pink);
+      border-top: 1px solid var(--pink-dim);
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- Slide 1: Title + Credibility -->
+<div class="slide active" id="slide-1" data-note="开场：我是谁，为什么听我说">
+  <div class="slide-title">黑客松高效组队与团队协作</div>
+  <div class="slide-subtitle">开放世界，不设限<br>
+    <span style="font-size: 18px; color: var(--ink-dim);">—— 多次参赛、组建团队、持续复盘的实战分享</span>
+  </div>
+  <div class="slide-number">01 / 16</div>
+</div>
+
+<!-- Slide 2: Open World Metaphor -->
+<div class="slide" id="slide-2" data-note="核心隐喻：黑客松不是考试，是高压版开放式学习场">
+  <div class="big-quote">黑客松是<span class="highlight">开放世界游戏</span><br>你进去之后完全可以自由地探索</div>
+  <div class="slide-number">02 / 16</div>
+</div>
+
+<!-- Slide 3: Solo is OK -->
+<div class="slide" id="slide-3" data-note="Solo 不是社恐逃生舱，是一种项目控制策略">
+  <div class="slide-content">
+    <ul>
+      <li>碰到什么<span class="highlight">主题</span></li>
+      <li>碰到什么<span class="highlight">人</span></li>
+      <li>对什么感兴趣</li>
+    </ul>
+    <br><br>
+    <div class="big-quote" style="font-size:28px">Solo 也未尝不可，不一定要对组队有那么大的包袱</div>
+    <p style="color: var(--ink-dim); font-size: 18px; margin-top: 40px;">* Solo = 选择了更纯粹的路，需要 AI 作为联合创始人，极度克制项目范围</p>
+  </div>
+  <div class="slide-number">03 / 16</div>
+</div>
+
+<!-- Slide 4: When to Team Up -->
+<div class="slide" id="slide-4" data-note="">
+  <div class="slide-title">什么时候适合组队？</div>
+  <div class="slide-content">
+    <ul>
+      <li><span class="highlight">奔着奖金</span>去</li>
+      <li><span class="highlight">成熟团队</span>出击</li>
+      <li>跟朋友一起去玩，<span class="highlight">氛围更好</span></li>
+      <li>现场认识的人，<span class="highlight">想法非常契合</span></li>
+    </ul>
+  </div>
+  <div class="slide-number">04 / 16</div>
+</div>
+
+<!-- NEW Slide 5: Women-Only Space = Lower Barrier -->
+<div class="slide" id="slide-5" data-note="核心差异化页面 - SheNicest 专属弹药">
+  <div class="slide-title">女性空间 = 更低的组队门槛</div>
+  <div class="slide-content">
+    <ul>
+      <li>女性专属黑客松参与率 <span class="highlight">52.6%</span>，混合赛仅 22% — <span style="color: var(--ink-dim); font-size: 20px;">Eindhoven University</span></li>
+      <li>WiE 黑客松中女性 <span class="highlight">内在动机显著更高</span>（4.4 vs 3.3）— <span style="color: var(--ink-dim); font-size: 20px;">Waterloo</span></li>
+      <li>专属空间降低 <span class="highlight">Impostor Syndrome</span>，"走到陌生人面前"的心理成本更低</li>
+    </ul>
+    <br>
+    <p style="color: var(--ink-dim); font-size: 20px;">在 SheNicest，现场组队不是冒险，是<span class="highlight">设计好的安全体验</span></p>
+  </div>
+  <div class="slide-number">05 / 16</div>
+</div>
+
+<!-- Slide 6: Three Team Formation Modes -->
+<div class="slide" id="slide-6" data-note="现场组队加一句安全提示">
+  <div class="slide-title">三种组队模式</div>
+  <div class="three-col">
+    <div class="col-card">
+      <h3>1. 熟人组队</h3>
+      <p>发链接给以前就认识的朋友，提前针对赛题充分解读</p>
+    </div>
+    <div class="col-card">
+      <h3>2. 线上推销</h3>
+      <p>在群里或赛前 meet up 主动展示背景和技能，带 idea 去招募</p>
+    </div>
+    <div class="col-card">
+      <h3>3. 现场组队</h3>
+      <p>找到同样<span class="highlight">在寻找队友</span>的人，主动介绍你的技能和兴趣</p>
+    </div>
+  </div>
+  <p class="tag-line" style="margin-top: 30px;">SheNicest 的现场组队 = 在安全的场域里主动连接</p>
+  <div class="slide-number">06 / 16</div>
+</div>
+
+<!-- Slide 7: Teamwork After Formation -->
+<div class="slide" id="slide-7" data-note="边做边学风险提示 + 先睡觉金句">
+  <div class="slide-title">组队后的协作</div>
+  <div class="slide-content">
+    <ul>
+      <li>清楚各自<span class="highlight">技术栈</span>和负责部分</li>
+      <li>有人专精不扩充，也可以</li>
+      <li>有人想<span class="highlight">边做边学</span>，也可以 — 但别抢核心后端然后爆炸</li>
+      <li>热情和愿景一致，就 OK</li>
+    </ul>
+  </div>
+  <br>
+  <p style="color: var(--ink-dim); font-size: 18px;">新手建议认领：资料整理、用户访谈、UI、pitch、测试、demo script</p>
+  <br>
+  <p class="big-quote" style="font-size: 24px; margin-top: 20px;">别把熬夜浪漫化。<span class="highlight">睡眠不是拖累，是性能优化。</span></p>
+  <div class="slide-number">07 / 16</div>
+</div>
+
+<!-- Slide 8: Recording Discussions -->
+<div class="slide" id="slide-8" data-note="修正 TicNote 拼写">
+  <div class="slide-title">用录音记录讨论</div>
+  <div class="slide-content">
+    <ul>
+      <li><span class="highlight">Plaud</span> / <span class="highlight">随手记</span> / 华为手机自带录音</li>
+      <li><span class="highlight">腾讯会议</span>：远程接入 + VIP转写</li>
+      <li>导出 TXT 给 AI 协作</li>
+    </ul>
+    <br>
+    <p style="color: var(--ink-dim); font-size: 20px;">把讨论变成<span class="highlight">可检索资产</span>，不要让想法死在空气里</p>
+  </div>
+  <div class="slide-number">08 / 16</div>
+</div>
+
+<!-- Slide 9: AI as Team Member -->
+<div class="slide" id="slide-9" data-note="">
+  <div class="slide-title">AI 是你的团队成员</div>
+  <div class="three-col">
+    <div class="col-card">
+      <h3>调查</h3>
+      <p>避免重复造轮子，封装成 Hackathon Skill</p>
+    </div>
+    <div class="col-card">
+      <h3>探讨思路</h3>
+      <p>参考学术研究和前人思路，不仅用代码，也用思路</p>
+    </div>
+    <div class="col-card">
+      <h3>新闻报道</h3>
+      <p>Reddit 等论坛，了解网友对工具/领域的情绪</p>
+    </div>
+  </div>
+  <div class="slide-number">09 / 16</div>
+</div>
+
+<!-- Slide 10: AI Info Sources - Fixed -->
+<div class="slide" id="slide-10" data-note="修正 Gemini 描述，替换为 Perplexity/Claude">
+  <div class="slide-title">AI 信息源选择</div>
+  <div class="slide-content">
+    <ul>
+      <li><span class="highlight">Kimi</span>：抓取 B站专栏、知乎问答、公众号</li>
+      <li><span class="highlight">OpenAI</span>：能读 Reddit 等海外论坛</li>
+      <li><span class="highlight">Perplexity / Claude</span>：学术溯源和引文准确性更高</li>
+    </ul>
+    <br>
+    <p style="color: var(--ink-dim); font-size: 20px;">AI 输出必须回到<span class="highlight">原始链接、论文、官方文档、论坛原帖</span>验证</p>
+  </div>
+  <div class="slide-number">10 / 16</div>
+</div>
+
+<!-- Slide 11: GitHub Collaboration -->
+<div class="slide" id="slide-11" data-note="">
+  <div class="slide-title">善用 GitHub</div>
+  <div class="slide-content">
+    <ul>
+      <li>有远程队员要注重<span class="highlight">信息传递高效性</span></li>
+      <li>用 AI 整理文档</li>
+      <li>赛前充分把握 <span class="highlight">Git</span> 使用</li>
+    </ul>
+  </div>
+  <div class="slide-number">11 / 16</div>
+</div>
+
+<!-- Slide 12: Anti-fragile Team Formation - Simplified -->
+<div class="slide" id="slide-12" data-note="压缩到3项，避免文字过载">
+  <div class="slide-title">怎么组队不翻车</div>
+  <div class="two-col">
+    <div class="col-check">先问目标：拿奖 / 学习 / 交朋友 / 做作品集</div>
+    <div class="col-check">先亮技能：我会什么、不会什么、想学什么</div>
+    <div class="col-check">先定边界：代码、设计、pitch、产权、后续是否继续</div>
+    <div class="col-check">先建系统：GitHub、共享文档、录音转写、任务板</div>
+    <div class="col-check">先对齐预期：投入多少？最终目标？短期不见回报能接受吗？</div>
+    <div class="col-check">先明分寸：见好就收、相机而动、互为补位、不拖后腿</div>
+  </div>
+  <div class="slide-number">12 / 16</div>
+</div>
+
+<!-- Slide 13: Key Takeaways -->
+<div class="slide" id="slide-13" data-note="">
+  <div class="slide-title">核心要点</div>
+  <div class="slide-content">
+    <ul>
+      <li><span class="highlight">开放心态</span>：Solo 或组队都可以</li>
+      <li><span class="highlight">主动出击</span>：熟人、线上、现场，总有适合你的方式</li>
+      <li><span class="highlight">善用工具</span>：录音、腾讯会议、GitHub</li>
+      <li><span class="highlight">AI 赋能</span>：调查、思路、情绪，一个都不能少</li>
+      <li><span class="highlight">女性空间</span>：在 SheNicest，组队是设计好的安全体验</li>
+    </ul>
+  </div>
+  <div class="slide-number">13 / 16</div>
+</div>
+
+<!-- Slide 14: 30-Minute Contract -->
+<div class="slide" id="slide-14" data-note="">
+  <div class="slide-title">组队前 30 分钟契约</div>
+  <div class="slide-content">
+    <ul>
+      <li><span class="highlight">先明分寸</span>：见好就收、相机而动、互为补位、不拖后腿</li>
+      <li><span class="highlight">技术栈对齐</span>：各自负责什么技能</li>
+      <li><span class="highlight">目标与投入</span>：最终目标是什么？愿意投入多少？短期内不见回报能接受吗？</li>
+      <li><span class="highlight">退出与分配</span>：如果有人退出怎么办，奖金怎么分</li>
+      <li><span class="highlight">睡眠/工作节奏</span>：通宵还是分班</li>
+      <li><span class="highlight">录音与知识产权</span>：开始前确认所有人同意</li>
+    </ul>
+  </div>
+  <div class="slide-number">14 / 16</div>
+</div>
+
+<!-- Slide 15: References - Simplified -->
+<div class="slide" id="slide-15" data-note="只放4个核心引用，现场演示字体要够大">
+  <div class="slide-title" style="font-size: 42px;">参考文献</div>
+  <div class="slide-content" style="font-size: 22px; line-height: 2.2;">
+    <ul>
+      <li>arXiv - Competing or Collaborating? Hackathon Formats & Team Dynamics</li>
+      <li>Eindhoven University - 女性专属黑客松参与率 52.6% vs 22%</li>
+      <li>Waterloo - WiE 黑客松女性内在动机 (4.4 vs 3.3)</li>
+      <li>MDPI - Integrating Generative AI in Hackathons</li>
+    </ul>
+    <br>
+    <p style="font-size: 20px;">扫码获取完整文献包 + 演讲者备注</p>
+    <div style="display: flex; gap: 40px; justify-content: center; align-items: flex-start; margin-top: 10px;">
+      <div style="text-align: center;">
+        <img src="images/qrcode-wechat-public.png" alt="公众号二维码" style="width: 100px; height: 100px; object-fit: contain;">
+        <p style="font-size: 14px; color: var(--ink-dim); margin-top: 5px;">公众号</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="images/xrcode-xiaohongshu.png" alt="小红书" style="width: 100px; height: 100px; object-fit: contain;">
+        <p style="font-size: 14px; color: var(--ink-dim); margin-top: 5px;">小红书</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">15 / 16</div>
+</div>
+
+<!-- Slide 16: End with CTA -->
+<div class="slide" id="slide-16" data-note="加下一步行动召唤">
+  <div class="big-quote">祝大家组队顺利<br><span class="highlight">玩得开心！</span></div>
+  <div style="margin-top: 40px; text-align: center;">
+    <p style="font-size: 20px; color: var(--ink-dim);">资源包：Git 急救卡 + 30分钟契约模板</p>
+    <p style="font-size: 22px; color: var(--pink); margin-top: 10px;">扫码领取 / 关注 SheNicest 公众号</p>
+  </div>
+  <div class="slide-number">16 / 16</div>
+</div>
+
+<nav id="nav"></nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('nav');
+const progress = document.getElementById('progress');
+let current = 0;
+
+slides.forEach((_, i) => {
+  const btn = document.createElement('button');
+  btn.onclick = () => goTo(i);
+  if (i === 0) btn.classList.add('active');
+  nav.appendChild(btn);
+});
+
+function goTo(i) {
+  slides[current].classList.remove('active');
+  nav.children[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  nav.children[current].classList.add('active');
+  progress.style.width = ((current + 1) / slides.length * 100) + '%';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { if (current < slides.length - 1) goTo(current + 1); }
+  if (e.key === 'ArrowLeft') { if (current > 0) goTo(current - 1); }
+  // N key = toggle speaker notes
+  if (e.key === 'n' || e.key === 'N') {
+    document.body.classList.toggle('speaker-mode');
+  }
+});
+
+document.addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') {
+    if (e.clientX > window.innerWidth / 2 && current < slides.length - 1) goTo(current + 1);
+    if (e.clientX <= window.innerWidth / 2 && current > 0) goTo(current - 1);
+  }
+});
+</script>
+
+</body>
+</html>

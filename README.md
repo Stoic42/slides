@@ -4,6 +4,12 @@ A collection of presentations by Desal.
 
 ## Presentations
 
+### 黑客松高效组队 (Hackathon Team Formation)
+
+**从多次组队翻车到多次获奖 —— 实战经验分享**
+
+- [View Slides](slides/hackathon-team-formation-slides.html)
+
 ### ADHD × Vibe Coding
 
 **副本开得太多怎么办？- ADHD × Vibe Coding**
