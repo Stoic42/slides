@@ -279,17 +279,52 @@
 <!-- Slide 5: Women-Only Space = Lower Barrier -->
 <div class="slide" id="slide-5" data-note="这里是情绪高点。说'女性专属黑客松参与率 52.6%，混合赛只有 22%。在这个场域里，走到陌生人面前的心理成本更低。'">
   <div class="slide-title">女性空间 = 更低的组队门槛</div>
-  <div class="slide-content" style="max-width: 1000px;">
+  <div class="slide-content" style="max-width: 900px;">
     <ul>
       <li>女性专属黑客松参与率 <span class="highlight">52.6%</span>，混合赛仅 22% — <span style="color: var(--ink-dim); font-size: 20px;">Eindhoven University</span></li>
-      <li>WiE 黑客松中女性 <span class="highlight">内在动机显著更高</span>（4.4 vs 3.3）— <span style="color: var(--ink-dim); font-size: 20px;">Waterloo</span></li>
+      <li>WiE 黑客松中女性 <span class="highlight">内在动机显著更高</span>（4.4 vs 3.3，满分 5）— <span style="color: var(--ink-dim); font-size: 20px;">Waterloo</span></li>
       <li>专属空间降低 <span class="highlight">Impostor Syndrome</span>，"走到陌生人面前"的心理成本更低</li>
     </ul>
   </div>
-  <div style="margin-top: 16px; text-align: center;">
-    <iframe src="hackathon-participation-rate-chart.html" width="580" height="220" style="border:none; border-radius: 6px; overflow:hidden;" title="参与率对比图表"></iframe>
-    <iframe src="hackathon-motivation-chart.html" width="420" height="240" style="border:none; border-radius: 6px; overflow:hidden;" title="内在动机对比图表"></iframe>
+
+  <!-- Participation Rate Bar Chart -->
+  <div style="display: flex; gap: 32px; align-items: flex-end; margin-top: 14px;">
+    <div>
+      <p style="font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; text-align: center;">女性专属 vs 混合赛参与率</p>
+      <svg width="340" height="90" viewBox="0 0 340 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- 女性专属赛 52.6% bar -->
+        <text x="0" y="12" font-family="PingFang SC, sans-serif" font-size="10" fill="#f9d8e8" opacity="0.7">女性专属赛</text>
+        <rect x="0" y="16" width="340" height="20" rx="3" fill="rgba(255,63,148,0.15)"/>
+        <rect x="0" y="16" width="310" height="20" rx="3" fill="#ff3f94"/>
+        <text x="318" y="30" font-family="sans-serif" font-size="11" fill="#fff" font-weight="bold">52.6%</text>
+        <!-- 混合赛 22% bar -->
+        <text x="0" y="52" font-family="PingFang SC, sans-serif" font-size="10" fill="#f9d8e8" opacity="0.7">混合赛</text>
+        <rect x="0" y="56" width="340" height="20" rx="3" fill="rgba(255,63,148,0.15)"/>
+        <rect x="0" y="56" width="130" height="20" rx="3" fill="#1B365D"/>
+        <text x="138" y="70" font-family="sans-serif" font-size="11" fill="#fff" font-weight="bold">22%</text>
+        <!-- Source -->
+        <text x="0" y="88" font-family="sans-serif" font-size="8" fill="rgba(249,216,232,0.4)">来源：Eindhoven University of Technology</text>
+      </svg>
+    </div>
+    <div>
+      <p style="font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; text-align: center;">WiE 女性内在动机得分</p>
+      <svg width="260" height="90" viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- WiE 4.4/5 bar (88% of 5) -->
+        <text x="0" y="12" font-family="PingFang SC, sans-serif" font-size="10" fill="#f9d8e8" opacity="0.7">WiE 专属赛</text>
+        <rect x="0" y="16" width="220" height="20" rx="3" fill="rgba(255,63,148,0.15)"/>
+        <rect x="0" y="16" width="194" height="20" rx="3" fill="#ff3f94"/>
+        <text x="200" y="30" font-family="sans-serif" font-size="11" fill="#fff" font-weight="bold">4.4</text>
+        <!-- 混合 3.3/5 bar (66%) -->
+        <text x="0" y="52" font-family="PingFang SC, sans-serif" font-size="10" fill="#f9d8e8" opacity="0.7">混合赛</text>
+        <rect x="0" y="56" width="220" height="20" rx="3" fill="rgba(255,63,148,0.15)"/>
+        <rect x="0" y="56" width="145" height="20" rx="3" fill="#1B365D"/>
+        <text x="150" y="70" font-family="sans-serif" font-size="11" fill="#fff" font-weight="bold">3.3</text>
+        <!-- Source -->
+        <text x="0" y="88" font-family="sans-serif" font-size="8" fill="rgba(249,216,232,0.4)">来源：University of Waterloo · 满分 5 分</text>
+      </svg>
+    </div>
   </div>
+
   <div style="position: absolute; bottom: 30px; right: 40px;">
     <img src="images/shenicest-logo.svg" alt="SheNicest" style="height: 40px; opacity: 0.7;">
   </div>
