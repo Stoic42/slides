@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开太多副本怎么办？让AI当我的背包</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #2a2a3a;
+      --text: #e8e8f0;
+      --text-muted: #8888a0;
+      --accent: #ff6b9d;
+      --accent2: #00d4ff;
+      --accent3: #a855f7;
+      --warning: #fbbf24;
+      --success: #34d399;
+      --danger: #f87171;
+    }
+
+    .reveal {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 28px;
+      color: var(--text);
+    }
+
+    .reveal .slides { text-align: left; }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Noto Sans SC', sans-serif;
+      text-transform: none;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h1 {
+      font-size: 2.4em;
+      color: var(--accent2);
+      border-bottom: 3px solid var(--accent2);
+      padding-bottom: 0.3em;
+      margin-bottom: 0.5em;
+    }
+
+    .reveal h2 {
+      font-size: 1.5em;
+      color: var(--accent);
+      margin-bottom: 0.8em;
+    }
+
+    .reveal h3 {
+      font-size: 1em;
+      color: var(--accent3);
+      margin-bottom: 0.5em;
+    }
+
+    .reveal p { font-size: 0.75em; line-height: 1.7; }
+    .reveal li { font-size: 0.75em; line-height: 1.7; }
+
+    .reveal blockquote {
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 107, 157, 0.08);
+      padding: 15px 25px;
+      margin: 15px 0;
+      width: 95%;
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .reveal blockquote p { font-size: 1em; margin-bottom: 0.3em; }
+    .reveal blockquote p:last-child { margin-bottom: 0; }
+
+    .reveal .highlight { color: var(--accent2); font-weight: 700; }
+    .reveal .warn { color: var(--warning); }
+    .reveal .soft { color: var(--text-muted); font-style: italic; }
+    .reveal .loud { color: var(--accent); font-weight: 700; font-size: 1.3em; }
+
+    .reveal .tag {
+      display: inline-block;
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--accent2);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.65em;
+      margin: 3px;
+      font-weight: 500;
+    }
+    .reveal .tag.pink {
+      background: rgba(255, 107, 157, 0.15);
+      color: var(--accent);
+      border-color: rgba(255, 107, 157, 0.3);
+    }
+    .reveal .tag.purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--accent3);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+    .reveal .tag.yellow {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--warning);
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+    .reveal .tag.green {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--success);
+      border-color: rgba(52, 211, 153, 0.3);
+    }
+
+    .reveal .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 12px 0;
+    }
+
+    .reveal .skill-box {
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5em;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      color: #c4b5fd;
+    }
+
+    .reveal table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.65em;
+      margin: 10px 0;
+    }
+    .reveal table th {
+      background: rgba(255, 107, 157, 0.2);
+      color: var(--accent);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .reveal table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .reveal table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .reveal .two-col { display: flex; gap: 40px; align-items: flex-start; }
+    .reveal .two-col > div { flex: 1; min-width: 0; }
+
+    .reveal .timeline {
+      position: relative;
+      padding-left: 28px;
+      list-style: none;
+    }
+    .reveal .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent2), var(--accent));
+    }
+    .reveal .timeline li {
+      position: relative;
+      margin-bottom: 14px;
+      padding-left: 8px;
+    }
+    .reveal .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 9px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent2);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+    }
+
+    .reveal .about-me {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      margin: 25px 0;
+    }
+    .reveal .about-me .avatar {
+      width: 130px;
+      height: 130px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      flex-shrink: 0;
+      box-shadow: 0 0 40px rgba(255, 107, 157, 0.3);
+    }
+    .reveal .about-me .info h3 {
+      font-size: 1.3em;
+      color: var(--accent2);
+      margin-bottom: 8px;
+    }
+    .reveal .about-me .info p { margin-bottom: 6px; }
+
+    .reveal .center { text-align: center; }
+
+    .reveal .key-quote {
+      font-size: 1.3em;
+      color: var(--accent2);
+      text-align: center;
+      padding: 25px 20px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .reveal .stat-box {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .reveal .stat-box .number {
+      font-size: 3em;
+      font-weight: 900;
+      color: var(--accent2);
+      line-height: 1;
+    }
+    .reveal .stat-box .label { font-size: 0.7em; color: var(--text-muted); margin-top: 5px; }
+
+    .reveal .event-banner {
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(168, 85, 247, 0.15));
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 25px 30px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .reveal .event-banner h3 {
+      color: var(--accent);
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .reveal .event-banner p { font-size: 0.8em; margin-bottom: 8px; }
+
+    .reveal .meta-foot { font-size: 0.45em; color: var(--text-muted); text-align: right; margin-top: 40px; }
+
+    .reveal .emoji { font-size: 1.3em; margin: 0 2px; }
+    .reveal code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .reveal section { padding: 20px 0; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- P1: 封面 -->
+      <section>
+        <div class="about-me">
+          <div class="avatar">🧱</div>
+          <div class="info">
+            <h3 style="font-size: 1.6em; color: var(--accent2); margin-bottom: 8px;">赛博砖块 @ SheNicest</h3>
+            <p>我是<span class="highlight">Jenny</span>，姜徐宁</p>
+            <p class="soft">"哪里需要往哪搬" — ADHD，什么都想干，<br>什么都上瘾，探索完打包成Skills分享给别人</p>
+            <div style="margin-top: 12px;">
+              <span class="tag">CS老师</span>
+              <span class="tag pink">游戏开发</span>
+              <span class="tag purple">科幻作者</span>
+              <span class="tag yellow">OMSCS在读</span>
+            </div>
+          </div>
+        </div>
+        <h1 style="margin-top: 30px; font-size: 2em;">开太多副本怎么办？</h1>
+        <h2 style="color: var(--accent); font-size: 1.3em; border: none; margin: 0;">让AI当我的背包</h2>
+        <p class="meta-foot">ADHD × Vibe Coding · 2026 · SheNicest</p>
+      </section>
+
+      <!-- P2: 关于"赛博砖块" -->
+      <section>
+        <h2>为什么叫"赛博砖块"？</h2>
+        <div class="two-col">
+          <div>
+            <h3>🧱 砖块的隐喻</h3>
+            <ul>
+              <li>建筑里<span class="highlight">随时移动</span>的那块砖</li>
+              <li>哪里需要往哪里搬</li>
+              <li>每一块都有<span class="highlight">独特的形状和重量</span></li>
+            </ul>
+            <h3 style="margin-top: 20px;">💻 赛博的意思</h3>
+            <ul>
+              <li>我们是<span class="highlight">remote</span>的</li>
+              <li>不绑定任何固定位置</li>
+              <li>数字游民 + 创意游民</li>
+            </ul>
+          </div>
+          <div>
+            <h3>🔄 ADHD的循环</h3>
+            <ul class="timeline">
+              <li>探索一个领域 → <span class="highlight">上瘾</span></li>
+              <li>学透、搞清楚、变成Skills</li>
+              <li>打包成分享 → <span class="highlight">分享给别人</span></li>
+              <li>继续下一个</li>
+            </ul>
+            <br>
+            <blockquote>
+              <p>"不是卷，是<span class="highlight">想活下来</span>。<br>不是展示，是<span class="highlight">需要知道</span>。"</p>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- P3: 母亲节活动预告 -->
+      <section>
+        <div class="event-banner">
+          <h3>🌸 SheNicest 母亲节特别场 🌸</h3>
+          <p style="font-size: 1em; color: var(--accent2);">Vivi也参加过我们的活动！欢迎了解</p>
+          <p style="font-size: 0.8em; color: var(--text-muted);">来ADHD的场合跟见家人一样，<br>不是因为我们都"有病"，是因为我们都知道调参有多难。</p>
+          <div style="margin-top: 15px;">
+            <span class="tag">社群活动</span>
+            <span class="tag pink">创意工作坊</span>
+            <span class="tag purple">母亲节专场</span>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 15px;">
+          <p style="font-size: 0.9em; text-align: center;">
+            <span class="soft">如果感兴趣，联系我获取活动详情</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- P4: 钩子 - Vivi故事 -->
+      <section>
+        <h2>先说一个故事</h2>
+        <blockquote>
+          <p>昨天和瑞典的朋友聊起<span class="highlight">Vivi</span>，我们说：<br>"为什么她总在半夜coding？"</p>
+          <p style="padding-left: 20px;">我想了想，Vivi不一定是为了卷。<br>她可能只是在想<span class="highlight">怎么活下来</span>。</p>
+        </blockquote>
+        <br>
+        <p style="font-size: 0.85em;">朋友问我：你觉得自己是ADHD吗？</p>
+        <p class="loud" style="text-align: center; margin: 15px 0;">
+          "没想管自己是不是，<br>有用就用，人活着就是不断给自己调参。"
+        </p>
+        <p class="soft" style="text-align: center; font-size: 0.75em;">——这就是我的开场白</p>
+      </section>
+
+      <!-- P5: 核心悖论 -->
+      <section>
+        <h2>ADHD用AI最大的悖论</h2>
+        <p class="key-quote">
+          我们最需要AI帮我们<span class="highlight">收敛</span><br>
+          但AI的默认设置是<span class="warn">发散</span>
+        </p>
+        <table>
+          <tr>
+            <th>表面</th>
+            <th>底层</th>
+          </tr>
+          <tr>
+            <td>"人生无限可能"</td>
+            <td>所有可能性都在<span class="highlight">消耗认知资源</span></td>
+          </tr>
+          <tr>
+            <td>"蒸蒸日上"</td>
+            <td>没有反馈机制，不知道哪个在<span class="warn">涨哪个在跌</span></td>
+          </tr>
+          <tr>
+            <td>"没人打醒我"</td>
+            <td>缺少外部化的<span class="highlight">时间/后果感知</span></td>
+          </tr>
+        </table>
+        <p class="soft" style="text-align: center; margin-top: 15px; font-size: 0.75em;">
+          我的解法不是"少想"，是"让AI当那个打醒的人"——背包 + 闹钟 + 外部秤
+        </p>
+      </section>
+
+      <!-- P6: 四维工作流总览 -->
+      <section>
+        <h2>我的四维AI工作流</h2>
+        <div class="two-col">
+          <div>
+            <p><span class="tag">第一维</span> <strong>救急</strong> — Google Workspace全家桶</p>
+            <p style="padding-left: 20px;" class="soft">Gemini + Drive + Gmail + Calendar</p>
+
+            <p><span class="tag pink">第二维</span> <strong>收敛</strong> — Skills + Coding Plan</p>
+            <p style="padding-left: 20px;" class="soft">Hyperfocus的缰绳</p>
+
+            <p><span class="tag purple">第三维</span> <strong>打醒</strong> — 幻觉检测器</p>
+            <p style="padding-left: 20px;" class="soft">哪些副本已经僵了？</p>
+
+            <p><span class="tag yellow">第四维</span> <strong>复用</strong> — 把自己作为Context</p>
+            <p style="padding-left: 20px;" class="soft">小说/游戏/教学互为宇宙</p>
+          </div>
+          <div>
+            <div class="stat-box">
+              <div class="number">🧱</div>
+              <p style="font-size: 1.1em; font-weight: 700; margin-top: 10px;">AI是我的</p>
+              <p class="key-quote" style="font-size: 1em; padding: 10px;">
+                背包 + 闹钟 + 外部秤
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- P7: Google Workspace 救急 -->
+      <section>
+        <h2>Google Workspace全家桶：救急</h2>
+        <div class="two-col">
+          <div>
+            <p><span class="emoji">📧</span> <strong>邮件回复</strong> — Gemini读取Gmail上下文，直接生成回复草稿</p>
+            <p class="soft" style="font-size: 0.8em; padding-left: 25px;">不用自己组织语言，空白页恐惧的解药</p>
+
+            <p><span class="emoji">📁</span> <strong>Drive作为知识库</strong> — 把历史课件丢进文件夹，Gemini直接引用</p>
+            <p class="soft" style="font-size: 0.8em; padding-left: 25px;">不用记得东西放哪，AI知道</p>
+
+            <p><span class="emoji">📅</span> <strong>Calendar联动</strong> — AI自动提议会议时间</p>
+            <p class="soft" style="font-size: 0.8em; padding-left: 25px;">减少决策疲劳</p>
+
+            <div style="margin-top: 15px;">
+              <span class="tag green">🆕 新功能</span>
+              <p style="font-size: 0.85em; margin-top: 8px;"><strong>NotebookLM × Gemini 打通</strong></p>
+              <p class="soft" style="font-size: 0.75em;">在Gemini里直接@NotebookLM调用，上下文打通，历史自动保留</p>
+            </div>
+          </div>
+          <div>
+            <div class="stat-box">
+              <div class="number">105</div>
+              <div class="label">分钟 / 周 · Google官方数据</div>
+              <p style="font-size: 0.7em; margin-top: 10px;" class="soft">用户平均节省</p>
+            </div>
+            <div class="card" style="margin-top: 15px;">
+              <p style="font-size: 0.85em;"><strong>"作为国际学校老师，突然要复用去年的课，<br>我直接让AI读我Drive里的'2024秋季'文件夹，<br>不用从零回忆。"</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- P8: Skills + Coding Plan -->
+      <section>
+        <h2>Skills + Coding Plan：Hyperfocus的缰绳</h2>
+        <div class="two-col">
+          <div>
+            <table>
+              <tr><th>问题</th><th>解法</th><th>效果</th></tr>
+              <tr>
+                <td>每次写prompt都从头开始</td>
+                <td><span class="highlight">Skills打包</span></td>
+                <td>一键调用</td>
+              </tr>
+              <tr>
+                <td>改着改着偏离主线</td>
+                <td><span class="highlight">Coding Plan约束</span></td>
+                <td>强制收敛</td>
+              </tr>
+              <tr>
+                <td>想优化A又冒出B和C</td>
+                <td>Plan写死范围</td>
+                <td>画边界</td>
+              </tr>
+            </table>
+            <br>
+            <blockquote>
+              <p>"我以前hyperfocus改prompt改到半夜，<br>朋友问我是不是在卷。<br><span class="highlight">我说不是，我只是想让它停下来</span>。"</p>
+            </blockquote>
+          </div>
+          <div>
+            <p style="color: var(--warning); font-size: 0.8em; margin-bottom: 10px;">⚡ 关键设计：Coding Plan = 硬规则，不是建议</p>
+            <div class="skill-box">【本次任务边界 - Coding Plan】
+- 目标：整理2024秋季IB物理课件
+- 范围：仅限Chapter 3-5，不碰Chapter 6
+- 停止条件：输出3条建议即结束
+- 不追问、不扩展</div>
+            <p class="soft" style="font-size: 0.65em; margin-top: 10px;">
+              ADHD大脑对"建议"会自动忽略<br>对"规则"会执行
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- P9: 幻觉检测器 -->
+      <section>
+        <h2><span class="tag pink">NEW</span> 幻觉检测器：打醒系统</h2>
+        <div class="two-col">
+          <div>
+            <h3>ADHD的高光幻觉</h3>
+            <ul class="timeline">
+              <li><strong>"这个点子绝了！现在就开干！"</strong></li>
+              <li><span class="warn">3天后</span>：没动</li>
+              <li><span class="warn">3周后</span>：忘了</li>
+              <li><span class="warn">3月后</span>：又想起来，重复循环</li>
+            </ul>
+            <br>
+            <blockquote>
+              <p>"我需要AI打醒我，但不是骂我。<br>是<span class="highlight">用事实打醒</span>——<br>'你三个月前说想学网安，投入了0小时，<br>现在排第7，要继续吗？'"</p>
+            </blockquote>
+          </div>
+          <div>
+            <p style="color: var(--accent2); font-size: 0.85em; margin-bottom: 10px;">⏰ AI的介入点</p>
+            <p><span class="tag">48小时</span> 无进展 → "这个副本还在吗？"</p>
+            <p><span class="tag yellow">1周</span> 无更新 → "沉没成本是__"</p>
+            <p><span class="tag pink">1月</span> 无激活 → "放入冷冻库，解冻条件：__"</p>
+            <br>
+            <div class="skill-box" style="font-size: 0.42em;">
+【副本健康度检查】
+Verdict：【继续 / 冷冻 / 埋葬】
+理由：2句话，不安慰，不打击
+
+禁止：❌ "加油你可以的"
+禁止：❌ "这个其实很有潜力"
+禁止：❌ 帮用户自我欺骗</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- P10: ChatMemo + 副本管理器 -->
+      <section>
+        <h2>ChatMemo + Decision Graph：副本管理器</h2>
+        <div class="two-col">
+          <div>
+            <p style="font-size: 1em; margin-bottom: 15px;">今天想去<span class="highlight">希腊</span><br>
+            明天想去<span class="highlight">美国</span><br>
+            后天想学<span class="highlight">网安</span><br>
+            大后天想当<span class="highlight">艺术家</span></p>
+            <p style="color: var(--danger); font-size: 0.9em;">抱一大堆东西根本拿不动！</p>
+            <p class="soft" style="font-size: 0.75em;">捡了芝麻丢了西瓜，或者芝麻西瓜都捡了</p>
+            <br>
+            <p>我用<span class="highlight">ChatMemo</span>管理各种奇思妙想<br><span class="soft">(也有用Chatbox的)</span></p>
+          </div>
+          <div>
+            <p style="color: var(--accent2); font-size: 0.85em; margin-bottom: 10px;">📊 Decision Graph 生成器</p>
+            <div class="skill-box" style="font-size: 0.4em;">
+输入：任何想法/副本
+
+1. 【现实检验】
+   核心吸引力？（1句话）
+   最小资源？（时间/金钱/技能）
+
+2. 【后果推演】
+   3个月后的状态？
+   1年后的状态？
+
+3. 【与主线关系】
+   替代 OR 并行？
+   切换的触发条件？
+
+4. 【收敛输出】
+   Verdict：【立即执行/观察列表/存档】
+   理由限2句话</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- P11: 跨宇宙连接 -->
+      <section>
+        <h2>我的多宇宙：互为Context</h2>
+        <p style="color: var(--warning); font-size: 0.85em; margin-bottom: 15px;">我的小说、游戏、教学、影视——不是分开的，是互相渗漏的</p>
+        <div class="two-col">
+          <div>
+            <p><span class="tag purple">📚</span> 小说 → 科幻（用Git管版本）</p>
+            <p><span class="tag pink">🎮</span> 游戏 → Unity, 交互媒体, AIGC</p>
+            <p><span class="tag">🎬</span> 影视 → AI生成影视内容</p>
+            <p><span class="tag yellow">👩‍🏫</span> 教学 → 国际学校CS老师</p>
+            <br>
+            <p class="soft" style="font-size: 0.75em;">"科幻小说里会蹦出vibe coding工具，<br>课堂讨论会启发叙事结构"</p>
+          </div>
+          <div>
+            <p><span class="tag green">💡</span> <strong>Git管小说版本</strong></p>
+            <p class="soft" style="font-size: 0.7em;">"不是因为我爱代码，是因为ADHD的我<br>会把主角名字改八遍，没有版本控制我就疯了。"</p>
+            <br>
+            <p><span class="tag purple">🤖</span> <strong>长期Agent愿景</strong></p>
+            <p class="soft" style="font-size: 0.7em;">像Vivi的2Up一样，把生活经验提炼成Skills，<br>覆盖我所有的宇宙</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- P12: ChatGPT发散陷阱 -->
+      <section>
+        <h2>ChatGPT的发散陷阱：批判</h2>
+        <table>
+          <tr><th>ChatGPT默认行为</th><th>ADHD真实需求</th><th>解法</th></tr>
+          <tr>
+            <td>"要A还是B？"</td>
+            <td>直接给推荐</td>
+            <td><span class="highlight">Skill里预置</span>："直接给最佳建议"</td>
+          </tr>
+          <tr>
+            <td>无限开支线</td>
+            <td>强制收敛</td>
+            <td><span class="highlight">Coding Plan</span>约束范围</td>
+          </tr>
+          <tr>
+            <td>"你具体想要什么？"</td>
+            <td>先给粗糙原型</td>
+            <td>Skill格式：1)答案 2)理由 3)唯一动作</td>
+          </tr>
+        </table>
+        <br>
+        <blockquote>
+          <p>"ChatGPT的'要A还是B'对ADHD是灾难——<br>不是选不出来，是选了A又会想'那B呢？'<br>然后C、D、E全出来了。<span class="highlight">Skills让我绕过这个决策疲劳</span>。"</p>
+        </blockquote>
+        <p style="text-align: center; margin-top: 10px;">
+          <code style="font-size: 0.7em;">"Give me your single best recommendation. Do not ask questions. Do not offer alternatives."</code>
+        </p>
+      </section>
+
+      <!-- P13: 完整Workflow演示 -->
+      <section>
+        <h2>完整Workflow：3分钟复盘</h2>
+        <div class="two-col">
+          <div>
+            <p><strong>场景：明天要上一节去年的课</strong></p>
+            <p class="soft" style="font-size: 0.8em;">但我完全忘了怎么上的</p>
+            <br>
+            <ul class="timeline">
+              <li>打开Drive里的<span class="highlight">'2024秋季'</span>文件夹</li>
+              <li><span class="highlight">@Gemini</span> "总结关于[主题]的课件"</li>
+              <li>把Gemini输出丢进<span class="highlight">课件复盘Skill</span></li>
+              <li>Skill自动输出：3条目标+2条误区+3条调整</li>
+              <li><span class="highlight">去睡觉</span></li>
+            </ul>
+            <p class="soft" style="font-size: 0.7em; margin-top: 10px;">全程不用写prompt，不用记得去年讲了什么</p>
+          </div>
+          <div>
+            <p style="color: var(--accent2); font-size: 0.85em;">关键优势</p>
+            <p><span class="tag">省时间</span> 不用从零回忆</p>
+            <p><span class="tag pink">有结构</span> Skill强制输出格式</p>
+            <p><span class="tag purple">防Hyperfocus</span> Coding Plan接管范围</p>
+            <br>
+            <p style="color: var(--danger); font-size: 0.85em;">如果我不复盘呢？</p>
+            <p class="soft" style="font-size: 0.7em;">Drive里的课件 → 3个月没打开 → 下周又要上课<br>→ 完全忘了 → 熬夜重做 → <span class="warn">crash</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- P14: 彩蛋 + 社群问题 -->
+      <section>
+        <h2>彩蛋页：你们呢？</h2>
+        <blockquote style="font-size: 1.1em; padding: 25px 35px; text-align: center;">
+          <p>"你们有没有那种<span class="warn">三个月前开的副本，<br>现在完全忘了</span>的时刻？</p>
+          <p>或者'所有人都看出来我那个项目死了，<br>只有我还在给它输血'？</p>
+          <p style="color: var(--accent2); margin-top: 15px; font-size: 1.1em;">
+            <strong>我需要的不只是工具，<br>是一个敢告诉我真相的系统。你们呢？</strong>
+          </p>
+        </blockquote>
+        <br>
+        <p class="soft" style="text-align: center; font-size: 0.8em;">
+          "来ADHD的场合跟见家人一样。不是因为我们都'有病'，<br>是因为我们都知道调参有多难。"
+        </p>
+        <div class="event-banner" style="margin-top: 20px; padding: 15px;">
+          <p style="font-size: 0.85em;"><span class="tag pink">🌸</span> SheNicest 母亲节特别场 <span class="tag pink">🌸</span></p>
+          <p class="soft" style="font-size: 0.7em; margin-top: 5px;">Vivi也参加过！欢迎了解</p>
+        </div>
+      </section>
+
+      <!-- P15: 总结 -->
+      <section>
+        <h2>调参的人，调好的AI</h2>
+        <p class="key-quote" style="font-size: 1.2em;">
+          "人生无限可能，蒸蒸日上——<br>
+          <span class="warn">但没人打醒我的话，我根本不知道</span>。"
+        </p>
+        <p style="text-align: center; font-size: 1.1em; color: var(--accent2); margin: 15px 0;">
+          AI不是我的造梦机，是我的<span class="highlight">闹钟</span>。<br>
+          不是让我少做梦，是让我知道<br><strong>哪些梦还在呼吸，哪些已经僵了</strong>。
+        </p>
+        <br>
+        <p style="text-align: center;">
+          <span class="tag">🧱 背包</span>
+          <span class="tag pink">⏰ 闹钟</span>
+          <span class="tag purple">⚖️ 外部秤</span>
+        </p>
+        <br>
+        <p class="key-quote" style="font-size: 0.95em; color: var(--warning); margin-top: 10px;">
+          标签不重要，参数才重要。<br>我们都是在调参的人。
+        </p>
+      </section>
+
+      <!-- P16: Thank you -->
+      <section>
+        <div class="center">
+          <p style="font-size: 4em; margin: 20px 0;">🧱</p>
+          <h1 style="font-size: 2.5em; border: none; color: var(--accent2);">谢谢</h1>
+          <p style="font-size: 1.3em; color: var(--accent);">赛博砖块 @ SheNicest</p>
+          <br>
+          <p>Jenny 姜徐宁</p>
+          <p class="soft">游走在代码与人文边界的造梦师</p>
+          <br>
+          <p>
+            <span class="tag">OMSCS Fall 2026</span>
+            <span class="tag pink">Falmouth Indie Game</span>
+            <span class="tag purple">CTO @ SheNicest</span>
+          </p>
+          <br>
+          <p class="soft" style="font-size: 0.7em; margin-top: 20px;">
+            如需Prompts和详细Skill文本，请联系我
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      width: 1280,
+      height: 720,
+      margin: 0.06,
+      transition: 'fade',
+      backgroundTransition: 'fade'
+    });
+  </script>
+</body>
+</html>

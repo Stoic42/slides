@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>副本开得太多怎么办？ - ADHD × Vibe Coding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fff4e6;
+            --bg-alt: #ffe8cc;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --accent: #ff6b6b;
+            --accent-soft: #ffb4b4;
+            --green: #7dd87d;
+            --green-soft: #b8e6b8;
+            --yellow: #ffd93d;
+            --blue: #6c5ce7;
+            --purple: #a29bfe;
+            --mint: #81ecec;
+            --pool: #74b9ff;
+            --berry: #fd79a8;
+            --gold: #fdcb6e;
+            --lilac: #dfe6e9;
+            --mono: 'Space Mono', monospace;
+            --sans: 'Noto Sans SC', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+        .slides {
+            width: 100%; height: 100%; position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.26, 0.86, 0.48, 0.96);
+        }
+
+        .slide {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; opacity: 0; visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 60px 80px; overflow-y: auto;
+        }
+
+        .slide.active { opacity: 1; visibility: visible; }
+
+        /* Ambient background */
+        .ambient {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; pointer-events: none; z-index: 0;
+        }
+
+        .ambient-grid {
+            background-image:
+                linear-gradient(rgba(255,107,107,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,107,107,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .ambient-glow {
+            background: radial-gradient(ellipse at 20% 50%, rgba(255,107,107,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(108,92,231,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(125,216,125,0.06) 0%, transparent 50%);
+        }
+
+        /* Typography */
+        .eyebrow {
+            font-family: var(--mono); font-size: 0.85rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-secondary); margin-bottom: 1.5rem;
+        }
+
+        h1 { font-size: 4rem; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        h2 { font-size: 2.8rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.8rem; }
+
+        p { font-size: 1.15rem; line-height: 1.8; color: var(--text-secondary); max-width: 700px; }
+
+        .highlight { color: var(--accent); font-weight: 700; }
+        .highlight-green { color: #2d8a2d; font-weight: 700; }
+        .highlight-blue { color: var(--blue); font-weight: 700; }
+
+        /* Cards */
+        .card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 16px; padding: 24px 28px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+
+        .card-accent { border-left: 4px solid var(--accent); }
+        .card-green { border-left: 4px solid var(--green); }
+        .card-yellow { border-left: 4px solid var(--yellow); }
+
+        /* Layout helpers */
+        .flex-row { display: flex; gap: 24px; width: 100%; max-width: 1100px; }
+        .flex-col { display: flex; flex-direction: column; gap: 16px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; max-width: 1000px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 1100px; }
+
+        /* Code blocks */
+        .code-block {
+            background: #1a1a2e; color: #f8f8f2;
+            font-family: var(--mono); font-size: 0.85rem;
+            line-height: 1.6; padding: 20px 24px;
+            border-radius: 12px; overflow-x: auto;
+            max-width: 700px; width: 100%;
+        }
+        .code-block .comment { color: #6272a4; }
+        .code-block .keyword { color: #ff79c6; }
+        .code-block .string { color: #f1fa8c; }
+        .code-block .number { color: #bd93f9; }
+
+        /* Tags */
+        .tag {
+            display: inline-block; background: var(--accent-soft); color: var(--accent);
+            font-family: var(--mono); font-size: 0.75rem;
+            padding: 4px 12px; border-radius: 20px; margin-right: 8px; margin-bottom: 8px;
+        }
+        .tag-green { background: var(--green-soft); color: #2d8a2d; }
+
+        /* Comparison table */
+        .compare-table { width: 100%; max-width: 900px; border-collapse: collapse; }
+        .compare-table th { text-align: left; padding: 12px 16px; font-weight: 700; font-size: 0.9rem; color: var(--text-secondary); border-bottom: 2px solid var(--accent-soft); }
+        .compare-table td { padding: 16px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; }
+        .compare-table tr:hover td { background: rgba(255,255,255,0.5); }
+
+        /* Big quote */
+        .big-quote {
+            font-size: 2rem; font-weight: 700; line-height: 1.4;
+            text-align: center; max-width: 800px; position: relative;
+        }
+        .big-quote::before {
+            content: '"'; font-size: 6rem; color: var(--accent-soft);
+            position: absolute; top: -40px; left: -40px; font-family: serif;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed; bottom: 30px; right: 40px;
+            z-index: 100; display: flex; gap: 12px;
+        }
+        .nav-btn {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.08);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease;
+            font-size: 1.2rem; color: var(--text);
+        }
+        .nav-btn:hover { background: var(--accent); color: white; transform: scale(1.1); }
+
+        .slide-counter {
+            position: fixed; bottom: 30px; left: 40px; z-index: 100;
+            font-family: var(--mono); font-size: 0.85rem; color: var(--text-secondary);
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+            padding: 8px 16px; border-radius: 20px;
+        }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: var(--accent); z-index: 100; transition: width 0.3s ease;
+        }
+
+        /* Special elements */
+        .emoji-big { font-size: 3rem; margin-bottom: 1rem; }
+        .avatar-circle {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: var(--accent-soft);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; margin-bottom: 1.5rem;
+        }
+        .arrow-down { font-size: 2rem; color: var(--accent); animation: bounce 2s infinite; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* Transition script */
+        .transition-script {
+            position: absolute; bottom: 100px; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--mono); font-size: 0.85rem;
+            color: var(--text-secondary); opacity: 0.7;
+            max-width: 800px; text-align: center; line-height: 1.6;
+        }
+
+        /* Slide cover */
+        .slide-cover { text-align: center; }
+        .slide-cover h1 { font-size: 5rem; margin-bottom: 0.5rem; }
+        .slide-cover .subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 2rem; }
+        .slide-cover .meta { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); margin-top: 2rem; }
+
+        /* Workflow */
+        .workflow-step { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--accent); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-family: var(--mono); flex-shrink: 0;
+        }
+        .step-content { flex: 1; }
+        .step-arrow { color: var(--accent); font-size: 1.5rem; margin-left: 12px; }
+
+        /* Boxes */
+        .highlight-box { background: var(--yellow); padding: 4px 12px; border-radius: 8px; font-weight: 700; display: inline; }
+        .warning-box { background: rgba(255,107,107,0.1); border: 2px solid var(--accent); border-radius: 12px; padding: 20px 24px; max-width: 700px; }
+        .success-box { background: rgba(125,216,125,0.15); border: 2px solid var(--green); border-radius: 12px; padding: 20px 24px; max-width: 700px; }
+
+        /* Joke box */
+        .joke-box {
+            background: var(--yellow); border-radius: 12px; padding: 16px 24px;
+            max-width: 600px; margin: 2rem auto 0;
+            font-family: var(--mono); font-size: 0.95rem;
+        }
+
+        @media (max-width: 900px) {
+            .slide { padding: 40px 30px; }
+            h1 { font-size: 2.5rem; } h2 { font-size: 2rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .flex-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient ambient-grid"></div>
+    <div class="ambient ambient-glow"></div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="reveal">
+        <div class="slides" id="slides">
+
+            <!-- SLIDE 1: Cover -->
+            <div class="slide slide-cover active" data-slide="1" data-transition="开场">
+                <div class="eyebrow">adhd × vibe coding / guest share</div>
+                <h1>副本开得太多<br>怎么办？</h1>
+                <p class="subtitle">让AI当我的背包</p>
+                <div class="joke-box">
+                    开个玩笑：距离要讲了才十几分钟，才做出了第一版slides
+                </div>
+                <div style="margin-top: 2rem;">
+                    <span class="tag">赛博砖块</span>
+                    <span class="tag tag-green">@SheNicest</span>
+                </div>
+                <p class="meta">游走在代码与人文边界的造梦师<br>相信技术的终极浪漫是消灭门槛</p>
+                <div class="transition-script">「来ADHD的场合跟见家人一样。不是因为我们都'有病'，是因为我们都知道调参有多难。」</div>
+            </div>
+
+            <!-- SLIDE 2: Self Intro -->
+            <div class="slide" data-slide="2" data-transition="自我介绍">
+                <div class="eyebrow">who am i</div>
+                <h2>为什么叫<span class="highlight">砖块</span>？</h2>
+                <div class="flex-col" style="max-width: 700px; width: 100%;">
+                    <div class="card card-accent">
+                        <h3>🧱 哪里需要往哪搬</h3>
+                        <p>ADHD嘛，什么都想干，什么都上瘾。今天想学网安，明天想当艺术家，后天想去希腊定居。探索完了就打包成 <span class="highlight">Skills</span> 分享给别人。</p>
+                    </div>
+                    <div class="card card-green">
+                        <h3>🌐 为什么赛博？</h3>
+                        <p>我们整个团队 <span class="highlight-green">Remote</span>，分布式协作。线上建联，线下见面，像今天这样。</p>
+                    </div>
+                    <div class="card card-yellow">
+                        <h3>💝 母亲节特别场</h3>
+                        <p>顺便推荐 <span class="highlight">SheNicest 母亲节特别活动</span>，Vivi 也参加过我们的活动，感兴趣可以了解！</p>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; padding: 12px 20px; background: rgba(255,107,107,0.08); border-radius: 8px; border-left: 3px solid var(--accent); max-width: 700px;">
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                        <strong style="color: var(--accent);">👀 现场演示：</strong>大家看我投屏可能会注意到——我这哐哐哐全是标签页。内存永远不够用。这就是我的日常，等下你们就知道了。
+                    </p>
+                </div>
+                <div class="transition-script">好，自我介绍完了。但今天不是来听我讲砖块的——是来解决一个问题的。</div>
+            </div>
+
+            <!-- SLIDE 3: Hook + Paradox -->
+            <div class="slide" data-slide="3" data-transition="核心矛盾">
+                <div class="eyebrow">the paradox</div>
+                <h2>ADHD × AI 的悖论</h2>
+                <div class="big-quote" style="margin: 2rem 0;">
+                    我们最需要 AI 帮我们<span class="highlight">收敛</span><br>
+                    但 AI 的默认设置是<span class="highlight">发散</span>
+                </div>
+                <div class="grid-3" style="margin-top: 2rem;">
+                    <div class="card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                        <h3>我需要的</h3>
+                        <p style="font-size: 0.95rem;">直接告诉我怎么做</p>
+                    </div>
+                    <div class="card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">❓</div>
+                        <h3>AI 给的</h3>
+                        <p style="font-size: 0.95rem;">"要 A 还是 B？"</p>
+                    </div>
+                    <div class="card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💥</div>
+                        <h3>结果</h3>
+                        <p style="font-size: 0.95rem;">决策疲劳 → 无限开支线</p>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.9rem; font-family: var(--mono);">
+                    💡 Claude Code GitHub Issue #48137: "5-min prompt cache expires while neurodivergent users are reading..."
+                </p>
+                <div class="transition-script">这个问题困扰了我很久。直到我开始观察身边那些"看起来很卷"的人——比如 Vivi。</div>
+            </div>
+
+            <!-- SLIDE 4: Vivi Story -->
+            <div class="slide" data-slide="4" data-transition="Vivi的故事">
+                <div class="eyebrow">a story about vivi</div>
+                <h2>为什么 Vivi 总在半夜 Coding？</h2>
+                <div class="flex-col" style="max-width: 750px; width: 100%; gap: 24px;">
+                    <div class="card" style="border-left: 4px solid var(--berry);">
+                        <p style="font-size: 1.3rem; color: var(--text); line-height: 1.8;">
+                            "昨天和瑞典的朋友聊起 Vivi，她说为什么 Vivi 总在半夜 coding？"
+                        </p>
+                    </div>
+                    <div class="arrow-down">⬇️</div>
+                    <div class="card" style="border-left: 4px solid var(--pool); background: rgba(116,185,255,0.1);">
+                        <p style="font-size: 1.3rem; color: var(--text); line-height: 1.8;">
+                            "我想了想——<span class="highlight">Vivi 不一定是为了卷别人，她可能只是在想怎么活下来。</span>"
+                        </p>
+                    </div>
+                    <div class="arrow-down">⬇️</div>
+                    <div class="success-box">
+                        <p style="font-size: 1.1rem; color: var(--text);">
+                            朋友问我：你觉得自己是 ADHD 吗？<br>
+                            我说：<span class="highlight-green">没想管自己是不是，也不想贴标签。反正看着像自己的，有用的方法都用用。人活着就是不断给自己调参。</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="transition-script">所以——今天我不讲"ADHD该怎么用AI"，我讲一个总在调参的人，怎么把AI调成自己的参数。</div>
+            </div>
+
+            <!-- SLIDE 5: Framework Overview -->
+            <div class="slide" data-slide="5" data-transition="四维总览">
+                <div class="eyebrow">my framework</div>
+                <h2>四维工作流</h2>
+                <div class="grid-2" style="max-width: 900px;">
+                    <div class="card card-accent">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚨</div>
+                        <h3>救急</h3>
+                        <p>Google Workspace 全家桶<br>Gemini + Drive + NotebookLM</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--blue);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🛡️</div>
+                        <h3>收敛</h3>
+                        <p>Skills 打包 + Coding Plan<br>防止 Hyperfocus 失控</p>
+                    </div>
+                    <div class="card card-green">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔄</div>
+                        <h3>复用</h3>
+                        <p>把自己作为 Context<br>旧课件 → 新课 → 成长档案</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--purple);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌌</div>
+                        <h3>跨宇宙</h3>
+                        <p>小说 ↔ 游戏 ↔ 教学<br>互为 Context，互相渗漏</p>
+                    </div>
+                </div>
+                <div class="transition-script">听起来很多对吧？但别担心——我会一个个讲。今天先说最紧急的：救急。</div>
+            </div>
+
+            <!-- SLIDE 6: Workspace - Emergency Aid -->
+            <div class="slide" data-slide="6" data-transition="救急">
+                <div class="eyebrow">brick 1 / 救急</div>
+                <h2>Google Workspace 全家桶</h2>
+                <p style="margin-bottom: 2rem;">明天要上课，完全忘了去年怎么上的</p>
+
+                <div class="flex-col" style="max-width: 800px; width: 100%; gap: 16px;">
+                    <div class="workflow-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <strong>打开 Drive</strong> → 找到 "2024 秋季物理" 文件夹
+                        </div>
+                        <span style="font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary);">30s</span>
+                    </div>
+                    <div class="step-arrow">↓</div>
+                    <div class="workflow-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <strong>@Gemini</strong> "总结我 '2024 秋季物理' 文件夹里关于 [主题] 的课件"
+                        </div>
+                        <span style="font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary);">1min</span>
+                    </div>
+                    <div class="step-arrow">↓</div>
+                    <div class="workflow-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <strong>自动生成</strong>：3 条目标 + 2 条误区 + 3 条调整点
+                        </div>
+                        <span style="font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary);">1min</span>
+                    </div>
+                    <div class="step-arrow">↓</div>
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--green);">✓</div>
+                        <div class="step-content">
+                            <span class="highlight-green">去上课</span>
+                        </div>
+                        <span style="font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary);">Total: 3min</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 16px 24px; background: var(--yellow); border-radius: 12px; max-width: 700px;">
+                    <strong>🔥 新更新：</strong>NotebookLM × Gemini 打通！以前 NotebookLM 没历史记录，现在 Gemini 里直接 @NotebookLM，上下文自动继承。
+                </div>
+                <div class="transition-script">3分钟，从完全忘记到胸有成竹。但这只是救急——真正的问题是，怎么防止我改着改着停不下来？</div>
+            </div>
+
+            <!-- SLIDE 7: Skills + Coding Plan -->
+            <div class="slide" data-slide="7" data-transition="收敛">
+                <div class="eyebrow">brick 2 / 收敛</div>
+                <h2>Skills + Coding Plan</h2>
+                <p style="margin-bottom: 1.5rem;">省钱，想改几轮改几轮，但 Hyperfocus 改 3 小时停不下来</p>
+
+                <div class="grid-2" style="max-width: 1000px;">
+                    <div>
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">❌ 问题</h3>
+                        <div class="flex-col" style="gap: 12px;">
+                            <div class="card" style="opacity: 0.7;">
+                                <p>每次写 Prompt 从头来</p>
+                            </div>
+                            <div class="card" style="opacity: 0.7;">
+                                <p>改着改着偏离主线</p>
+                            </div>
+                            <div class="card" style="opacity: 0.7;">
+                                <p>想优化 A 又冒出 B、C</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--green); margin-bottom: 1rem;">✅ 解法</h3>
+                        <div class="flex-col" style="gap: 12px;">
+                            <div class="card card-green">
+                                <p><strong>Skills 打包</strong>：固化常用模板，一键调用</p>
+                            </div>
+                            <div class="card card-green">
+                                <p><strong>Coding Plan</strong>：硬规则，不是建议</p>
+                            </div>
+                            <div class="card card-green">
+                                <p><strong>停止条件</strong>：输出 3 条即结束</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box" style="margin-top: 2rem;">
+                    <p style="font-size: 1.1rem; color: var(--text);">
+                        <strong>关键洞察：</strong>ADHD 的大脑对 <span class="highlight">"建议"</span> 会自动忽略，对 <span class="highlight">"规则"</span> 会执行。
+                    </p>
+                </div>
+                <div class="transition-script">规则，不是建议——这句话很重要。我试过告诉自己"差不多就行了"，没用。但如果说"系统规定最多3条"，我就会停。</div>
+            </div>
+
+            <!-- SLIDE 8: Skill Demo -->
+            <div class="slide" data-slide="8" data-transition="Skill演示">
+                <div class="eyebrow">skill demo</div>
+                <h2>课件复盘 Skill</h2>
+                <div class="code-block" style="margin-top: 1rem;">
+<span class="comment">【系统角色】</span>
+你是一位国际学校课程复盘助手
+
+<span class="comment">【核心规则 - 必须遵守】</span>
+1. 输出必须<span class="keyword">收敛</span>：只给结论，不问问题
+2. 输出必须<span class="keyword">有限</span>：严格按指定数量
+3. 输出必须<span class="keyword">结构化</span>：固定格式
+
+<span class="comment">【处理流程】</span>
+1. 提取核心教学目标（<span class="number">严格限 3 条</span>）
+2. 列出学生常见误区（<span class="number">严格限 2 条</span>）
+3. 给出建议调整的 3 个点
+
+<span class="comment">【禁止行为】</span>
+❌ 不提供替代方案
+❌ 不生成补充材料
+❌ 不询问 "您是否需要..."
+
+<span class="comment">【结束语】</span>
+"复盘完成。如需深入某个点，请明确指定编号。"
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem;">
+                    <span class="tag">预制菜</span>
+                    <span class="tag tag-green">一键调用</span>
+                    <span class="tag">不写 Prompt</span>
+                </p>
+                <div class="transition-script">这就是我说的"预制菜"——不用每次重新炒，随时热一下就能用。但光有工具还不够，我要能管住自己的念头。</div>
+            </div>
+
+            <!-- SLIDE 9: ChatMemo + Decision Graph -->
+            <div class="slide" data-slide="9" data-transition="副本管理">
+                <div class="eyebrow">brick 3 / 副本管理</div>
+                <h2>ChatMemo + Decision Graph</h2>
+                <p style="margin-bottom: 2rem;">今天想去希腊，明天想去美国，后天想学网安...</p>
+
+                <div class="flex-col" style="max-width: 800px; width: 100%; gap: 20px;">
+                    <div class="card" style="border-left: 4px solid var(--purple);">
+                        <h3>🧠 奇思妙想层（发散）</h3>
+                        <p>ChatMemo 记录所有念头：学兽医、当艺术家、去希腊、去美国...</p>
+                    </div>
+                    <div style="text-align: center; font-size: 1.5rem; color: var(--accent);">↓</div>
+                    <div class="card" style="border-left: 4px solid var(--pool);">
+                        <h3>📋 可能性评估层（AI 帮忙）</h3>
+                        <p>以前：让ChatGPT画个图、标优先级<br>
+                        现在：直接搜Skills商店、调研GitHub仓库<br>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">RAG都快死了，AI越来越好用，工具越来越强</span></p>
+                    </div>
+                    <div style="text-align: center; font-size: 1.5rem; color: var(--accent);">↓</div>
+                    <div class="card" style="border-left: 4px solid var(--green);">
+                        <h3>📊 Decision Graph（长期追踪）</h3>
+                        <p>每个选择的后果、时间线、资源需求、3 个月后还重要吗？</p>
+                    </div>
+                </div>
+
+                <div class="success-box" style="margin-top: 2rem;">
+                    <p style="font-size: 1.1rem;">
+                        <strong>核心洞察：</strong>ADHD 不是不能开副本，是<span class="highlight-green">不能同时感知所有副本的重量</span>。AI 是我的外部秤，也是我的打醒系统。
+                    </p>
+                </div>
+                <div class="transition-script">外部秤——这个比喻很重要。我们ADHD最缺的就是对"这件事有多重"的感知。别人一眼就看出来这事不靠谱，我们看不出来。</div>
+            </div>
+
+            <!-- SLIDE 10: ChatGPT Critique -->
+            <div class="slide" data-slide="10" data-transition="ChatGPT陷阱">
+                <div class="eyebrow">the trap</div>
+                <h2>ChatGPT 的"要 A 还是 B？"</h2>
+                <p style="margin-bottom: 2rem;">对 ADHD 是灾难，不是体贴</p>
+
+                <table class="compare-table" style="margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th>ChatGPT 说</th>
+                            <th>ADHD 内心 OS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"您想要正式还是随意的语气？"</td>
+                            <td>"正式吧...但随意可能更自然...等等，看对象是谁..."</td>
+                        </tr>
+                        <tr>
+                            <td>"需要我展开 A 还是 B？"</td>
+                            <td>"A 吧...但 B 也有道理...要不都看看？...C 也不错？"</td>
+                        </tr>
+                        <tr>
+                            <td>"您还有其他需求吗？"</td>
+                            <td>"有！但我不确定是什么...让我想想...2 小时过去了"</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="card" style="background: var(--accent); color: white; max-width: 700px;">
+                    <h3 style="color: white; margin-bottom: 0.5rem;">💡 我的收敛开场白</h3>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem; font-weight: 700;">
+                        "不要问我问题，直接给出你的最佳建议，我会反馈调整。"
+                    </p>
+                </div>
+                <div class="transition-script">你看——ChatGPT 以为在帮忙，其实是在挖坑。它每问一个问题，我就得多想一个半小时。</div>
+            </div>
+
+            <!-- SLIDE 11: Cross-Context -->
+            <div class="slide" data-slide="11" data-transition="跨宇宙">
+                <div class="eyebrow">brick 4 / 跨宇宙</div>
+                <h2>互为 Context 的多宇宙</h2>
+                <p style="margin-bottom: 2rem;">小说、游戏、教学、AIGC 影视——它们互相渗漏</p>
+
+                <div class="grid-2" style="max-width: 900px;">
+                    <div class="card" style="border-left: 4px solid var(--purple);">
+                        <h3>🎮 科幻小说 → Vibe Coding 工具</h3>
+                        <p>小说里写到一个 AI 工具，Skill 自动问：这个能放进教学课件吗？能做成游戏机制吗？</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--pool);">
+                        <h3>📚 课堂讨论 → 叙事结构</h3>
+                        <p>学生的奇怪问题启发小说情节，教学反馈成为创作素材</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--berry);">
+                        <h3>🎬 AIGC 影视 → 课件可视化</h3>
+                        <p>用 AI 生成的视频片段直接插入教学，学生反馈再优化影视脚本</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--gold);">
+                        <h3>⚡ Git 控制小说版本</h3>
+                        <p>主角名字改八遍然后改回去，没有版本控制我就疯了</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2rem; font-family: var(--mono); font-size: 0.9rem; color: var(--text-secondary);">
+                    💡 本地 Agent 可以互相参考，让科幻小说里的工具真的跑起来
+                </p>
+                <div class="transition-script">这些宇宙不是孤立的——它们在互相喂养。你写小说的时候冒出一个工具灵感，可以用到教学里；教学里的问题，可以变成游戏机制。</div>
+            </div>
+
+            <!-- SLIDE 12: Full Workflow Demo -->
+            <div class="slide" data-slide="12" data-transition="完整演示">
+                <div class="eyebrow">demo</div>
+                <h2>完整 Workflow 演示</h2>
+                <p style="margin-bottom: 2rem;">明天要上课，3 分钟复盘</p>
+
+                <div class="flex-col" style="max-width: 700px; width: 100%;">
+                    <div class="workflow-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">Drive 文件夹 → @Gemini 读取</div>
+                        <span style="font-family: var(--mono); color: var(--text-secondary);">30s</span>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">丢进「课件复盘 Skill」→ 自动输出</div>
+                        <span style="font-family: var(--mono); color: var(--text-secondary);">1min</span>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">想 Hyperfocus 改更多？</div>
+                        <span style="font-family: var(--mono); color: var(--text-secondary);">→</span>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--accent);">!</div>
+                        <div class="step-content">
+                            <span class="highlight">Coding Plan 弹出：</span>"已输出 3 条，如需深入请明确具体方向"
+                        </div>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--green);">✓</div>
+                        <div class="step-content">
+                            <span class="highlight-green">全程不写 Prompt，不做决策，甚至不用记得去年讲了什么</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="transition-script">全程不写 Prompt，不用记得去年讲了什么——3分钟，去睡觉。但问题来了：如果我就是想改呢？谁来拦住我？</div>
+            </div>
+
+            <!-- SLIDE 13: Tools Today - NoFeed -->
+            <div class="slide" data-slide="13" data-transition="当前解法">
+                <div class="eyebrow">tools now</div>
+                <h2>门口效应 → 已经有解法了</h2>
+                <p style="margin-bottom: 2rem;">我门口效应越来越严重，经常忘记刚在干什么——直到这两个工具出现</p>
+
+                <div class="grid-2" style="max-width: 900px;">
+                    <div class="card" style="border-left: 4px solid var(--accent);">
+                        <h3 style="color: var(--accent);">🚫 NoFeed</h3>
+                        <p style="font-size: 0.95rem;">跳过App首页Feed流，直达搜索结果页</p>
+                        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                            <p>✅ 搜索直达 + 线性历史</p>
+                            <p>✅ App别名自定义</p>
+                            <p>✅ 小组件支持</p>
+                            <p>✅ 隐私友好，本地离线</p>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem; font-style: italic; color: var(--blue);">
+                            "感觉能把好多app图标都从桌面隐藏掉！adhd福音！！"
+                        </p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--blue);">
+                        <h3 style="color: var(--blue);">🧠 MineContext</h3>
+                        <p style="font-size: 0.95rem;">字节出品：主动式上下文感知伙伴</p>
+                        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                            <p>📊 活动记录：每15分钟一条</p>
+                            <p>📋 待办事项：自动按优先级生成</p>
+                            <p>🔔 日常提示：洞察模式 + 风险预警</p>
+                            <p>📅 每日总结：今天干了啥主线任务</p>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem; font-style: italic; color: var(--blue);">
+                            "我愿称MineContext为ADHD神器！"
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 16px; background: rgba(255,217,61,0.15); border-radius: 12px; max-width: 800px;">
+                    <p style="font-size: 1rem;">
+                        <strong style="color: var(--yellow);">💡 新发现：</strong>回车监测比屏幕截图更精准——按回车往往是你做了<strong>重要操作</strong>的时刻。
+                        Codex、阶跃这些下一代工具可能在往这个方向走。
+                    </p>
+                </div>
+                <div class="transition-script">这两个工具都在解决同一个问题——帮我知道"自己在哪"、"刚干了什么"。但还不够——我的终极目标是让所有宇宙都打通。</div>
+            </div>
+
+            <!-- SLIDE 14: Wake-up System + 幻觉检测器 -->
+            <div class="slide" data-slide="14" data-transition="打醒系统">
+                <div class="eyebrow">the wake-up call</div>
+                <h2>没人打醒我的话，我根本不知道</h2>
+
+                <div class="big-quote" style="margin: 2rem 0; font-size: 1.8rem;">
+                    人生无限可能，蒸蒸日上——<br>
+                    但<span class="highlight">没人打醒我</span>的话，<br>
+                    我根本不知道哪些副本已经僵了
+                </div>
+
+                <div class="grid-2" style="max-width: 800px; margin-top: 2rem;">
+                    <div class="warning-box">
+                        <h3 style="color: var(--accent); margin-bottom: 0.5rem;">😶‍🌫️ "没人打醒我"路径</h3>
+                        <p style="font-size: 0.95rem;">
+                            Drive 课件 → 3 个月没打开 → 下周又要上课 → 完全忘了 → 熬夜重做 → <span class="highlight">crash</span>
+                        </p>
+                    </div>
+                    <div class="success-box">
+                        <h3 style="color: #2d8a2d; margin-bottom: 0.5rem;">🤖 AI 介入路径</h3>
+                        <p style="font-size: 0.95rem;">
+                            2 周未访问 → Gemini 提醒 → <span class="highlight-green">一键触发 Skill</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--yellow); max-width: 700px;">
+                    <h3>🧱 幻觉检测器</h3>
+                    <p style="font-size: 0.95rem;">
+                        AI 定期扫描副本健康度：30天没动？标🟡休眠。90天没动？标🔴僵死。
+                        不是骂我，是用证据告诉我——这个梦还在呼吸吗？
+                    </p>
+                </div>
+                <div class="transition-script">"没人打醒我就不知道"——这句话是今天最重要的。如果你们今天只记住一句，就记住这句。</div>
+            </div>
+
+            <!-- SLIDE 15: Ultimate Vision -->
+            <div class="slide" data-slide="15" data-transition="Agent梦想">
+                <div class="eyebrow">the dream</div>
+                <h2>终极 Agent 梦</h2>
+                <p style="margin-bottom: 2rem;">像 Vivi 的 2Up，但覆盖我所有的宇宙</p>
+
+                <div class="flex-col" style="max-width: 700px; width: 100%; gap: 20px;">
+                    <div class="card" style="border-left: 4px solid var(--berry);">
+                        <h3>🎙️ 现在：半手动</h3>
+                        <p>微信群聊 → Bubbles 监听 → 扣子提取 → 飞书存储 → 手动整理进 Context</p>
+                    </div>
+                    <div style="text-align: center; font-size: 2rem;">⬇️</div>
+                    <div class="card" style="border-left: 4px solid var(--green); background: rgba(125,216,125,0.1);">
+                        <h3>🤖 未来：全自动</h3>
+                        <p>生活录音 + 课堂讨论 + 半夜奇思妙想 → <span class="highlight-green">Agent 自动提炼</span> → 跨项目 Skills → 各宇宙复用</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 20px; background: rgba(108,92,231,0.1); border-radius: 12px; max-width: 700px;">
+                    <p style="font-size: 1.1rem; color: var(--text);">
+                        <strong>开放问题：</strong>微信聊天记录怎么更自动地结构化进 Context？飞书多维表格 vs Google Drive？<span class="highlight-blue">散场后想偷师。</span>
+                    </p>
+                </div>
+                <div class="transition-script">这就是我想要的——不是更多工具，是让工具帮我"知道自己在哪里"。</div>
+            </div>
+
+            <!-- SLIDE 16: Summary -->
+            <div class="slide" data-slide="16" data-transition="总结">
+                <div class="eyebrow">takeaway</div>
+                <h2>四句话带走</h2>
+
+                <div class="flex-col" style="max-width: 800px; width: 100%; gap: 20px; margin-top: 1rem;">
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--accent);">1</div>
+                        <div class="step-content">
+                            <strong>救急：</strong>Workspace + NotebookLM 打通 = <span class="highlight">不用记东西放哪</span>
+                        </div>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--blue);">2</div>
+                        <div class="step-content">
+                            <strong>收敛：</strong>Skills + Coding Plan = <span class="highlight-blue">Hyperfocus 有边界</span>
+                        </div>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--green);">3</div>
+                        <div class="step-content">
+                            <strong>复用：</strong>把自己作为 Context = <span class="highlight-green">旧课件的二次生命</span>
+                        </div>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-num" style="background: var(--purple);">4</div>
+                        <div class="step-content">
+                            <strong>跨宇宙：</strong>副本之间修高速公路 = <span style="color: var(--purple); font-weight: 700;">互为 Context，互相喂养</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="transition-script">四句话。但最想你们记住的，是最后这句——</div>
+            </div>
+
+            <!-- SLIDE 17: Closing -->
+            <div class="slide slide-cover" data-slide="17" data-transition="收尾">
+                <div class="big-quote" style="font-size: 2.2rem; margin-bottom: 2rem;">
+                    AI 不是我的造梦机，<br>
+                    是我的<span class="highlight">闹钟</span>。<br><br>
+                    不是让我少做梦，<br>
+                    是让我知道<span class="highlight-green">哪些梦还在呼吸</span>，<br>
+                    哪些已经<span class="highlight">僵了</span>。
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <span class="tag">标签不重要</span>
+                    <span class="tag tag-green">参数才重要</span>
+                </div>
+
+                <p style="margin-top: 2rem; font-size: 1.2rem;">
+                    来 ADHD 的场合跟<span class="highlight">见家人</span>一样。<br>
+                    我们都知道「活下来」不是矫情。
+                </p>
+
+                <div style="margin-top: 3rem;">
+                    <p style="font-family: var(--mono); font-size: 0.9rem; color: var(--text-secondary);">
+                        赛博砖块 @SheNicest | 小红书: Desal<br>
+                        感兴趣 → SheNicest 母亲节特别场 🌸
+                    </p>
+                </div>
+                <div class="transition-script">谢谢大家。</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="slide-counter" id="slideCounter">1 / 17</div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()">←</button>
+        <button class="nav-btn" onclick="nextSlide()">→</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 17;
+
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index + 1 === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+            document.getElementById('progressBar').style.width = `${(currentSlide / totalSlides) * 100}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
