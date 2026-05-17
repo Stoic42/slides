@@ -7,14 +7,14 @@
   <style>
     @font-face {
       font-family: "ChaohuaType";
-      src: url("fonts/朝华打字机-subset.woff2") format("woff2");
+      src: url("../fonts/朝华打字机-subset.woff2") format("woff2");
       font-weight: normal;
       font-style: normal;
       font-display: swap;
     }
     @font-face {
       font-family: "ChaohuaTitle";
-      src: url("fonts/朝华标题A-subset.woff2") format("woff2");
+      src: url("../fonts/朝华标题A-subset.woff2") format("woff2");
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -142,7 +142,8 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 30px;
-      max-width: 1000px;
+      max-width: 900px;
+      padding: 0 40px;
     }
     .col-check {
       background: var(--bg-paper);
@@ -191,19 +192,6 @@
       z-index: 100;
     }
 
-    .qr-placeholder {
-      width: 120px;
-      height: 120px;
-      border: 2px dashed var(--pink-dim);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: var(--ink-dim);
-      margin-top: 30px;
-    }
-
     .tag-line {
       font-size: 18px;
       color: var(--ink-dim);
@@ -245,7 +233,7 @@
 <div class="progress" id="progress"></div>
 
 <!-- Slide 1: Title + Credibility -->
-<div class="slide active" id="slide-1" data-note="开场：我是谁，为什么听我说">
+<div class="slide active" id="slide-1" data-note="开场 30 秒：不要报菜名式自我介绍。只说'我参加过多次黑客松，组过熟人队、现场队、也 Solo 过。今天分享的都是翻车后的复盘。'">
   <div class="slide-title">黑客松高效组队与团队协作</div>
   <div class="slide-subtitle">开放世界，不设限<br>
     <span style="font-size: 18px; color: var(--ink-dim);">—— 多次参赛、组建团队、持续复盘的实战分享</span>
@@ -254,13 +242,13 @@
 </div>
 
 <!-- Slide 2: Open World Metaphor -->
-<div class="slide" id="slide-2" data-note="核心隐喻：黑客松不是考试，是高压版开放式学习场">
+<div class="slide" id="slide-2" data-note="抛隐喻：问观众'你们来之前是不是有点紧张？像不像明天要考试？' → 接'黑客松不是考试，是开放世界游戏，没有标准答案。'">
   <div class="big-quote">黑客松是<span class="highlight">开放世界游戏</span><br>你进去之后完全可以自由地探索</div>
   <div class="slide-number">02 / 16</div>
 </div>
 
 <!-- Slide 3: Solo is OK -->
-<div class="slide" id="slide-3" data-note="Solo 不是社恐逃生舱，是一种项目控制策略">
+<div class="slide" id="slide-3" data-note="给 Solo 正名：强调'不是退而求其次'。停顿一下，说'如果你选 Solo，AI 就是你的联合创始人，但项目范围要砍到只剩骨头。'">
   <div class="slide-content">
     <ul>
       <li>碰到什么<span class="highlight">主题</span></li>
@@ -275,7 +263,7 @@
 </div>
 
 <!-- Slide 4: When to Team Up -->
-<div class="slide" id="slide-4" data-note="">
+<div class="slide" id="slide-4" data-note="组队决策框架：快速过 4 个场景。重点讲'成熟团队出击'——如果你和朋友本来就是团队，黑客松是你们的练兵场。">
   <div class="slide-title">什么时候适合组队？</div>
   <div class="slide-content">
     <ul>
@@ -288,8 +276,8 @@
   <div class="slide-number">04 / 16</div>
 </div>
 
-<!-- NEW Slide 5: Women-Only Space = Lower Barrier -->
-<div class="slide" id="slide-5" data-note="核心差异化页面 - SheNicest 专属弹药">
+<!-- Slide 5: Women-Only Space = Lower Barrier -->
+<div class="slide" id="slide-5" data-note="这里是情绪高点。说'女性专属黑客松参与率 52.6%，混合赛只有 22%。在这个场域里，走到陌生人面前的心理成本更低。'">
   <div class="slide-title">女性空间 = 更低的组队门槛</div>
   <div class="slide-content">
     <ul>
@@ -304,7 +292,7 @@
 </div>
 
 <!-- Slide 6: Three Team Formation Modes -->
-<div class="slide" id="slide-6" data-note="现场组队加一句安全提示">
+<div class="slide" id="slide-6" data-note="三种模式：现场组队部分给具体操作。'找眼神迷茫的人，走过去说"你好，我会前端/设计/产品，你在找队友吗？" '">
   <div class="slide-title">三种组队模式</div>
   <div class="three-col">
     <div class="col-card">
@@ -325,7 +313,7 @@
 </div>
 
 <!-- Slide 7: Teamwork After Formation -->
-<div class="slide" id="slide-7" data-note="边做边学风险提示 + 先睡觉金句">
+<div class="slide" id="slide-7" data-note="协作边界：强调'边做边学可以，但别抢核心后端然后爆炸'。新手认领清单快速念，然后抛金句'睡眠不是拖累，是性能优化。'">
   <div class="slide-title">组队后的协作</div>
   <div class="slide-content">
     <ul>
@@ -338,12 +326,12 @@
   <br>
   <p style="color: var(--ink-dim); font-size: 18px;">新手建议认领：资料整理、用户访谈、UI、pitch、测试、demo script</p>
   <br>
-  <p class="big-quote" style="font-size: 24px; margin-top: 20px;">别把熬夜浪漫化。<span class="highlight">睡眠不是拖累，是性能优化。</span></p>
+  <p class="big-quote" style="font-size: 32px; margin-top: 20px;">别把熬夜浪漫化。<span class="highlight">睡眠不是拖累，是性能优化。</span></p>
   <div class="slide-number">07 / 16</div>
 </div>
 
 <!-- Slide 8: Recording Discussions -->
-<div class="slide" id="slide-8" data-note="修正 TicNote 拼写">
+<div class="slide" id="slide-8" data-note="展示成本极低。说'你不需要买 Plaud，华为手机自带录音+转文字就够了。关键是把讨论变成可检索资产。'">
   <div class="slide-title">用录音记录讨论</div>
   <div class="slide-content">
     <ul>
@@ -358,7 +346,7 @@
 </div>
 
 <!-- Slide 9: AI as Team Member -->
-<div class="slide" id="slide-9" data-note="">
+<div class="slide" id="slide-9" data-note="讲边界——'AI 做调研，人类做决策。别让 AI 替代你们头脑风暴时的争吵，那是价值所在。'">
   <div class="slide-title">AI 是你的团队成员</div>
   <div class="three-col">
     <div class="col-card">
@@ -378,7 +366,7 @@
 </div>
 
 <!-- Slide 10: AI Info Sources - Fixed -->
-<div class="slide" id="slide-10" data-note="修正 Gemini 描述，替换为 Perplexity/Claude">
+<div class="slide" id="slide-10" data-note="快速对比。重点说'Perplexity 和 Claude 适合学术溯源，但所有 AI 输出必须回到原始链接验证。'">
   <div class="slide-title">AI 信息源选择</div>
   <div class="slide-content">
     <ul>
@@ -393,7 +381,7 @@
 </div>
 
 <!-- Slide 11: GitHub Collaboration -->
-<div class="slide" id="slide-11" data-note="">
+<div class="slide" id="slide-11" data-note="强调'Git 是赛前就要会的，不是赛中学。远程队友的信息传递效率决定你们能睡几小时。'">
   <div class="slide-title">善用 GitHub</div>
   <div class="slide-content">
     <ul>
@@ -406,7 +394,7 @@
 </div>
 
 <!-- Slide 12: Anti-fragile Team Formation - Simplified -->
-<div class="slide" id="slide-12" data-note="压缩到3项，避免文字过载">
+<div class="slide" id="slide-12" data-note="快速过 6 项，重点展开'先明分寸'和'先对齐预期'。讲 DIIS 故事：队友变叙事口径时，有眼力见的人配合，而不是冲上去 debuff。">
   <div class="slide-title">怎么组队不翻车</div>
   <div class="two-col">
     <div class="col-check">先问目标：拿奖 / 学习 / 交朋友 / 做作品集</div>
@@ -420,7 +408,7 @@
 </div>
 
 <!-- Slide 13: Key Takeaways -->
-<div class="slide" id="slide-13" data-note="">
+<div class="slide" id="slide-13" data-note="这是总结页，控制 30 秒。不要展开，只说'开放、主动、工具、AI、女性空间——五个关键词带走。'">
   <div class="slide-title">核心要点</div>
   <div class="slide-content">
     <ul>
@@ -435,7 +423,7 @@
 </div>
 
 <!-- Slide 14: 30-Minute Contract -->
-<div class="slide" id="slide-14" data-note="">
+<div class="slide" id="slide-14" data-note="强调'不是签合同，是快速对齐'。讲腾讯云故事：队长说'奖金平分'，氛围立刻好了。这里可以互动：'你们现在就可以和旁边的人聊 30 秒。'">
   <div class="slide-title">组队前 30 分钟契约</div>
   <div class="slide-content">
     <ul>
@@ -451,7 +439,7 @@
 </div>
 
 <!-- Slide 15: References - Simplified -->
-<div class="slide" id="slide-15" data-note="只放4个核心引用，现场演示字体要够大">
+<div class="slide" id="slide-15" data-note="告诉观众'扫码获取完整文献包+演讲者备注'。停顿 3 秒，让观众掏手机。">
   <div class="slide-title" style="font-size: 42px;">参考文献</div>
   <div class="slide-content" style="font-size: 22px; line-height: 2.2;">
     <ul>
@@ -462,13 +450,13 @@
     </ul>
     <br>
     <p style="font-size: 20px;">扫码获取完整文献包 + 演讲者备注</p>
-    <div style="display: flex; gap: 40px; justify-content: center; align-items: flex-start; margin-top: 10px;">
+    <div style="display: flex; gap: 60px; justify-content: center; align-items: flex-start; margin-top: 10px;">
       <div style="text-align: center;">
-        <img src="images/qrcode-wechat-public.png" alt="公众号二维码" style="width: 100px; height: 100px; object-fit: contain;">
+        <img src="images/qrcode-wechat-public.png" alt="公众号二维码" style="width: 140px; height: 140px; object-fit: contain;">
         <p style="font-size: 14px; color: var(--ink-dim); margin-top: 5px;">公众号</p>
       </div>
       <div style="text-align: center;">
-        <img src="images/xrcode-xiaohongshu.png" alt="小红书" style="width: 100px; height: 100px; object-fit: contain;">
+        <img src="images/xrcode-xiaohongshu.png" alt="小红书" style="width: 140px; height: 140px; object-fit: contain;">
         <p style="font-size: 14px; color: var(--ink-dim); margin-top: 5px;">小红书</p>
       </div>
     </div>
@@ -477,11 +465,21 @@
 </div>
 
 <!-- Slide 16: End with CTA -->
-<div class="slide" id="slide-16" data-note="加下一步行动召唤">
+<div class="slide" id="slide-16" data-note="说'玩得开心'，然后指一下屏幕角落的二维码提示，'资源在上一页，欢迎扫码关注'。">
   <div class="big-quote">祝大家组队顺利<br><span class="highlight">玩得开心！</span></div>
   <div style="margin-top: 40px; text-align: center;">
     <p style="font-size: 20px; color: var(--ink-dim);">资源包：Git 急救卡 + 30分钟契约模板</p>
     <p style="font-size: 22px; color: var(--pink); margin-top: 10px;">扫码领取 / 关注 SheNicest 公众号</p>
+    <div style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-top: 20px;">
+      <div style="text-align: center;">
+        <img src="images/qrcode-wechat-public.png" alt="公众号二维码" style="width: 90px; height: 90px; object-fit: contain;">
+        <p style="font-size: 13px; color: var(--ink-dim); margin-top: 4px;">公众号</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="images/xrcode-xiaohongshu.png" alt="小红书" style="width: 90px; height: 90px; object-fit: contain;">
+        <p style="font-size: 13px; color: var(--ink-dim); margin-top: 4px;">小红书</p>
+      </div>
+    </div>
   </div>
   <div class="slide-number">16 / 16</div>
 </div>
@@ -513,7 +511,6 @@ function goTo(i) {
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ') { if (current < slides.length - 1) goTo(current + 1); }
   if (e.key === 'ArrowLeft') { if (current > 0) goTo(current - 1); }
-  // N key = toggle speaker notes
   if (e.key === 'n' || e.key === 'N') {
     document.body.classList.toggle('speaker-mode');
   }
