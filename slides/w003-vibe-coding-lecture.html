@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Coding 工作坊讲义 · W003 杭州</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a1f3d;
+    --paper: #f1f3f5;
+    --accent: #1B365D;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Noto Serif SC', serif;
+    --sans: 'Noto Sans SC', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 6rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 头部 */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.8rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .tag-row {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--ink);
+    opacity: 0.7;
+  }
+
+  /* 导航锚点 */
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 0.8rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(10,31,61,0.15);
+    z-index: 10;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    opacity: 0.6;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  nav a:hover { opacity: 1; }
+
+  /* 章节标题 */
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 700;
+    margin: 3rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(10,31,61,0.2);
+    letter-spacing: -0.01em;
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--accent);
+  }
+
+  h4 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 1.2rem 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  p { margin: 0.7rem 0; }
+
+  /* 时间节点 */
+  .time-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 8px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* 引用框 */
+  .callout {
+    background: rgba(27,54,93,0.06);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout p { margin: 0.3rem 0; }
+  .callout .cite {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 0.6rem;
+  }
+
+  /* 列表 */
+  ul, ol {
+    padding-left: 1.4rem;
+    margin: 0.7rem 0;
+  }
+  li { margin: 0.4rem 0; }
+
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.92rem;
+  }
+  th {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 2px solid var(--ink);
+    opacity: 0.7;
+  }
+  td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid rgba(10,31,61,0.12);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* 分割线 */
+  hr {
+    border: none;
+    border-top: 1px solid rgba(10,31,61,0.15);
+    margin: 2.5rem 0;
+  }
+
+  /* 代码 */
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: rgba(27,54,93,0.08);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  strong { font-weight: 700; color: var(--accent); }
+
+  /* 页脚 */
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* 工具卡片 */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .tool-card {
+    border: 1px solid rgba(10,31,61,0.2);
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  .tool-card h4 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0.4rem;
+    opacity: 1;
+    color: var(--accent);
+  }
+  .tool-card p { font-size: 0.88rem; opacity: 0.8; margin: 0.3rem 0; }
+  .tool-card .badge {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.4rem;
+  }
+
+  /* 步骤 */
+  .step {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: flex-start;
+  }
+  .step-nb {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.5;
+    min-width: 2rem;
+    line-height: 1.2;
+  }
+  .step-body { flex: 1 }
+
+  /* 响应式 */
+  @media (max-width: 600px) {
+    body { padding: 1.2rem 1rem 4rem; }
+    h2 { font-size: 1.4rem; }
+    .tool-grid { grid-template-columns: 1fr; }
+    nav { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-meta">She Code Lab · W003 杭州站 &nbsp;·&nbsp; 2026</div>
+  <h1>Vibe Coding 工作坊讲义</h1>
+  <p class="subtitle">把自己作为语料 · Self as Context</p>
+  <div class="tag-row">
+    <span class="tag">工作坊</span>
+    <span class="tag">Vibe Coding</span>
+    <span class="tag">AI 编程</span>
+    <span class="tag">杭州</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#warmup">开场破冰</a>
+  <a href="#tools">工具链</a>
+  <a href="#prompt">Prompt 方法论</a>
+  <a href="#steering">掌舵艺术</a>
+  <a href="#painpoint">痛点验票</a>
+  <a href="#deploy">上线部署</a>
+  <a href="#demo">Demo Day</a>
+</nav>
+
+<!-- ==========================================
+     第一部分：开场与破冰
+     ========================================== -->
+<h2 id="warmup">一、开场与破冰 &nbsp;<span class="time-tag">00:00–00:30</span></h2>
+
+<h3>核心理念传达</h3>
+<p>开场破冰的核心目标是建立安全感，打破"我不懂技术"的恐惧，完成 Tech Lead 与 Creator 的混编。</p>
+
+<div class="callout">
+  <p>"欢迎来到 She Code Lab W003。今天在座的没有'程序员'和'小白'之分，只有'想做产品的人'。"</p>
+  <p>"我们要抛弃传统的编程学习路径（先学半年语法）。今天，<strong>英语（或中文）就是最高级的编程语言。</strong>"</p>
+  <p>"只要你能把你的想法说清楚，你就能写代码。"</p>
+</div>
+
+<h3>"Campfire" 座次安排策略</h3>
+<p>16 位 Tech Lead 分散坐开，Creator 坐在附近——这样 Creator 可以 solo 工作，但遇到问题可以转身问 Tech Lead。</p>
+
+<h4>Tech Lead 识别（5分钟）</h4>
+<ul>
+  <li>"请收到'Builder'邀请的 Tech Lead 站起来或举手。"</li>
+  <li>"这些是你们的'救生员'。如果环境配置出问题，或者 GitHub 拒绝你的密码，找她们。"</li>
+</ul>
+
+<h4>"Hello World" 环境检查（15分钟）</h4>
+<p>投屏显示三个绿灯检查：</p>
+<ul>
+  <li>✅ <strong>工具</strong>：打开 Cursor/Trae，确保 AI Chat 能用</li>
+  <li>✅ <strong>云端</strong>：登录 GitHub Desktop，创建空白 repo "W003-Demo"</li>
+  <li>✅ <strong>链接</strong>：（可选）登录 Vercel，连接 GitHub 账号</li>
+</ul>
+<p><em>规则："如果你有 3 个绿灯，可以去接咖啡。如果有红灯，问最近的 Tech Lead。"</em></p>
+
+<!-- ==========================================
+     第二部分：工具链底座
+     ========================================== -->
+<h2 id="tools">二、工具链底座 &nbsp;<span class="time-tag">00:30–01:00</span></h2>
+
+<h3>工具选型指南</h3>
+<div class="tool-grid">
+  <div class="tool-card">
+    <div class="badge">全自动 Agent · 适合从 0 到 1</div>
+    <h4>Trae</h4>
+    <p>还没想好代码怎么写，完全生成模式。Trae 帮你写 PRD、建文件、写代码。</p>
+  </div>
+  <div class="tool-card">
+    <div class="badge">PM 思维可视化 · 适合逻辑复杂</div>
+    <h4>Kiro</h4>
+    <p>逻辑复杂、需要先写文档。先 Design 再 Task，把 PM 思维可视化。</p>
+  </div>
+  <div class="tool-card">
+    <div class="badge">局部修改 · 适合已有代码</div>
+    <h4>Cursor</h4>
+    <p>已有代码，局部修改。最强补全 (Tab)，反应快。</p>
+  </div>
+</div>
+
+<h3>网络分流策略</h3>
+<table>
+  <tr><th>情况</th><th>推荐模型</th></tr>
+  <tr><td>可以翻墙</td><td>Claude 3.5 Sonnet / GPT-4</td></tr>
+  <tr><td>不能翻墙</td><td>DeepSeek / Kimi / Trae 国内版</td></tr>
+</table>
+
+<h3>重新理解 API Key：麦当劳得来速 + 贴牌比喻</h3>
+<div class="callout">
+  <p><strong>API Key = 企业信用卡</strong>：让你能访问大模型工厂（DeepSeek/Qwen 等）</p>
+  <p><strong>Prompt = OEM 贴牌生产单</strong>：决定产出是否符合你的品牌调性</p>
+  <p class="cite">安全警告：不要把 API Key 写在公开代码里，用 .env 文件</p>
+</div>
+
+<h4>救命锦囊（直接挂屏幕上）</h4>
+<ul>
+  <li><strong>Terminal 密码输入不显示</strong>："输入 <code>sudo</code> 密码时屏幕不会有反应，这是正常的！输完回车就行。"</li>
+  <li><strong>Git 弹窗轰炸</strong>："Mac 疯狂弹 Git 验证？点取消，或者切回 IDE 关掉 Git 插件，今天用 GitHub Desktop 拖拽上传。"</li>
+  <li><strong>依赖报错</strong>："看见 <code>command not found</code> 或红字？把报错信息复制，扔回给 AI，让它教你装环境。"</li>
+  <li><strong>永远先建文件夹</strong>：不要把项目生在根目录！</li>
+</ul>
+
+<!-- ==========================================
+     第三部分：Prompt 方法论
+     ========================================== -->
+<h2 id="prompt">三、核心方法论：Prompt 秘籍 &nbsp;<span class="time-tag">01:00–01:40</span></h2>
+
+<h3>Prompt 公式</h3>
+<div class="callout">
+  <p><strong>Context</strong>（背景） + <strong>Task</strong>（任务） + <strong>Constraints</strong>（约束） = <strong>Magic ✨</strong></p>
+</div>
+
+<table>
+  <tr><th>要素</th><th>含义</th><th>举例</th></tr>
+  <tr>
+    <td><strong>Context</strong></td>
+    <td>背景信息，把图片拖进去，把日记粘贴</td>
+    <td>"照着这个图做"、"这是我写的第一篇文章"（附文章内容）</td>
+  </tr>
+  <tr>
+    <td><strong>Task</strong></td>
+    <td>具体任务，说明白目标和结果</td>
+    <td>"做一个红色圆形按钮，点击弹出'Hello'"</td>
+  </tr>
+  <tr>
+    <td><strong>Constraints</strong></td>
+    <td>约束条件，格式、风格、边距……说清楚</td>
+    <td>"用 Bootstrap，响应式，不要动画"</td>
+  </tr>
+</table>
+
+<h3>迭代思维：AI 第一版永远是不完美的</h3>
+<p>如何通过"追问"来修改 Bug：把报错信息复制给 AI，问它"这是什么意思，请帮我修好"。<strong>这就是程序员每天 80% 的工作。</strong></p>
+
+<h3>现场演示：故意出错，然后修复</h3>
+<p>亲自演示用 5 分钟从零写出一个简单的"倒计时番茄钟"——演示<strong>出错</strong>的情况，然后演示如何把报错信息复制给 AI 让它修好。</p>
+
+<!-- ==========================================
+     第四部分：掌舵艺术
+     ========================================== -->
+<h2 id="steering">四、掌舵的艺术 &nbsp;<span class="time-tag">01:40–02:00</span></h2>
+
+<h3>Kiro Workflow：先写清再写代码</h3>
+
+<div class="step">
+  <div class="step-nb">01</div>
+  <div class="step-body">
+    <h4>Requirements</h4>
+    <p>"我要个注册功能"（PM 思维）</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-nb">02</div>
+  <div class="step-body">
+    <h4>Design / Spec — <em>Human Review Here!</em></h4>
+    <p>检查边界情况：手机号重复怎么办？用户名重复怎么办？</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-nb">03</div>
+  <div class="step-body">
+    <h4>Task</h4>
+    <p>生成代码（Dev 思维）</p>
+  </div>
+</div>
+
+<div class="callout">
+  <p><strong>Review the Spec, not just the Code.</strong></p>
+  <p class="cite">看不懂代码没关系，但你一定看得懂逻辑。</p>
+</div>
+
+<!-- ==========================================
+     第五部分：痛点验票
+     ========================================== -->
+<h2 id="painpoint">五、痛点验票 &nbsp;<span class="time-tag">02:00–02:30</span></h2>
+
+<h3>便利贴法则</h3>
+
+<div class="step">
+  <div class="step-nb">写</div>
+  <div class="step-body">
+    <h4>Step 1: Write</h4>
+    <p>拿出便利贴：</p>
+    <ul>
+      <li>左边：你的 <strong>Idea</strong>（产品名）</li>
+      <li>右边：<strong>崩溃瞬间</strong>（即你的 Context）——你生活中最烦恼的那个具体场景</li>
+    </ul>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-nb">验</div>
+  <div class="step-body">
+    <h4>Step 2: Check</h4>
+    <p>自检时刻：</p>
+    <ul>
+      <li>写不出右边的"崩溃瞬间"？</li>
+      <li><strong>警报：你的 Idea 太大了！</strong></li>
+      <li>立刻缩小范围，直到你能写出那个瞬间。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <p><strong>你的痛点 = 最好的 Prompt 输入</strong></p>
+  <p>AI 不仅是你的程序员，它首先是你的镜子。今天我们不一定要做一个改变世界的产品，但我们可以做一个<strong>"懂我"</strong>的产品。</p>
+</div>
+
+<!-- ==========================================
+     第六部分：上线部署
+     ========================================== -->
+<h2 id="deploy">六、上线部署 &nbsp;<span class="time-tag">02:30–03:00</span></h2>
+
+<h3>分流部署</h3>
+<table>
+  <tr><th>情况</th><th>推荐方案</th></tr>
+  <tr><td>可以翻墙</td><td><strong>Vercel</strong>（推荐）：拖拽上传或连接 GitHub</td></tr>
+  <tr><td>不能翻墙</td><td><strong>EdgeOne Pages</strong>（腾讯云）：国内可用，支持全栈</td></tr>
+</table>
+
+<h3>万能部署 Prompt</h3>
+<div class="callout">
+  <p>"我是新手，我想把当前的网页免费部署上线。我已经安装了 Vercel 插件（或者请教我用最简单的方式）。请不要让我用复杂的命令行，最好能用图形界面或者最简单的指令。"</p>
+</div>
+
+<p><strong>保底大招：Netlify Drop</strong>（把文件夹直接拖进网页即可上线，无需 Git）</p>
+
+<h3>关于"刹不住车"：分流策略</h3>
+<p><em>不要试图让跑得快的人停下来听你讲基础，这会消磨她们的热情。</em></p>
+<p>动作：开场直接给一个"Cheat Sheet / 路线图"（一张 PPT 或 Notion 链接）。话术："如果你已经知道要做什么了，并且环境是绿灯，<strong>请直接开始 Solo</strong>，不用听我讲废话。如果你卡住了，或者不知道选哪个模式，请抬头看屏幕。"</p>
+
+<!-- ==========================================
+     第七部分：Demo Day
+     ========================================== -->
+<h2 id="demo">七、Demo Day &nbsp;<span class="time-tag">03:00–03:30</span></h2>
+
+<h3>Pitch 规则</h3>
+<p>闪电演讲，每人 2 分钟：</p>
+<ol>
+  <li>我原本想做什么？</li>
+  <li>我遇到了什么困难？</li>
+  <li>AI 是怎么帮我解决的？</li>
+  <li><strong>展示那个 URL。</strong></li>
+</ol>
+
+<div class="callout">
+  <p><strong>代码躺在你的电脑里只是文件，只有 URL，才是产品。</strong></p>
+</div>
+
+<h3>AI 帮你吹牛（下午 4 点强制执行）</h3>
+<p>打开 Gamma，输入："我做了一个 [产品一句话介绍]，解决了 [什么痛点]，核心功能是 [1,2,3]，请帮我生成 5 页 Pitch Deck。"</p>
+<p>或者让 Trae/Cursor 生成一个漂亮的 <code>README.md</code>，直接演示 GitHub Pages。</p>
+
+<h3>作品分享</h3>
+<p>闪电演讲，每人 2 分钟，分享内容：</p>
+<ol>
+  <li>我原本想做什么？</li>
+  <li>我遇到了什么困难？</li>
+  <li>AI 是怎么帮我解决的？</li>
+  <li><strong>展示那个 URL。</strong></li>
+</ol>
+
+<div class="callout">
+  <p><strong>代码躺在你的电脑里只是文件，只有 URL，才是产品。</strong></p>
+  <p class="cite">Done is better than perfect.</p>
+</div>
+
+<hr>
+
+<h3>给 Tech Lead 的话</h3>
+<div class="callout">
+  <p>"试着挑战一下，不要写一行代码，纯粹用自然语言让 AI 完成你的架构。感受一下这种'指挥官'的感觉。"</p>
+  <p>"这次 Workshop 的目标是让小白也能开发。所以你的挑战不是自己写出多牛的代码，而是<strong>带领 2-3 个新手用 AI 把 Demo 跑通</strong>。"</p>
+</div>
+
+<h3>给 Product Creator（小白）的话</h3>
+<div class="callout">
+  <p>"别怕报错！AI 的报错信息就是它的反馈，告诉你它哪里卡住了。直接复制那段红字，问它：'这是什么意思，请帮我修好'。"</p>
+</div>
+
+<hr>
+
+<h3>物料准备清单</h3>
+<table>
+  <tr><th>类型</th><th>内容</th></tr>
+  <tr><td>电子物料</td><td>工具清单和安装指南、前置文档、项目模板、资源包二维码、"救命锦囊"PPT</td></tr>
+  <tr><td>实物物料</td><td>名牌贴纸（区分 Tech Lead 和 Creator）、项目卡片模板、笔和纸</td></tr>
+  <tr><td>设备需求</td><td>稳定 Wi-Fi（测试 GitHub 和 OpenAI 连接）、投影+屏幕、电源插座充足</td></tr>
+</table>
+
+<footer>
+  <span>She Code Lab W003 · 杭州</span>
+  <span>Vibe Coding · 2026</span>
+</footer>
+
+</body>
+</html>
