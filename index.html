@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self as Context Archive · Desal / SheNicest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fafaf8;--paper-rgb:250,250,248;--ink:#0a0a0a;--ink-rgb:10,10,10;
+    --grey-1:#f0f0ee;--grey-2:#d4d4d2;--grey-3:#737373;
+    --accent:#002FA7;--accent-rgb:0,47,167;--accent-on:#ffffff;--accent-bright:#5B7BFF;
+    --amber:#f59e0b;--amber-rgb:245,158,11;--rose:#fb7185;--rose-rgb:251,113,133;
+    --text-primary:#0a0a0a;--text-secondary:#525252;--text-helper:#737373;
+    --border-subtle:#e0e0e0;
+    --sans:"Inter","Helvetica Neue","Helvetica","Arial",system-ui,-apple-system,sans-serif;
+    --sans-zh:"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans SC","Microsoft YaHei UI","Microsoft YaHei","微软雅黑",sans-serif;
+    --mono:"JetBrains Mono","IBM Plex Mono","SF Mono",ui-monospace,monospace;
+    --serif-zh:"Noto Serif SC",source-han-serif-sc,serif;
+    --sp-3:8px;--sp-4:12px;--sp-5:16px;--sp-6:24px;--sp-7:32px;--sp-8:40px;--sp-9:48px;--sp-10:64px;--sp-11:80px;--sp-12:96px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100vh;background:var(--paper);color:var(--ink);font-family:var(--sans),var(--sans-zh);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased}
+
+  /* ============ Canvas Grid Background ============ */
+  canvas.grid-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.7}
+
+  .page-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 var(--sp-8)}
+
+  /* ============ Header / Nav ============ */
+  header{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-8) 0;border-bottom:1px solid var(--border-subtle)}
+  .site-title{font-family:var(--sans);font-weight:200;font-size:1.1rem;letter-spacing:.08em;color:var(--ink)}
+  .site-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--text-helper);margin-top:3px}
+  nav{display:flex;gap:var(--sp-6);align-items:center}
+  nav a{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-helper);text-decoration:none;transition:color .2s}
+  nav a:hover{color:var(--accent)}
+
+  /* ============ Hero ============ */
+  .hero{padding:var(--sp-12) 0 var(--sp-10);border-bottom:1px solid var(--border-subtle)}
+  .hero-eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text-helper);margin-bottom:var(--sp-5)}
+  .hero-title{font-family:var(--sans);font-weight:200;font-size:clamp(2.8rem,6vw,5.5rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:var(--sp-6)}
+  .hero-title em{font-style:normal;color:var(--accent)}
+  .hero-tagline{font-family:var(--sans-zh);font-weight:300;font-size:clamp(1rem,1.8vw,1.4rem);line-height:1.6;color:var(--text-secondary);max-width:620px;margin-bottom:var(--sp-7)}
+  .hero-actions{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:var(--sp-3);padding:10px 22px;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .25s ease;border:1px solid currentColor}
+  .btn-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+  .btn-outline{color:var(--ink);border-color:var(--border-subtle)}
+  .btn-outline:hover{border-color:var(--ink)}
+
+  /* ============ Featured ============ */
+  .section{padding:var(--sp-10) 0;border-bottom:1px solid var(--border-subtle)}
+  .section-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-helper);margin-bottom:var(--sp-6);display:flex;align-items:center;gap:var(--sp-4)}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--border-subtle)}
+
+  .featured-card{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-10);background:var(--ink);color:var(--paper);padding:var(--sp-8);border-radius:4px;overflow:hidden;position:relative}
+  .featured-card::before{content:"";position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,rgba(0,47,167,.15) 0%,transparent 60%);pointer-events:none}
+  .featured-card .card-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,250,248,.5);margin-bottom:var(--sp-4)}
+  .featured-card .card-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-bright)}
+  .featured-card h2{font-family:var(--sans);font-weight:700;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.15;letter-spacing:-.01em;color:var(--paper);margin-bottom:var(--sp-3)}
+  .featured-card .card-sub{font-family:var(--sans-zh);font-weight:300;font-size:1rem;color:rgba(250,250,248,.7);margin-bottom:var(--sp-5)}
+  .featured-card .card-desc{font-family:var(--sans);font-size:.9rem;line-height:1.7;color:rgba(250,250,248,.6);margin-bottom:var(--sp-6);max-width:480px}
+  .featured-card .card-meta{display:flex;gap:var(--sp-5);font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,250,248,.4);margin-bottom:var(--sp-6)}
+  .featured-card .card-links{display:flex;gap:var(--sp-3);flex-wrap:wrap}
+  .featured-card .card-links a{padding:7px 16px;font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(250,250,248,.25);color:var(--paper);transition:all .2s}
+  .featured-card .card-links a:hover{background:var(--accent);border-color:var(--accent)}
+  .featured-card .card-right{position:relative;display:flex;flex-direction:column;justify-content:flex-end}
+  .card-stats{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5)}
+  .stat-item{padding:var(--sp-5);background:rgba(250,250,248,.06);border:1px solid rgba(250,250,248,.08)}
+  .stat-item .stat-num{font-family:var(--mono);font-size:2rem;font-weight:600;color:var(--paper);letter-spacing:-.02em;line-height:1}
+  .stat-item .stat-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,250,248,.4);margin-top:var(--sp-2)}
+
+  /* ============ Archive Grid ============ */
+  .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-6)}
+  .archive-card{background:var(--paper);border:1px solid var(--border-subtle);padding:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-4);transition:all .25s ease;text-decoration:none;color:inherit}
+  .archive-card:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .archive-card .ac-tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-helper)}
+  .archive-card .ac-tag .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  .archive-card h3{font-family:var(--sans);font-weight:600;font-size:1.15rem;line-height:1.25;color:var(--ink)}
+  .archive-card p{font-family:var(--sans);font-size:.85rem;line-height:1.65;color:var(--text-secondary);flex:1}
+  .archive-card .ac-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:var(--sp-4);border-top:1px solid var(--border-subtle)}
+  .archive-card .ac-meta{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper)}
+  .archive-card .ac-arrow{font-family:var(--mono);font-size:.75rem;color:var(--text-helper);transition:transform .2s}
+  .archive-card:hover .ac-arrow{transform:translateX(4px)}
+
+  /* ============ About Strip ============ */
+  .about-strip{padding:var(--sp-10) 0;border-bottom:1px solid var(--border-subtle);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-10);align-items:center}
+  .about-strip h2{font-family:var(--sans);font-weight:200;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:var(--sp-5)}
+  .about-strip p{font-family:var(--sans);font-size:.95rem;line-height:1.75;color:var(--text-secondary);margin-bottom:var(--sp-5)}
+  .about-strip .about-tags{display:flex;gap:var(--sp-3);flex-wrap:wrap}
+  .about-tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper);padding:5px 12px;border:1px solid var(--border-subtle)}
+
+  /* ============ Footer ============ */
+  footer{padding:var(--sp-10) 0;display:flex;justify-content:space-between;align-items:center}
+  footer .foot-left{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-helper)}
+  footer .foot-right{display:flex;gap:var(--sp-6)}
+  footer .foot-right a{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper);text-decoration:none}
+  footer .foot-right a:hover{color:var(--accent)}
+
+  /* ============ Responsive ============ */
+  @media(max-width:900px){
+    .page-wrap{padding:0 var(--sp-5)}
+    .featured-card{grid-template-columns:1fr}
+    .archive-grid{grid-template-columns:1fr 1fr}
+    .about-strip{grid-template-columns:1fr}
+    header{flex-direction:column;gap:var(--sp-4);align-items:flex-start}
+    nav{gap:var(--sp-4)}
+  }
+  @media(max-width:600px){
+    .archive-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="gridBg" class="grid-bg"></canvas>
+
+<div class="page-wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="site-title">
+      Self as Context Archive
+      <span>Desal / SheNicest · Public Studio</span>
+    </div>
+    <nav>
+      <a href="#workshops">Workshops</a>
+      <a href="#talks">Talks</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/Stoic42/slides" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">A living archive of AI coding workshops, talks & field notes</div>
+    <h1 class="hero-title">把自己的痛点<br>变成 AI 的<em>语料</em></h1>
+    <p class="hero-tagline">
+      把日记、痛点、项目和工作坊整理成可复用的创作上下文。<br>
+      这里不是 PPT 墓地——是每一次现场实验留下的可复用标本。
+    </p>
+    <div class="hero-actions">
+      <a href="#workshops" class="btn btn-primary">View Latest Workshop</a>
+      <a href="#talks" class="btn btn-outline">Browse Archive</a>
+    </div>
+  </section>
+
+  <!-- Featured Workshop -->
+  <section class="section" id="workshops">
+    <div class="section-label">Featured Workshop</div>
+
+    <div class="featured-card">
+      <div class="card-left">
+        <div class="card-tag"><span class="dot"></span>Workshop · W003 · Hangzhou 2026</div>
+        <h2>Vibe Coding 工作坊<br>把自己作为语料</h2>
+        <div class="card-sub">Self as Context · AI Coding · Prompt Engineering</div>
+        <p class="card-desc">从工具链配置到 Demo Day：一场关于如何把个人痛点转化为 AI 协作上下文的工作坊。覆盖 Trae / Kiro / Cursor 选型、Context + Task + Constraints 公式、Kiro Steering 掌舵法、痛点验票与上线部署。</p>
+        <div class="card-meta">
+          <span>2026.05 · 杭州</span>
+          <span>·</span>
+          <span>9 Slides + Lecture Notes</span>
+          <span>·</span>
+          <span>Demo Day</span>
+        </div>
+        <div class="card-links">
+          <a href="slides/w003-vibe-coding-slides.html" target="_blank">View Slides</a>
+          <a href="slides/w003-vibe-coding-lecture.html" target="_blank">Lecture Notes</a>
+          <a href="slides/ADHD_VibeCoding_Slides_v3.html" target="_blank">ADHD Version</a>
+        </div>
+      </div>
+      <div class="card-right">
+        <div class="card-stats">
+          <div class="stat-item">
+            <div class="stat-num" style="color:var(--accent-bright)">9</div>
+            <div class="stat-label">Slides</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">17</div>
+            <div class="stat-label">ADHD Version</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">06</div>
+            <div class="stat-label">Sections</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" style="color:var(--rose)">1</div>
+            <div class="stat-label">Demo Day</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Archive Grid -->
+  <section class="section" id="talks">
+    <div class="section-label">Archive</div>
+
+    <div class="archive-grid">
+
+      <a href="slides/hackathon-team-formation-slides.html" class="archive-card">
+        <div class="ac-tag"><span class="dot"></span>Talk · Hackathon</div>
+        <h3>黑客松高效组队</h3>
+        <p>从多次组队翻车到多次获奖：关于队友、分工、风险和现场协作的实战分享。</p>
+        <div class="ac-footer">
+          <span class="ac-meta">2026 · Slides</span>
+          <span class="ac-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="slides/ADHD_VibeCoding_Slides_v3.html" class="archive-card">
+        <div class="ac-tag"><span class="dot"></span>Workshop · ADHD</div>
+        <h3>副本开得太多怎么办？</h3>
+        <p>让 AI 当我的背包。赛博砖块 × Vibe Coding：四维工作流（救急 / 收敛 / 复用 / 跨宇宙）＋ NoFeed + MineContext 工具推荐。</p>
+        <div class="ac-footer">
+          <span class="ac-meta">2026 · 17 Slides · Swiss Style</span>
+          <span class="ac-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="slides/w003-vibe-coding-slides.html" class="archive-card">
+        <div class="ac-tag"><span class="dot"></span>Workshop · Vibe Coding</div>
+        <h3>Vibe Coding W003 · 杭州站</h3>
+        <p>把自己作为语料：工具选型（Trae / Kiro / Cursor）、Prompt 公式、掌舵艺术、痛点验票与 Demo Day。</p>
+        <div class="ac-footer">
+          <span class="ac-meta">2026.05 · 杭州 · 9 Slides</span>
+          <span class="ac-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="slides/w003-vibe-coding-lecture.html" class="archive-card">
+        <div class="ac-tag"><span class="dot"></span>Lecture Notes · W003</div>
+        <h3>Vibe Coding 讲义全文</h3>
+        <p>竖向长文版讲义，多端适配。包含工作坊时间线：开场破冰 → 工具链配置 → Prompt 方法论 → 掌舵艺术 → 痛点验票 → 上线部署 → Demo Day。</p>
+        <div class="ac-footer">
+          <span class="ac-meta">2026.05 · Long-form</span>
+          <span class="ac-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="source/ADHD_VibeCoding_Speech_Script.md" class="archive-card">
+        <div class="ac-tag"><span class="dot"></span>Script · ADHD</div>
+        <h3>ADHD × Vibe Coding 演讲稿</h3>
+        <p>原始演讲脚本 Markdown 版。现场演示 + transition scripts + 代码片段注释。</p>
+        <div class="ac-footer">
+          <span class="ac-meta">2026 · Markdown</span>
+          <span class="ac-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- About Strip -->
+  <section class="about-strip" id="about">
+    <div>
+      <h2>关于这个档案库</h2>
+      <p>由 Desal / SheNicest community 维护。收录关于 AI Coding、创作者工具、教育实验与自我语料化的讲义、演讲和现场笔记。</p>
+      <div class="about-tags">
+        <span class="about-tag">AI Coding</span>
+        <span class="about-tag">Prompt Engineering</span>
+        <span class="about-tag">Vibe Coding</span>
+        <span class="about-tag">Self as Context</span>
+        <span class="about-tag">Hackathon</span>
+        <span class="about-tag">Education</span>
+        <span class="about-tag">Workflow</span>
+        <span class="about-tag">Field Notes</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:var(--serif-zh);font-size:1.15rem;line-height:1.8;color:var(--text-secondary)">
+        这里不是 PPT 墓地。<br>
+        这里是每一次现场实验<br>
+        留下的<strong>可复用标本</strong>。
+      </p>
+      <p style="font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-helper);margin-top:var(--sp-5)">
+        Maintained by Stoic42 / SheNicest
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot-left">Self as Context Archive · Desal / SheNicest · 2026</div>
+    <div class="foot-right">
+      <a href="https://github.com/Stoic42/slides" target="_blank">GitHub</a>
+      <a href="https://shenicest.com" target="_blank">SheNicest</a>
+      <a href="mailto:contact@shenicest.com">Contact</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ Subtle Grid Canvas ============ */
+const canvas = document.getElementById('gridBg');
+const ctx = canvas.getContext('2d');
+let W, H, mouse = {x:.5, y:.5};
+
+function resize(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+addEventListener('resize', resize);
+addEventListener('mousemove', e => {mouse.x = e.clientX/W; mouse.y = e.clientY/H;});
+
+function drawGrid(t){
+  ctx.clearRect(0,0,W,H);
+  const grid = 32;
+  ctx.strokeStyle = 'rgba(0,47,167,.06)';
+  ctx.lineWidth = .5;
+  for(let x=0; x<W; x+=grid){
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+  }
+  for(let y=0; y<H; y+=grid){
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+  }
+  const mx = mouse.x * W, my = mouse.y * H;
+  const grd = ctx.createRadialGradient(mx,my,0,mx,my,200);
+  grd.addColorStop(0,'rgba(0,47,167,.07)');
+  grd.addColorStop(1,'transparent');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0,0,W,H);
+}
+
+let raf = 0, t0 = Date.now();
+(function loop(){
+  drawGrid((Date.now()-t0)/1000);
+  raf = requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>
