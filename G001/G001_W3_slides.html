@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>G001 W3 · MVP开发冲刺 — SheNicest</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+<style>
+.reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: "Noto Sans SC", sans-serif; }
+.reveal h2 { font-size: 1.35em; font-weight: 600; letter-spacing: 0.02em; color: #fff; }
+.reveal h1 { font-size: 1.8em; font-weight: 700; letter-spacing: 0.01em; }
+.reveal .slides section { text-align: left; padding: 20px 40px; }
+.reveal .slides section.center { text-align: center; }
+.reveal ul { margin-left: 1em; }
+.reveal li { margin: 0.5em 0; }
+.reveal p, .reveal li { font-size: 0.85em; line-height: 1.6; }
+.highlight-box {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(12px);
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-left: 4px solid #4dabf7;
+  margin: 18px 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.highlight-box:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15); }
+.highlight-box.pink { border-left-color: #ff6b9d; background: linear-gradient(135deg, rgba(255,107,157,0.15) 0%, rgba(255,107,157,0.05) 100%); }
+.highlight-box.green { border-left-color: #51cf66; background: linear-gradient(135deg, rgba(81,207,102,0.12) 0%, rgba(81,207,102,0.04) 100%); }
+.highlight-box.orange { border-left-color: #ff922b; background: linear-gradient(135deg, rgba(255,146,43,0.12) 0%, rgba(255,146,43,0.04) 100%); }
+.highlight-box.purple { border-left-color: #cc5de8; background: linear-gradient(135deg, rgba(204,93,232,0.12) 0%, rgba(204,93,232,0.04) 100%); }
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
+}
+.glass-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+.term-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(77,171,247,0.25) 0%, rgba(77,171,247,0.15) 100%);
+  border: 1px solid rgba(77,171,247,0.5);
+  color: #74c0fc;
+  font-size: 0.62em;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-right: 8px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; font-size: 0.8em; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; font-size: 0.75em; }
+.four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 18px; font-size: 0.72em; }
+.step-box {
+  background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border-radius: 14px;
+  padding: 18px 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.step-box:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.step-box .num { font-size: 1.6em; font-weight: bold; color: #ff6b9d; line-height: 1.2; }
+.step-box .title { font-weight: 600; color: #4dabf7; margin-top: 8px; font-size: 0.95em; }
+.reveal .slides section > p { margin: 8px 0; }
+.reveal strong { color: #fff; font-weight: 600; }
+.reveal code {
+  background: rgba(0,0,0,0.35);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.88em;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+</style>
+</head>
+<body><div class="reveal"><div class="slides">
+
+<!-- W3 封面 -->
+<section class="center" data-background-color="#1a1a2e">
+  <h2 style="color:#ff6b9d; font-size:1.8em; margin-bottom:20px;">G001 · Week 3</h2>
+  <h1 style="font-size:2em; line-height:1.3;">MVP开发冲刺<br/>从PRD到可运行产品</h1>
+  <p style="margin-top:40px; opacity:0.7; font-size:0.8em;">SheNicest 黑客松课程 · 2026 夏</p>
+</section>
+
+<!-- Part 0: Agentic Thinking -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 0</span> 从Vibe到Agentic思维</h2>
+  <div class="highlight-box purple">
+    <p style="font-size:1em;"><strong>从"一步步指挥AI"升级到"给AI一个目标，让它自己规划执行"</strong></p>
+  </div>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b6b; margin-bottom:10px;">❌ 一步步指令（被动）</p>
+      <p style="font-size:0.85em; font-family:monospace; background:rgba(0,0,0,0.3); padding:10px; border-radius:8px;">"帮我做个登录页<br/>→ 再做个注册页<br/>→ 再做个忘记密码页"</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#51cf66; margin-bottom:10px;">✅ 给目标（主动）</p>
+      <p style="font-size:0.85em; font-family:monospace; background:rgba(0,0,0,0.3); padding:10px; border-radius:8px;">"构建一个带JWT认证、登录、邮件提醒的任务追踪器"</p>
+      <p style="font-size:0.8em; margin-top:8px; color:#51cf66;">→ AI自己决定步骤</p>
+    </div>
+  </div>
+  <div class="highlight-box orange" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>Cursor的auto-fix和auto-complete就是最简Agent行为</strong></p>
+  </div>
+</section>
+
+<!-- Part 1: 功能优先级 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 1</span> 功能优先级 + Colborne极简四步</h2>
+  <div class="four-col" style="margin-top:20px;">
+    <div class="step-box">
+      <div class="num">1️⃣</div>
+      <div class="title" style="color:#ff6b6b;">Remove 删除</div>
+      <p style="font-size:0.75em; margin-top:5px;">砍掉不产生核心价值的功能<br/><strong>最痛苦但最有效</strong></p>
+    </div>
+    <div class="step-box">
+      <div class="num">2️⃣</div>
+      <div class="title" style="color:#4dabf7;">Organize 组织</div>
+      <p style="font-size:0.75em; margin-top:5px;">将元素按逻辑分块（Chunking）<br/>建立清晰边界</p>
+    </div>
+    <div class="step-box">
+      <div class="num">3️⃣</div>
+      <div class="title" style="color:#ff922b;">Hide 隐藏</div>
+      <p style="font-size:0.75em; margin-top:5px;">低频设置藏起来<br/><strong>适时展现</strong></p>
+    </div>
+    <div class="step-box">
+      <div class="num">4️⃣</div>
+      <div class="title" style="color:#51cf66;">Displace 转移</div>
+      <p style="font-size:0.75em; margin-top:5px;">复杂计算交给系统<br/>灵活判断留给用户</p>
+    </div>
+  </div>
+  <div class="highlight-box pink" style="margin-top:20px;">
+    <p style="font-size:0.9em;"><strong>实操作业：强制"Delete回合"</strong><br/>从现有应用中找出2个跛脚功能并删除，2个低频选项隐藏</p>
+  </div>
+</section>
+
+<!-- Part 2: Krug验收标准 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 2</span> Krug验收标准：别让我思考</h2>
+  <div class="highlight-box green">
+    <p style="font-size:1em;"><strong>用户在网页上不是"阅读"——是"扫描"</strong></p>
+    <p style="opacity:0.85; margin-top:8px;">他们快速浏览而不是逐字读。如果你的界面需要长篇文字说明才能理解，说明<strong>设计失败了</strong>。</p>
+  </div>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b6b; margin-bottom:10px;">❌ 失败信号</p>
+      <ul style="font-size:0.85em;">
+        <li>需要解释才能使用</li>
+        <li>选项不明确</li>
+        <li>界面有歧义</li>
+        <li>文字说明超过3行</li>
+      </ul>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#51cf66; margin-bottom:10px;">✅ 好的设计</p>
+      <ul style="font-size:0.85em;">
+        <li><strong>不假思索的选择（Mindless Choices）</strong></li>
+        <li>选项一目了然</li>
+        <li>不需要犹豫就知道怎么点</li>
+        <li>明显的视觉层级</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Part 3: Norman交互设计 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 3</span> Norman交互设计检查</h2>
+  <div class="two-col">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b6b; font-size:1.1em;">⚡ 执行鸿沟</p>
+      <p style="font-size:0.85em; opacity:0.8;">用户<strong>不知道怎么做</strong></p>
+      <div class="highlight-box orange" style="margin-top:10px; padding:12px;">
+        <p style="font-size:0.85em;"><strong>解法：意符 Signifiers</strong><br/>告诉用户"请按这里"的视觉提示</p>
+      </div>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff922b; font-size:1.1em;">📊 评估鸿沟</p>
+      <p style="font-size:0.85em; opacity:0.8;">用户<strong>不知道刚才发生了什么</strong></p>
+      <div class="highlight-box green" style="margin-top:10px; padding:12px;">
+        <p style="font-size:0.85em;"><strong>解法：反馈 Feedback</strong><br/>明确告诉用户操作的结果</p>
+      </div>
+    </div>
+  </div>
+  <div class="glass-card" style="margin-top:20px;">
+    <p style="font-weight:bold; color:#cc5de8; margin-bottom:10px;">⚠️ 重要澄清：示能 vs 意符</p>
+    <ul style="font-size:0.85em;">
+      <li><strong>示能 Affordance</strong>：物体本身的属性（按钮有"可被按压"的示能）</li>
+      <li><strong>意符 Signifiers</strong>：告诉用户"这里可以按"的视觉提示</li>
+      <li>不要混用！</li>
+    </ul>
+  </div>
+  <div class="highlight-box pink" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>概念模型检查：</strong>用户看到界面，脑海中的操作预期和实际运行逻辑一致吗？（如"购物车"隐喻）</p>
+  </div>
+</section>
+
+<!-- Part 6: Beyond Vibe Coding -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 6</span> Beyond Vibe Coding：跨越70%鸿沟</h2>
+  <div class="highlight-box orange">
+    <p style="font-size:1em;"><strong>⚠️ Osmani：AI只能帮你完成70%</strong></p>
+    <p style="opacity:0.85; margin-top:8px;">剩下的30%（边缘情况/错误处理/架构调整）必须<strong>人类主导</strong></p>
+  </div>
+  <div class="three-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#4dabf7; margin-bottom:8px;">🤝 AI初稿起草者</p>
+      <p style="font-size:0.8em;">生成后由人精修</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b9d; margin-bottom:8px;">👥 AI结对程序员</p>
+      <p style="font-size:0.8em;">高频互动，步步微调</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#51cf66; margin-bottom:8px;">✅ AI验证者</p>
+      <p style="font-size:0.8em;">人类写核心，AI找Bug</p>
+    </div>
+  </div>
+  <div class="glass-card" style="margin-top:20px;">
+    <p style="font-weight:bold; color:#ff922b; margin-bottom:8px;">🔧 Debug Prompt模板（直接可用）</p>
+    <p style="font-size:0.85em; font-family:monospace; background:rgba(0,0,0,0.3); padding:12px; border-radius:8px;">"你是一个经验丰富的[Python/前端] Debug专家。请<strong>一步一步地思考(CoT)</strong>，找出以下代码中的错误并解释原因，然后再给出修改建议。"</p>
+  </div>
+</section>
+
+<!-- Part 7: AF4+RUI 交互逻辑增强 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 7</span> AF4+RUI：交互逻辑增强</h2>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b6b; margin-bottom:10px;">📐 从功能开始，不是布局</p>
+      <p style="font-size:0.8em;">AI生成爱做"空壳"（导航栏+侧边栏）。正确做法：先设计核心功能本身，如Google首页。</p>
+      <p style="font-weight:bold; color:#ff922b; margin-top:12px; font-size:0.8em;">🧠 不要过度设计</p>
+      <p style="font-size:0.8em;">先设计最简单的版本让它跑起来，再解决暴露的问题。"锦上添花"留到以后。</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#51cf66; margin-bottom:10px;">💎 非模态反馈</p>
+      <p style="font-size:0.8em;">出错不要弹窗打断用户！在输入框旁安静提示（标红/波浪线），让用户自己决定何时修改。</p>
+      <p style="font-weight:bold; color:#4dabf7; margin-top:12px; font-size:0.8em;">🧩 空状态=引导机会</p>
+      <p style="font-size:0.8em;">"暂无联系人"不是白板。是引导用户采取下一步行动的Call-to-action时刻。</p>
+    </div>
+  </div>
+  <div class="highlight-box orange" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>💾 体贴的软件有记忆：</strong>记住用户上一步操作/偏好，省去重复决策</p>
+  </div>
+</section>
+
+<!-- Part 8: RUI 视觉防坑 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 8</span> RUI视觉防坑：用系统代替灵感</h2>
+  <div class="four-col" style="margin-top:20px;">
+    <div class="step-box">
+      <div class="num" style="color:#868e96;">🩶</div>
+      <div class="title" style="color:#868e96;">灰度优先</div>
+      <p style="font-size:0.7em; margin-top:5px;">MVP只用黑白灰<br/>逼你用间距建立层级</p>
+    </div>
+    <div class="step-box">
+      <div class="num" style="color:#868e96;">🔒</div>
+      <div class="title" style="color:#868e96;">限制选择</div>
+      <p style="font-size:0.7em; margin-top:5px;">字号：12/16/24/32px<br/>颜色：8-10种预设</p>
+    </div>
+    <div class="step-box">
+      <div class="num" style="color:#868e96;">📊</div>
+      <div class="title" style="color:#868e96;">层级>语义</div>
+      <p style="font-size:0.7em; margin-top:5px;">"删除"按钮即使危险<br/>若非首要就低调处理</p>
+    </div>
+    <div class="step-box">
+      <div class="num" style="color:#868e96;">🌫️</div>
+      <div class="title" style="color:#868e96;">留白>拥挤</div>
+      <p style="font-size:0.7em; margin-top:5px;">先加你认为"过大"的间距<br/>再慢慢缩减到刚好</p>
+    </div>
+  </div>
+  <div class="highlight-box pink" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>🛠️ W3防坑检查清单（同伴验收用）</strong><br/>1. 是从功能开始而不是布局吗？<br/>2. 空状态有友好引导吗？<br/>3. 软件有记忆吗？<br/>4. 粗暴弹窗改成了非模态反馈吗？<br/>5. 剥离颜色后层级还清晰吗？<br/>6. 字号/颜色受限在预设系统中吗？</p>
+   </div>
+</section>
+
+<!-- Part 9: 布鲁克斯定律防坑 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 9</span> AI时代布鲁克斯定律：4周黑客松最致命的三种死法</h2>
+  <div class="three-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b6b; margin-bottom:8px;">🌀 Rhythm：零摩擦范围蔓延</p>
+      <p style="font-size:0.8em;">AI让"加功能"变得免费。<br/>每个下午看起来都合理，<br/>产品最终成了缝合怪。</p>
+      <p style="font-size:0.75em; margin-top:8px; color:#ff922b;">→ 解法：Scope Freeze</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff922b; margin-bottom:8px;">⏰ Month：70%时间幻觉</p>
+      <p style="font-size:0.8em;">"AI五分钟写完70%，<br/>剩下30%也几分钟？"<br/>最后排错成本是预估10倍+。</p>
+      <p style="font-size:0.75em; margin-top:8px; color:#ff922b;">→ 解法：步步验收（Prompt→Plan→Execute→Verify）</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#cc5de8; margin-bottom:8px;">👥 Person：人机协作Brooks' Law</p>
+      <p style="font-size:0.8em;">报错时开多个AI对话框<br/>= 增加人手 =沟通成本指数爆炸<br/>= "连贯的不正确性"</p>
+      <p style="font-size:0.75em; margin-top:8px; color:#ff922b;">→ 解法：统一AGENTS.md规则文件</p>
+    </div>
+  </div>
+  <div class="highlight-box orange" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>🛡️ 三个强制护栏</strong><br/>
+    1. Scope Freeze：W3前写"MVP明确不做什么"，中途加功能一律拒绝<br/>
+    2. 步步验收：前端骨架跑通→助教审查→才能进入下一步<br/>
+    3. AI协作宪法：W3前花20分钟生成AGENTS.md，统一命名/接口/Prompt规则</p>
+  </div>
+</section>
+
+<!-- W3 总结 -->
+<section class="center" data-background-color="#1a1a2e">
+  <h2 style="color:#ff6b9d;">W3 总结</h2>
+  <div class="glass-card" style="max-width:700px; margin:30px auto; text-align:left;">
+    <ul style="font-size:0.9em;">
+      <li>✅ Agentic思维：给AI目标，不是步骤</li>
+      <li>✅ Colborne极简四步：删/组织/隐藏/转移 + Delete回合</li>
+      <li>✅ Krug：需要长篇解释=设计失败</li>
+      <li>✅ 执行鸿沟用意符，评估鸿沟用反馈</li>
+      <li>✅ AF4+RUI：非模态反馈/体贴记忆/灰度系统/空状态引导</li>
+      <li>✅ 视觉防坑检查清单（同伴验收）</li>
+      <li>✅ 布鲁克斯定律防坑：Scope Freeze+步步验收+AI协作宪法</li>
+    </ul>
+  </div>
+  <p style="opacity:0.7; font-size:0.8em; margin-top:20px;">作业：MVP核心功能可演示 + 强制Delete回合</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({ hash: true, plugins: [ RevealHighlight, RevealNotes ] });
+</script>
+</body></html>

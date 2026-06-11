@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>G001 W2 · 从需求到PRD — SheNicest</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+<style>
+.reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: "Noto Sans SC", sans-serif; }
+.reveal h2 { font-size: 1.4em; font-weight: 600; letter-spacing: 0.02em; color: #fff; }
+.reveal h1 { font-size: 1.8em; font-weight: 700; letter-spacing: 0.01em; }
+.reveal .slides section { text-align: left; padding: 20px 40px; }
+.reveal .slides section.center { text-align: center; }
+.reveal ul { margin-left: 1em; }
+.reveal li { margin: 0.5em 0; }
+.reveal p, .reveal li { font-size: 0.85em; line-height: 1.6; }
+.highlight-box {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(12px);
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-left: 4px solid #4dabf7;
+  margin: 18px 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.highlight-box:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15); }
+.highlight-box.pink { border-left-color: #ff6b9d; background: linear-gradient(135deg, rgba(255,107,157,0.15) 0%, rgba(255,107,157,0.05) 100%); }
+.highlight-box.green { border-left-color: #51cf66; background: linear-gradient(135deg, rgba(81,207,102,0.12) 0%, rgba(81,207,102,0.04) 100%); }
+.highlight-box.orange { border-left-color: #ff922b; background: linear-gradient(135deg, rgba(255,146,43,0.12) 0%, rgba(255,146,43,0.04) 100%); }
+.highlight-box.purple { border-left-color: #cc5de8; background: linear-gradient(135deg, rgba(204,93,232,0.12) 0%, rgba(204,93,232,0.04) 100%); }
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
+}
+.glass-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+.term-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(77,171,247,0.25) 0%, rgba(77,171,247,0.15) 100%);
+  border: 1px solid rgba(77,171,247,0.5);
+  color: #74c0fc;
+  font-size: 0.62em;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-right: 8px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; font-size: 0.8em; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; font-size: 0.75em; }
+.reveal .slides section > p { margin: 8px 0; }
+.reveal strong { color: #fff; font-weight: 600; }
+.reveal code {
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.9em;
+}
+</style>
+</head>
+<body><div class="reveal"><div class="slides">
+
+<!-- W2 封面 -->
+<section class="center" data-background-color="#1a1a2e">
+  <h2 style="color:#ff6b9d; font-size:1.8em; margin-bottom:20px;">G001 · Week 2</h2>
+  <h1 style="font-size:2em; line-height:1.3;">从需求到PRD<br/>如何定义一个有价值的产品</h1>
+  <p style="margin-top:40px; opacity:0.7; font-size:0.8em;">SheNicest 黑客松课程 · 2026 夏</p>
+</section>
+
+<!-- Part 0: AI助手 vs AI Agent -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 0</span> AI助手 vs AI Agent</h2>
+  <div class="two-col">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#4dabf7; font-size:1.1em;">🤝 AI助手</p>
+      <p style="font-size:0.85em; opacity:0.8; margin-top:8px;">被动响应 · 你问，它答</p>
+      <p style="font-size:0.85em; margin-top:10px;">像餐厅服务员：你点菜，他上菜。<br/>不推动任何事情，只响应你的输入。</p>
+      <p style="font-size:0.8em; margin-top:10px; color:#51cf66;">→ 当前课程教的是这个</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b9d; font-size:1.1em;">🏠 AI Agent</p>
+      <p style="font-size:0.85em; opacity:0.8; margin-top:8px;">主动规划 · 你设目标，它自己干</p>
+      <p style="font-size:0.85em; margin-top:10px;">像私人管家：你说"安排今晚约会"，它自动订餐厅、叫车、提醒你出发。</p>
+      <p style="font-size:0.8em; margin-top:10px; color:#cc5de8;">→ W3 Agentic Thinking会涉及</p>
+    </div>
+  </div>
+</section>
+
+<!-- Part 1: 双钻模型 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 1</span> 双钻模型：先发现正确的问题</h2>
+  <div class="highlight-box purple">
+    <p style="font-size:1em;"><strong>Don Norman《设计心理学》核心</strong></p>
+    <p style="opacity:0.85; margin-top:8px;">设计第一步是<strong>"解决正确的问题"</strong>，不是急着给答案。</p>
+  </div>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff922b; margin-bottom:10px;">💎 第一颗钻石</p>
+      <p style="font-size:0.9em;">发散→收敛</p>
+      <p style="font-size:0.85em; margin-top:8px;">深入探索问题的<strong>根本原因（Root Cause）</strong><br/>不要跳到第一个显而易见的答案</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#4dabf7; margin-bottom:10px;">💎 第二颗钻石</p>
+      <p style="font-size:0.9em;">发散→收敛</p>
+      <p style="font-size:0.85em; margin-top:8px;">找到产品的<strong>解决方案</strong><br/>基于第一颗钻石的真实洞察</p>
+    </div>
+  </div>
+  <div class="highlight-box orange" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>练习：</strong>在动手写PRD前，先用5分钟写下"我真正要解决的是什么"</p>
+  </div>
+</section>
+
+<!-- Part 2: 痛点 vs 痒点 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 2</span> 痛点 vs 痒点</h2>
+  <div class="two-col">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b6b; font-size:1.1em;">💔 痛点 Pain Point</p>
+      <p style="font-size:0.85em; opacity:0.8; margin-top:8px;">用户真正愿意<strong>花钱或花时间</strong>解决的麻烦</p>
+      <ul style="font-size:0.85em; margin-top:10px;">
+        <li>不做会难受</li>
+        <li>做了会爽</li>
+        <li>痛点驱动<strong>真实需求</strong></li>
+      </ul>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff922b; font-size:1.1em;">✨ 痒点 Itch Point</p>
+      <p style="font-size:0.85em; opacity:0.8; margin-top:8px;">用户觉得"挺好"但不是"必须"的功能</p>
+      <ul style="font-size:0.85em; margin-top:10px;">
+        <li>做不做都行</li>
+        <li>做了加分</li>
+        <li>不做也不会离开</li>
+        <li>适合做<strong>差异化</strong>，但不该作为MVP核心</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:0.85em; opacity:0.8;">MVP阶段：聚焦痛点，痒点靠边站。每次想加功能时问"删掉会怎样？"</p>
+</section>
+
+<!-- Part 3: PRD五维度 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 3</span> PRD五维度 + Garrett五层模型</h2>
+  <div class="two-col">
+    <div>
+      <p style="font-weight:bold; color:#4dabf7; margin-bottom:10px;">PRD 五维度</p>
+      <ul>
+        <li><strong>背景</strong>：为什么做这个</li>
+        <li><strong>用户</strong>：为谁做（用户画像）</li>
+        <li><strong>功能</strong>：做什么</li>
+        <li><strong>用户流程</strong>：怎么做</li>
+        <li><strong>数据需求</strong>：需要什么数据</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:bold; color:#ff6b9d; margin-bottom:10px;">Garrett五层模型（入门两层）</p>
+      <ul>
+        <li><strong>战略层 Strategy</strong>：产品目标与用户需求——先回答"为什么做"</li>
+        <li><strong>范围层 Scope</strong>：功能与内容规格——明确"做什么"和<span style="color:#ff6b6b;"><strong>不做什么</strong></span></li>
+      </ul>
+      <div class="highlight-box orange" style="margin-top:10px; padding:10px;">
+        <p style="font-size:0.8em;"><strong>关键：</strong>砍掉"现在不做什么"和定义"做什么"同样重要</p>
+      </div>
+    </div>
+  </div>
+  <div class="highlight-box green" style="margin-top:15px;">
+    <p style="font-size:0.9em;"><strong>PRD = 给AI的"食谱"</strong> — 有食谱，AI才能做出你要的菜，而不是随便炒一盘</p>
+  </div>
+</section>
+
+<!-- Part 3: 用户画像 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 3</span> 用户画像 User Persona</h2>
+  <div class="highlight-box pink">
+    <p style="font-size:1em;"><strong>用户画像 = 你为目标用户建立的虚拟形象</strong></p>
+    <p style="opacity:0.85; margin-top:8px;">他们是谁、做什么、多大年纪、有什么痛点。<br/>PRD里写清楚"为谁做"，AI才能生成对的语气和功能。</p>
+  </div>
+  <div class="glass-card" style="margin-top:20px;">
+    <p style="font-weight:bold; color:#4dabf7; margin-bottom:10px;">📋 必做：两个具体Persona（AI生成或手动写）</p>
+    <ul style="font-size:0.85em;">
+      <li>基本信息：年龄、技术水平、职业</li>
+      <li>痛点：这个产品解决他们什么问题</li>
+      <li>使用场景：什么时候会用这个产品</li>
+      <li>障碍：他们有什么顾虑或困难</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Part 4: 用户访谈实操 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 4</span> 用户访谈 + PRD互评</h2>
+  <div class="two-col">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b9d; margin-bottom:10px;">🔍 用户访谈技巧</p>
+      <ul style="font-size:0.85em;">
+        <li>问"最近一次"而不是"你总是"</li>
+        <li>问场景，不问偏好</li>
+        <li>注意"沉默"——没说的话可能更重要</li>
+        <li>验证假设，不推销方案</li>
+      </ul>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#51cf66; margin-bottom:10px;">👥 PRD互评</p>
+      <ul style="font-size:0.85em;">
+        <li>小组互相审查PRD</li>
+        <li>发现<strong>隐藏假设</strong>和偏见</li>
+        <li>AI分析PRD中的文化/性别/社会偏见</li>
+        <li>类Apple Health案例重演</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:0.85em; opacity:0.8;">作业：完成2次用户访谈 + PRD初稿（含两个具体Persona）</p>
+</section>
+
+<!-- Part 5: JTBD + 机会得分 -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 5</span> JTBD框架：砍需求的商业逻辑</h2>
+  <div class="highlight-box pink">
+    <p style="font-size:1em;"><strong>核心转变：从"功能列表"到"Jobs to Be Done"</strong></p>
+    <p style="opacity:0.85; margin-top:8px;">用户不是买产品，而是"雇佣"产品完成任务。每个需求必须包含三层：功能+情感+社会</p>
+  </div>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff922b; margin-bottom:10px;">📊 机会得分公式</p>
+      <p style="font-family:monospace; font-size:1.1em; color:#ff922b;">机会得分 = 重要性 + (重要性 - 满意度)</p>
+      <p style="font-size:0.8em; margin-top:8px; opacity:0.8;">高重要性 + 低满意度 = 未满足需求 = MVP核心</p>
+    </div>
+    <div class="glass-card">
+      <p style="font-weight:bold; color:#ff6b9d; margin-bottom:10px;">🎯 关键时刻 Moments of Truth</p>
+      <p style="font-size:0.85em;">情绪最激烈、决定用户去留的互动节点。<br/>如：第一次匹配成功、第一次收到防网暴提示。</p>
+      <p style="font-size:0.8em; margin-top:8px; color:#51cf66;">MVP80%资源 → 打磨这些瞬间</p>
+    </div>
+  </div>
+</section>
+
+<!-- Part 6: Prompt Engineering for PRD -->
+<section data-background-color="#1a1a2e">
+  <h2><span class="term-tag">Part 6</span> Prompt Engineering：PRD的AI工作流</h2>
+  <div class="highlight-box purple">
+    <p style="font-size:1em;"><strong>🚫 禁止：一键生成PRD（得到废话）</strong></p>
+    <p style="opacity:0.85; margin-top:8px;">✅正确：链式提示（Prompt Chaining）=任务分解 + 步步收敛</p>
+  </div>
+  <div class="three-col" style="margin-top:20px;">
+    <div class="glass-card" style="text-align:center;">
+      <p style="font-weight:bold; color:#4dabf7; font-size:1.5em;">1️⃣</p>
+      <p style="font-weight:bold; color:#4dabf7; margin-top:8px;">发散</p>
+      <p style="font-size:0.8em; margin-top:5px;">输入人群+JTBD框架<br/>让AI生成10个痛点</p>
+    </div>
+    <div class="glass-card" style="text-align:center;">
+      <p style="font-weight:bold; color:#ff922b; font-size:1.5em;">2️⃣</p>
+      <p style="font-weight:bold; color:#ff922b; margin-top:8px;">收敛</p>
+      <p style="font-size:0.8em; margin-top:5px;">AI用机会得分打分<br/>筛出前3个痛点</p>
+    </div>
+    <div class="glass-card" style="text-align:center;">
+      <p style="font-weight:bold; color:#51cf66; font-size:1.5em;">3️⃣</p>
+      <p style="font-weight:bold; color:#51cf66; margin-top:8px;">输出</p>
+      <p style="font-size:0.8em; margin-top:5px;">Markdown格式输出<br/>PRD范围层规格</p>
+    </div>
+  </div>
+  <div class="highlight-box green" style="margin-top:15px;">
+    <p style="font-size:0.85em;"><strong>SOMA评估法：让AI做恶人砍需求</strong><br/>
+    写Prompt让AI对每个功能按"重要性/可行性/价值对齐度"打分，强制建议砍掉最低2个</p>
+  </div>
+</section>
+
+<!-- W2 总结 -->
+<section class="center" data-background-color="#1a1a2e">
+  <h2 style="color:#ff6b9d;">W2 总结</h2>
+  <div class="glass-card" style="max-width:700px; margin:30px auto; text-align:left;">
+    <ul style="font-size:0.9em;">
+      <li>✅ AI助手（被动）vs AI Agent（主动）</li>
+      <li>✅ 双钻模型：先找根本原因，再给答案</li>
+      <li>✅ 痛点驱动需求，痒点靠边站</li>
+      <li>✅ PRD = 给AI的食谱，Garrett战略/范围层</li>
+      <li>✅ 两个具体Persona是PRD第一页</li>
+      <li>✅ 用户访谈 + 小组互评发现隐藏偏见</li>
+      <li>✅ JTBD框架：功能+情感+社会三层需求</li>
+      <li>✅ 机会得分公式 + 关键时刻聚焦</li>
+      <li>✅链式提示（Prompt Chaining）+ SOMA评估让AI砍需求</li>
+    </ul>
+  </div>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({ hash: true, plugins: [ RevealHighlight, RevealNotes ] });
+</script>
+</body></html>
