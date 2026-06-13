@@ -11,14 +11,14 @@
   /* Chaohua fonts */
   @font-face {
     font-family: "ChaohuaType";
-    src: url("../../website/fonts/朝华打字机-subset.woff2") format("woff2");
+    src: url("../../fonts/朝华打字机-subset.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: "ChaohuaTitle";
-    src: url("../../website/fonts/朝华标题A-subset.woff2") format("woff2");
+    src: url("../../fonts/朝华标题A-subset.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -100,6 +100,20 @@
   .bar-towers{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2vw;flex:1;align-items:end;margin-top:auto}.bar-tower{display:flex;flex-direction:column;justify-content:flex-end;min-height:0;height:100%}.bar-tower .cap{background:var(--grey-1);height:5.6vh;display:flex;align-items:center;justify-content:center;margin-bottom:.4vh}.bar-tower .cap svg{width:1.6vw;height:1.6vw;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.bar-tower .body-block{flex:0 1 auto;padding:2vh 1.2vw 2vh;display:flex;flex-direction:column;justify-content:flex-end;min-height:18vh}.bar-tower .body-block.h-1{min-height:22vh}.bar-tower .body-block.h-2{min-height:30vh}.bar-tower .body-block.h-3{min-height:38vh}.bar-tower .body-block.h-4{min-height:46vh}.bar-tower .body-block{background:var(--paper);color:var(--ink);border:1px solid var(--grey-2)}.bar-tower .body-block.b-accent{background:var(--accent);color:var(--accent-on);border-color:var(--accent)}.bar-tower .lbl{font-family:var(--mono);font-size:max(14px,.82vw);letter-spacing:.16em;text-transform:uppercase;opacity:.65;margin-bottom:1vh}.bar-tower .nb{font-family:var(--sans);font-weight:250;font-size:max(20px,2.8vw);line-height:1;letter-spacing:-.03em;font-feature-settings:"tnum"}.bar-tower .body-block.b-accent .nb{font-weight:300}.bar-tower .nb .unit{font-size:.36em;font-weight:300;opacity:.7;margin-left:.08em;vertical-align:.4em}.bar-tower .sub{font-family:var(--sans),var(--sans-zh);font-size:max(16px,.92vw);opacity:.75;margin-top:1.2vh;line-height:1.5}.bar-tower .cap{background:var(--grey-1);color:var(--ink)}.bar-tower .lucide{width:1.6vw;height:1.6vw;stroke-width:1.4}
   .t-cat{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-helper);line-height:1.3}.t-cat.accent{color:var(--accent)}.t-cat.on-dark{color:rgba(255,255,255,.78)}.t-meta{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper);line-height:1.45}.t-helper{font-family:var(--sans),var(--sans-zh);font-size:14px;font-weight:400;color:var(--text-helper);line-height:1.5;letter-spacing:.005em}.t-body-sm{font-family:var(--sans),var(--sans-zh);font-size:16px;font-weight:400;color:var(--text-secondary);line-height:1.55;letter-spacing:0}.t-body{font-family:var(--sans),var(--sans-zh);font-size:18px;font-weight:400;color:var(--text-primary);line-height:1.5;letter-spacing:-.005em}.t-body-emp{font-family:var(--sans),var(--sans-zh);font-size:18px;font-weight:600;color:var(--text-primary);line-height:1.5;letter-spacing:-.005em}.t-h-prod{font-family:var(--sans),var(--sans-zh);font-size:22px;font-weight:600;color:var(--text-primary);line-height:1.4;letter-spacing:-.01em}.slide.dark .t-cat,.slide.dark .t-meta,.slide.dark .t-helper{color:rgba(255,255,255,.62)}.slide.dark .t-body-sm{color:rgba(255,255,255,.78)}.slide.dark .t-body,.slide.dark .t-body-emp,.slide.dark .t-h-prod{color:var(--paper)}.split-half .half.b-ink .t-cat,.split-half .half.b-ink .t-meta,.split-half .half.b-ink .t-helper{color:rgba(255,255,255,.62)}.split-half .half.b-ink .t-body-sm{color:rgba(255,255,255,.78)}.split-half .half.b-ink .t-body,.split-half .half.b-ink .t-body-emp,.split-half .half.b-ink .t-h-prod{color:var(--paper)}
   .hatch{background-image:repeating-linear-gradient(135deg,currentColor 0 1px,transparent 1px 8px);opacity:.55}
+  .lecture-note{position:absolute;bottom:18vh;left:5vw;background:rgba(0,0,0,.88);color:#fff;padding:1.2vh 1.6vw;border-radius:4px;font-family:var(--sans-zh),var(--sans);font-size:max(14px,.85vw);line-height:1.5;max-width:42vw;border-left:3px solid var(--accent);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:20}
+  .lecture-note.visible{opacity:1}
+  .lecture-note span{color:#ff71ce;font-weight:600}
+  .highlight-box{background:rgba(255,113,206,.15);border:1px solid var(--accent);padding:.8vh 1.2vw;border-radius:3px;margin-top:.8vh}
+  .step-connector{display:flex;align-items:center;gap:1vw;margin:1.4vh 0}
+  .step-connector::after{content:"";flex:1;height:1px;background:linear-gradient(to right,var(--accent),transparent)}
+  [data-anim="fade-up"]{opacity:0;transform:translateY(16px)}body.motion-ready [data-anim="fade-up"]{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+  [data-anim="fade-up"][data-delay="200"]{transition-delay:.2s}
+  [data-anim="fade-up"][data-delay="400"]{transition-delay:.4s}
+  [data-anim="scale-in"]{opacity:0;transform:scale(.92)}body.motion-ready [data-anim="scale-in"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  [data-anim="slide-left"]{opacity:0;transform:translateX(-20px)}body.motion-ready [data-anim="slide-left"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  [data-anim="slide-right"]{opacity:0;transform:translateX(20px)}body.motion-ready [data-anim="slide-right"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  [data-anim="highlight"]{background:transparent;transition:background .3s ease,color .3s ease}
+  body.motion-ready [data-anim="highlight"]:hover,body.motion-ready [data-anim="highlight"].active{background:rgba(255,113,206,.2);color:var(--accent)}
   .dot-mat{--d:14px;background-image:radial-gradient(currentColor 1.4px,transparent 1.6px);background-size:var(--d) var(--d);background-position:0 0;opacity:.5}.dot-mat.lg{--d:22px}.dot-mat.xl{--d:34px}.dot-mat.dense{--d:9px;opacity:.62}
   .ring-mat{--d:18px;background-image:radial-gradient(circle at 50% 50%,transparent 2px,currentColor 2px,currentColor 2.6px,transparent 2.7px);background-size:var(--d) var(--d);opacity:.55}.ring-mat.lg{--d:28px}
   .cross-mat{--d:22px;background-color:currentColor;-webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><g stroke='black' stroke-width='1.4' stroke-linecap='round' fill='none'><line x1='8' y1='8' x2='14' y2='14'/><line x1='14' y1='8' x2='8' y2='14'/></g></svg>");mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><g stroke='black' stroke-width='1.4' stroke-linecap='round' fill='none'><line x1='8' y1='8' x2='14' y2='14'/><line x1='14' y1='8' x2='8' y2='14'/></g></svg>");-webkit-mask-size:var(--d) var(--d);mask-size:var(--d) var(--d);-webkit-mask-repeat:repeat;mask-repeat:repeat;opacity:.42}.cross-mat.lg{--d:32px}
@@ -129,14 +143,18 @@
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
       <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">DEPLOYMENT · 部署课</div>
-      <h1 data-anim="title" style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(9.6vw,16vh);line-height:.94;letter-spacing:-.025em;color:#fff">C01 部署课<br/><span style="font-style:italic;font-weight:300">从本地到线上</span></h1>
-      <div data-anim="bottom" style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
+      <h1 data-anim="fade-up" style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(9.6vw,16vh);line-height:.94;letter-spacing:-.025em;color:#fff">C01 部署课<br/><span style="font-style:italic;font-weight:300">从本地到线上</span></h1>
+      <div data-anim="fade-up" data-delay="200" style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
         <div class="t-meta" style="color:rgba(255,255,255,.86)">2节 × 20分钟 · ¥99</div>
         <div style="display:flex;justify-content:space-between;align-items:end">
           <div class="t-meta" style="color:rgba(255,255,255,.6)">G001 前置工作坊</div>
           <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe</div>
         </div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S01" style="position:absolute;bottom:18vh;left:5vw;background:rgba(0,0,0,.85);color:#fff;padding:1.2vh 1.6vw;border-radius:4px;font-family:var(--sans);font-size:max(14px,.85vw);line-height:1.5;max-width:40vw;opacity:0;transition:opacity .3s;pointer-events:none">
+      <span style="color:#ff71ce;font-weight:600">讲师提示：</span>开场先问大家"你们现在怎么分享作品"，收集痛点后再引出部署概念
     </div>
   </div>
 </section>
@@ -150,11 +168,15 @@
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:3vh;margin-top:2vh">
       <div class="t-cat">课前问题</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.8vw,8.5vh);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary)">你们现在是怎么<br/>分享作品的？</h2>
+      <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.8vw,8.5vh);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary)">你们现在是怎么<br/>分享作品的？</h2>
       <div style="border-top:1px solid var(--border-subtle);padding-top:2.4vh;display:flex;flex-direction:column;gap:2vh">
         <div class="t-cat accent">什么是部署</div>
-        <p class="t-body" style="max-width:52ch">让作品从<span class="mark">只有我能打开</span>→<span class="mark">全世界都能打开</span></p>
+        <p data-anim="fade-up" data-delay="150" class="t-body" style="max-width:52ch">让作品从<span class="mark" data-anim="highlight">只有我能打开</span>→<span class="mark" data-anim="highlight">全世界都能打开</span></p>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S02">
+      <span>讲师提示：</span>先收集痛点——"发文件给朋友，对方说打不开"、"只能在截图里展示"等场景。引出"部署"概念：让全世界任何人只要有链接就能看到你的作品。
     </div>
   </div>
 </section>
@@ -223,7 +245,7 @@
       <div class="t-cat">Vercel 三步上线</div>
       <div class="timeline-h" style="margin-top:4vh">
         <div class="tl-row">
-          <div class="th-node">
+          <div class="th-node" data-anim="scale-in">
             <div class="dot"></div>
             <div class="label down">
               <div class="yr">Step 1</div>
@@ -231,7 +253,7 @@
               <div class="desc">用 GitHub 账号登录</div>
             </div>
           </div>
-          <div class="th-node accent">
+          <div class="th-node accent" data-anim="scale-in" data-delay="150">
             <div class="dot"></div>
             <div class="label down">
               <div class="yr">Step 2</div>
@@ -239,7 +261,7 @@
               <div class="desc">从 GitHub 导入项目</div>
             </div>
           </div>
-          <div class="th-node accent">
+          <div class="th-node accent" data-anim="scale-in" data-delay="300">
             <div class="dot"></div>
             <div class="label down">
               <div class="yr">Step 3</div>
@@ -249,6 +271,60 @@
           </div>
         </div>
       </div>
+      <!-- 步骤高亮动画 -->
+      <div data-anim="fade-up" data-delay="400" class="highlight-box" style="margin-top:3vh;text-align:center">
+        <div style="font-family:var(--mono);font-size:max(13px,.78vw);letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-bottom:.6vh">KEY POINT</div>
+        <div style="font-family:var(--sans-zh);font-size:max(16px,1vw)">全程<strong style="color:var(--accent)">不需要懂服务器</strong>，不需要敲命令，鼠标点点就上线</div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S05">
+      <span>讲师提示：</span>这是学员最容易惊叹的地方——"原来上线这么简单！"。可以停顿2秒让学员感受一下"魔法感"，然后说"接下来你们自己操作一遍"。
+    </div>
+  </div>
+</section>
+
+<!-- ========== C01 S05b: Git 冰箱协议 ========== -->
+<section class="slide dark" data-layout="S05b">
+  <div class="canvas-card">
+    <div class="chrome-min" style="color:rgba(255,255,255,.62)">
+      <div class="l">C01 · 05b / 12</div>
+      <div class="r">GIT · 延伸</div>
+    </div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:3vh;margin-top:2vh">
+      <div class="t-cat" style="color:rgba(255,255,255,.78)">Bonus · Git 是什么</div>
+      <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.5vw,8vh);line-height:1.05;letter-spacing:-.02em;color:var(--paper)">Git = 冰箱协议</h2>
+      <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:2.4vh;display:flex;flex-direction:column;gap:2vh">
+        <p data-anim="fade-up" data-delay="100" style="font-family:var(--sans),var(--sans-zh);font-size:max(18px,1.2vw);line-height:1.6;color:rgba(255,255,255,.85);max-width:52ch">
+          想象你和室友共用一个冰箱。<strong style="color:#ff71ce">你们怎么知道谁拿了什么？</strong>
+        </p>
+        <div data-anim="slide-left" style="display:grid;grid-template-columns:repeat(2,1fr);gap:2vw;margin-top:1vh">
+          <div style="background:rgba(255,255,255,.06);padding:2vh 1.6vw;border-radius:4px">
+            <div style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ff71ce;margin-bottom:1vh">没有 Git</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:.8vh;font-family:var(--sans),var(--sans-zh);font-size:max(14px,.9vw);color:rgba(255,255,255,.7);line-height:1.5">
+              <li>✗ "谁把我做的页面覆盖了？"</li>
+              <li>✗ "我改错了不知道怎么退回"</li>
+              <li>✗ "三个人同时改，乱了"</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,113,206,.15);padding:2vh 1.6vw;border-radius:4px;border:1px solid #ff71ce">
+            <div style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ff71ce;margin-bottom:1vh">有 Git</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:.8vh;font-family:var(--sans),var(--sans-zh);font-size:max(14px,.9vw);color:rgba(255,255,255,.85);line-height:1.5">
+              <li>✓ 每次改动都有记录</li>
+              <li>✓ 随时可以回到之前的版本</li>
+              <li>✓ 多人协作不会乱</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div data-anim="fade-up" data-delay="200" class="highlight-box" style="margin-top:1vh;background:rgba(255,113,206,.1);border-color:rgba(255,113,206,.4)">
+        <div style="font-family:var(--sans-zh);font-size:max(15px,.95vw);color:rgba(255,255,255,.9)">部署课只需要会用 GitHub —— 把代码"放冰箱"就够</div>
+        <div style="font-family:var(--mono);font-size:max(12px,.75vw);color:#ff71ce;margin-top:.6vh;letter-spacing:.08em">进阶：想深入 → C11 GitHub 协作课（PR / Code Review）</div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S05b">
+      <span>讲师提示：</span>这是选讲内容。如果学员问"为什么需要Git"，用冰箱比喻解释。强调：Vercel 部署只需要把代码推到 GitHub，Git 背景知识不是必须的。
     </div>
   </div>
 </section>
@@ -263,21 +339,25 @@
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
       <div class="t-cat" style="color:rgba(255,255,255,.78)">Success!</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4vw;align-items:center">
-        <div>
+        <div data-anim="scale-in">
           <div class="kpi-thin-sm accent" style="font-size:min(5.6vw,10vh)">.vercel.app</div>
           <p class="t-body" style="color:rgba(255,255,255,.82);margin-top:2vh">你获得了一个公开 URL<br/>立刻可以分享给朋友</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh">
-          <div class="stat-card accent-top" style="border-top-color:#fff">
+          <div data-anim="fade-up" data-delay="100" class="stat-card accent-top" style="border-top-color:#fff">
             <div class="stat-label" style="color:rgba(255,255,255,.7)">自动 HTTPS</div>
             <div class="stat-nb" style="color:#fff;font-size:3.6vw">✓</div>
           </div>
-          <div class="stat-card" style="border-top-color:rgba(255,255,255,.4)">
+          <div data-anim="fade-up" data-delay="200" class="stat-card" style="border-top-color:rgba(255,255,255,.4)">
             <div class="stat-label" style="color:rgba(255,255,255,.7)">全球 CDN</div>
             <div class="stat-nb" style="color:#fff;font-size:3.6vw">✓</div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S06">
+      <span>讲师提示：</span>这是全场最激动人心的时刻！让学员停顿3秒感受"我的作品全世界都能看到了"的成就感。然后问："你们想不想有一个自己的名字？下一节教你们绑定域名。"
     </div>
   </div>
 </section>
@@ -329,7 +409,7 @@
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em;margin-bottom:1.6vh">SUMMARY</div>
-          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(6vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">第1节<br/><span style="font-style:italic;font-weight:300">总结</span></h2>
+          <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-size:min(6vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">第1节<br/><span style="font-style:italic;font-weight:300">总结</span></h2>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.62)">部署课</div>
@@ -342,21 +422,21 @@
           <div class="r">3 RULES</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:0">
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+          <div data-anim="slide-left" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">01</div>
             <div>
               <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">部署 = 让作品全世界可访问</h3>
               <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">从"只有我能打开"变成"任何人都能打开"</p>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+          <div data-anim="slide-left" data-delay="100" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">02</div>
             <div>
               <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">Vercel = 一键部署</h3>
               <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">GitHub 导入，30秒上线，自动 HTTPS</p>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
+          <div data-anim="slide-left" data-delay="200" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">03</div>
             <div>
               <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">域名 = 给自己的作品起名</h3>
@@ -366,6 +446,10 @@
         </div>
         <div class="t-meta" style="color:var(--text-helper);text-align:right">→ 第2节</div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S08">
+      <span>讲师提示：</span>总结时不要照念文字，让学员自己说"今天最震撼的一点是什么"。引导大家意识到：上线其实很简单，只是以前不知道工具。
     </div>
   </div>
 </section>
@@ -400,17 +484,21 @@
       <div class="r">DEPLOYMENT</div>
     </div>
     <div class="duo-compare" style="margin-top:6vh">
-      <div class="col">
+      <div data-anim="scale-in" class="col">
         <div class="col-tag"><span class="num">01</span> 危险</div>
         <div class="col-ttl" style="color:var(--paper)">密码写在代码里</div>
         <div class="col-desc">GitHub 公开仓库会被扫描，密钥泄露，有人专门扫描 GitHub 泄露</div>
       </div>
       <span class="vrule"></span>
-      <div class="col accent">
+      <div data-anim="scale-in" data-delay="150" class="col accent">
         <div class="col-tag"><span class="num">02</span> 解决</div>
         <div class="col-ttl">环境变量</div>
         <div class="col-desc">把密钥放进"保险箱"，代码里只有变量名，密钥永不外露</div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S10">
+      <span>讲师提示：</span>可以讲一个真实案例——有人把 AWS 密钥上传到 GitHub，收到几千美元账单。"你们不想成为那个人对吧？环境变量就是你们的保险箱。"
     </div>
   </div>
 </section>
@@ -425,25 +513,29 @@
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
       <div class="t-cat">实操：配置环境变量</div>
       <div class="stack-row" style="margin-top:0">
-        <div class="stack-block b-accent">
+        <div data-anim="scale-in" class="stack-block b-accent">
           <div class="layer-nb">Step 1</div>
           <div class="layer-ttl">Vercel 控制台</div>
           <div class="layer-desc">打开项目 → Settings → Environment Variables</div>
         </div>
-        <div class="stack-block b-grey">
+        <div data-anim="scale-in" data-delay="120" class="stack-block b-grey">
           <div class="layer-nb">Step 2</div>
           <div class="layer-ttl">填入变量</div>
           <div class="layer-desc">变量名（KEY）+ 值（Value）</div>
         </div>
-        <div class="stack-block b-ink">
+        <div data-anim="scale-in" data-delay="240" class="stack-block b-ink">
           <div class="layer-nb">Step 3</div>
           <div class="layer-ttl" style="color:var(--paper)">Redeploy</div>
           <div class="layer-desc" style="color:rgba(255,255,255,.78)">触发重新构建，环境变量生效</div>
         </div>
       </div>
-      <div class="callout" style="margin-top:2vh">
+      <div data-anim="fade-up" data-delay="350" class="callout" style="margin-top:2vh">
         <div class="t-body-emp">现在轮到你 — 给自己的项目配置至少一个环境变量</div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S11">
+      <span>讲师提示：</span>这是动手环节。提醒学员：如果没有密钥可以配置，可以配置一个假的 API_KEY 练手。重点理解"密钥不在代码里"这个概念。
     </div>
   </div>
 </section>
@@ -460,7 +552,7 @@
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em;margin-bottom:1.6vh">CLOSING</div>
-          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(6vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">结业<br/><span style="font-style:italic;font-weight:300">Checklist</span></h2>
+          <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-size:min(6vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">结业<br/><span style="font-style:italic;font-weight:300">Checklist</span></h2>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.62)">C01 部署课</div>
@@ -473,21 +565,21 @@
           <div class="r">3 CHECKS</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:0">
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+          <div data-anim="slide-right" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">01</div>
             <div>
               <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">全世界都能访问的作品</h3>
               <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">Vercel 一键部署，获得公开 URL</p>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+          <div data-anim="slide-right" data-delay="100" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">02</div>
             <div>
               <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">安全的部署方式</h3>
               <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">密钥在环境变量，不在代码里</p>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
+          <div data-anim="slide-right" data-delay="200" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">03</div>
             <div>
               <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">自动更新的机制</h3>
@@ -498,12 +590,21 @@
         <div class="t-meta" style="color:var(--text-helper);text-align:right">→ C02 美化课</div>
       </div>
     </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S12">
+      <span>讲师提示：</span>结业时问学员："你们现在能把作品发给任何人看吗？"如果答案是肯定的，恭喜结业。预告下一节美化课："有了链接，下一步是让链接看起来更专业。"
+    </div>
   </div>
 </section>
 
 </div>
 <div id="nav"></div>
-<script>const VS=`attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}`;const FS=`precision highp float;uniform vec2 u_resolution;uniform float u_time;uniform vec2 u_mouse;uniform float u_dark;uniform vec3 u_accent;float gridLine(vec2 uv, float spacing, float thickness){vec2 g = abs(fract(uv / spacing) - 0.5);float d = min(g.x, g.y);return 1.0 - smoothstep(thickness - 0.005, thickness + 0.005, d);}float dot2(vec2 p){ return dot(p,p); }void main(){vec2 uv = gl_FragCoord.xy / u_resolution.xy;float aspect = u_resolution.x / u_resolution.y;vec2 p = uv;p.x *= aspect;vec2 drift = vec2(u_time * 0.008, u_time * 0.005);vec2 gp = p + drift;float mainGrid = gridLine(gp, 0.12, 0.012);float subGrid = gridLine(gp, 0.024, 0.04) * 0.4;vec2 m = u_mouse;m.x *= aspect;float md = length(p - m);float mInfluence = exp(-md * 4.0) * 0.5;float gridStrength = (mainGrid + subGrid * 0.5) * (0.45 + mInfluence);vec2 dotGrid = fract(gp * 50.0) - 0.5;float dotMask = 1.0 - smoothstep(0.05, 0.14, length(dotGrid));float wave = sin(gp.x * 1.4 + u_time * 0.15) * cos(gp.y * 1.6 - u_time * 0.12);dotMask *= smoothstep(-0.3, 0.6, wave) * 0.6;vec3 lineColor = mix(vec3(0.08), vec3(0.92), u_dark);vec3 bgColor = mix(vec3(0.97, 0.97, 0.96), vec3(0.06, 0.06, 0.07), u_dark);vec3 col = bgColor;col = mix(col, lineColor, gridStrength * 0.55);col = mix(col, lineColor, dotMask * 0.35);col = mix(col, u_accent, mInfluence * 0.18);gl_FragColor = vec4(col, 1.0);}`;const mouse={x:0.5,y:0.5};addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=1-e.clientY/innerHeight});function bootGL(canvasId, fsSrc){const canvas=document.getElementById(canvasId);const gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});if(!gl) return ()=>false;const mk=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh;};const prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fsSrc));gl.linkProgram(prog);gl.useProgram(prog);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(prog,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);const lRes=gl.getUniformLocation(prog,'u_resolution');const lT=gl.getUniformLocation(prog,'u_time');const lM=gl.getUniformLocation(prog,'u_mouse');const lD=gl.getUniformLocation(prog,'u_dark');const lA=gl.getUniformLocation(prog,'u_accent');const resize=()=>{const d=Math.min(window.devicePixelRatio||1,2);canvas.width=innerWidth*d;canvas.height=innerHeight*d;gl.viewport(0,0,canvas.width,canvas.height);};addEventListener('resize',resize);resize();function readAccent(){const cs = getComputedStyle(document.documentElement);const hex = cs.getPropertyValue('--accent').trim() || '#002FA7';const m = hex.match(/^#([0-9a-f]{6})$/i);if(!m) return [0, 0.18, 0.65];const n = parseInt(m[1], 16);return [((n>>16)&255)/255, ((n>>8)&255)/255, (n&255)/255];}let accent = readAccent();let dark = 0;return (tSec, isDark)=>{if(isDark !== undefined) dark = isDark ? 1 : 0;accent = readAccent();gl.uniform2f(lRes,canvas.width,canvas.height);gl.uniform1f(lT,tSec);gl.uniform2f(lM,mouse.x,mouse.y);gl.uniform1f(lD,dark);gl.uniform3f(lA,accent[0],accent[1],accent[2]);gl.drawArrays(gl.TRIANGLES,0,6);return true;};}let darkMode=false;let gridCtrl=null, gridRAF=0, gridT0=Date.now();function startGrid(){if(document.body.classList.contains('canvas-mode') || window.__lowPowerMode || gridRAF) return;if(!gridCtrl) gridCtrl = bootGL('bg-grid',FS);if(!gridCtrl) return;gridT0=Date.now();function loop(){if(window.__lowPowerMode){gridRAF=0;return;}const t=(Date.now()-gridT0)/1000;gridCtrl(t, darkMode);gridRAF=requestAnimationFrame(loop);}gridRAF=requestAnimationFrame(loop);}function stopGrid(){if(gridRAF) cancelAnimationFrame(gridRAF);gridRAF=0;}if(document.body.classList.contains('canvas-mode')){const c=document.getElementById('bg-grid');if(c) c.remove();}else{startGrid();}addEventListener('swiss-low-power-change', e=>{e.detail.on ? stopGrid() : startGrid();});const deck=document.getElementById('deck');const slides=deck.querySelectorAll('.slide');const nav=document.getElementById('nav');let idx=0,total=slides.length,lock=false;deck.style.width=(total*100)+'vw';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex = idx;deck.style.transform=`translateX(${-idx*100}vw)`;nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));const el=slides[idx];const isDark = el.classList.contains('dark') || el.classList.contains('accent');document.body.classList.toggle('dark-bg', isDark);darkMode = isDark;if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);lock=true;setTimeout(()=>lock=false,700);}let overviewOn=false;const ov=document.createElement('div');ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(250,250,248,.96);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:4vh 4vw';document.body.appendChild(ov);function buildOverview(){ov.innerHTML='';const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';slides.forEach((s,i)=>{const card=document.createElement('div');card.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--accent)':'rgba(0,0,0,.12)')+';transition:border-color .2s';card.onmouseenter=()=>card.style.borderColor='rgba(0,0,0,.4)';card.onmouseleave=()=>card.style.borderColor=i===idx?'var(--accent)':'rgba(0,0,0,.12)';const wrap=document.createElement('div');const isDark = s.classList.contains('dark') || s.classList.contains('accent');wrap.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:'+(isDark?'var(--ink)':'var(--paper)');const clone=s.cloneNode(true);clone.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';wrap.appendChild(clone);const label=document.createElement('div');label.style.cssText='padding:6px 10px;font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.7';label.textContent=(i+1)+' / '+total;card.appendChild(wrap);card.appendChild(label);card.onclick=()=>{toggleOverview();go(i)};grid.appendChild(card);});ov.appendChild(grid);}function toggleOverview(){overviewOn=!overviewOn;if(overviewOn){buildOverview();ov.style.display='block';}else{ov.style.display='none';}}addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key && e.key.toLowerCase()==='b' && !e.metaKey && !e.ctrlKey && !e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}if(overviewOn)return;if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){if(window.__pipeAdvance && window.__pipeAdvance()) return;go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);});let wheelTO=null,wheelAcc=0;addEventListener('wheel',e=>{wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){if(wheelAcc>0 && window.__pipeAdvance && window.__pipeAdvance()){wheelAcc=0;}else{go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}}clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);},{passive:true});let tx=0,ty=0;addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});addEventListener('touchend',e=>{const dx=(e.changedTouches[0].clientX-tx);const dy=(e.changedTouches[0].clientY-ty);if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0 && window.__pipeAdvance && window.__pipeAdvance()) return;go(idx+(dx<0?1:-1));}},{passive:true});const initialSlideParam = new URLSearchParams(location.search).get('slide');const initialSlide = initialSlideParam ? Number(initialSlideParam) - 1 : 0;go(Number.isFinite(initialSlide) ? initialSlide : 0);</script>
+<script>const VS=`attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}`;const FS=`precision highp float;uniform vec2 u_resolution;uniform float u_time;uniform vec2 u_mouse;uniform float u_dark;uniform vec3 u_accent;float gridLine(vec2 uv, float spacing, float thickness){vec2 g = abs(fract(uv / spacing) - 0.5);float d = min(g.x, g.y);return 1.0 - smoothstep(thickness - 0.005, thickness + 0.005, d);}float dot2(vec2 p){ return dot(p,p); }void main(){vec2 uv = gl_FragCoord.xy / u_resolution.xy;float aspect = u_resolution.x / u_resolution.y;vec2 p = uv;p.x *= aspect;vec2 drift = vec2(u_time * 0.008, u_time * 0.005);vec2 gp = p + drift;float mainGrid = gridLine(gp, 0.12, 0.012);float subGrid = gridLine(gp, 0.024, 0.04) * 0.4;vec2 m = u_mouse;m.x *= aspect;float md = length(p - m);float mInfluence = exp(-md * 4.0) * 0.5;float gridStrength = (mainGrid + subGrid * 0.5) * (0.45 + mInfluence);vec2 dotGrid = fract(gp * 50.0) - 0.5;float dotMask = 1.0 - smoothstep(0.05, 0.14, length(dotGrid));float wave = sin(gp.x * 1.4 + u_time * 0.15) * cos(gp.y * 1.6 - u_time * 0.12);dotMask *= smoothstep(-0.3, 0.6, wave) * 0.6;vec3 lineColor = mix(vec3(0.08), vec3(0.92), u_dark);vec3 bgColor = mix(vec3(0.97, 0.97, 0.96), vec3(0.06, 0.06, 0.07), u_dark);vec3 col = bgColor;col = mix(col, lineColor, gridStrength * 0.55);col = mix(col, lineColor, dotMask * 0.35);col = mix(col, u_accent, mInfluence * 0.18);gl_FragColor = vec4(col, 1.0);}`;const mouse={x:0.5,y:0.5};addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=1-e.clientY/innerHeight});function bootGL(canvasId, fsSrc){const canvas=document.getElementById(canvasId);const gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});if(!gl) return ()=>false;const mk=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh;};const prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fsSrc));gl.linkProgram(prog);gl.useProgram(prog);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(prog,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);const lRes=gl.getUniformLocation(prog,'u_resolution');const lT=gl.getUniformLocation(prog,'u_time');const lM=gl.getUniformLocation(prog,'u_mouse');const lD=gl.getUniformLocation(prog,'u_dark');const lA=gl.getUniformLocation(prog,'u_accent');const resize=()=>{const d=Math.min(window.devicePixelRatio||1,2);canvas.width=innerWidth*d;canvas.height=innerHeight*d;gl.viewport(0,0,canvas.width,canvas.height);};addEventListener('resize',resize);resize();function readAccent(){const cs = getComputedStyle(document.documentElement);const hex = cs.getPropertyValue('--accent').trim() || '#002FA7';const m = hex.match(/^#([0-9a-f]{6})$/i);if(!m) return [0, 0.18, 0.65];const n = parseInt(m[1], 16);return [((n>>16)&255)/255, ((n>>8)&255)/255, (n&255)/255];}let accent = readAccent();let dark = 0;return (tSec, isDark)=>{if(isDark !== undefined) dark = isDark ? 1 : 0;accent = readAccent();gl.uniform2f(lRes,canvas.width,canvas.height);gl.uniform1f(lT,tSec);gl.uniform2f(lM,mouse.x,mouse.y);gl.uniform1f(lD,dark);gl.uniform3f(lA,accent[0],accent[1],accent[2]);gl.drawArrays(gl.TRIANGLES,0,6);return true;};}let darkMode=false;let gridCtrl=null, gridRAF=0, gridT0=Date.now();function startGrid(){if(document.body.classList.contains('canvas-mode') || window.__lowPowerMode || gridRAF) return;if(!gridCtrl) gridCtrl = bootGL('bg-grid',FS);if(!gridCtrl) return;gridT0=Date.now();function loop(){if(window.__lowPowerMode){gridRAF=0;return;}const t=(Date.now()-gridT0)/1000;gridCtrl(t, darkMode);gridRAF=requestAnimationFrame(loop);}gridRAF=requestAnimationFrame(loop);}function stopGrid(){if(gridRAF) cancelAnimationFrame(gridRAF);gridRAF=0;}if(document.body.classList.contains('canvas-mode')){const c=document.getElementById('bg-grid');if(c) c.remove();}else{startGrid();}addEventListener('swiss-low-power-change', e=>{e.detail.on ? stopGrid() : startGrid();});const deck=document.getElementById('deck');const slides=deck.querySelectorAll('.slide');const nav=document.getElementById('nav');let idx=0,total=slides.length,lock=false;deck.style.width=(total*100)+'vw';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex = idx;deck.style.transform=`translateX(${-idx*100}vw)`;nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));const el=slides[idx];const isDark = el.classList.contains('dark') || el.classList.contains('accent');document.body.classList.toggle('dark-bg', isDark);darkMode = isDark;if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);lock=true;setTimeout(()=>lock=false,700);}let overviewOn=false;const ov=document.createElement('div');ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(250,250,248,.96);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:4vh 4vw';document.body.appendChild(ov);function buildOverview(){ov.innerHTML='';const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';slides.forEach((s,i)=>{const card=document.createElement('div');card.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--accent)':'rgba(0,0,0,.12)')+';transition:border-color .2s';card.onmouseenter=()=>card.style.borderColor='rgba(0,0,0,.4)';card.onmouseleave=()=>card.style.borderColor=i===idx?'var(--accent)':'rgba(0,0,0,.12)';const wrap=document.createElement('div');const isDark = s.classList.contains('dark') || s.classList.contains('accent');wrap.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:'+(isDark?'var(--ink)':'var(--paper)');const clone=s.cloneNode(true);clone.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';wrap.appendChild(clone);const label=document.createElement('div');label.style.cssText='padding:6px 10px;font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.7';label.textContent=(i+1)+' / '+total;card.appendChild(wrap);card.appendChild(label);card.onclick=()=>{toggleOverview();go(i)};grid.appendChild(card);});ov.appendChild(grid);}function toggleOverview(){overviewOn=!overviewOn;if(overviewOn){buildOverview();ov.style.display='block';}else{ov.style.display='none';}}addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key && e.key.toLowerCase()==='b' && !e.metaKey && !e.ctrlKey && !e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}if(overviewOn)return;if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){if(window.__pipeAdvance && window.__pipeAdvance()) return;go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);});let wheelTO=null,wheelAcc=0;addEventListener('wheel',e=>{wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){if(wheelAcc>0 && window.__pipeAdvance && window.__pipeAdvance()){wheelAcc=0;}else{go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}}clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);},{passive:true});let tx=0,ty=0;addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});addEventListener('touchend',e=>{const dx=(e.changedTouches[0].clientX-tx);const dy=(e.changedTouches[0].clientY-ty);if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0 && window.__pipeAdvance && window.__pipeAdvance()) return;go(idx+(dx<0?1:-1));}},{passive:true});const initialSlideParam = new URLSearchParams(location.search).get('slide');const initialSlide = initialSlideParam ? Number(initialSlideParam) - 1 : 0;go(Number.isFinite(initialSlide) ? initialSlide : 0);
+// 讲解要点显示/隐藏
+let notesVisible = false;
+function toggleNotes(){notesVisible=!notesVisible;updateNotes();}
+function updateNotes(){document.querySelectorAll('.lecture-note').forEach(n=>n.classList.remove('visible'));if(notesVisible){const currentSlide=slides[idx];if(currentSlide){currentSlide.querySelectorAll('.lecture-note').forEach(n=>n.classList.add('visible'));}}}
+addEventListener('keydown',e=>{if(e.key==='n'||e.key==='N'){if(!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();toggleNotes();return;}}},{passive:true});</script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
 </body>

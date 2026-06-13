@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C11 GitHub协作课 | PR / Code Review | G001</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:"ChaohuaType";src:url("../../fonts/朝华打字机-subset.woff2") format("woff2");font-weight:normal;font-style:normal;font-display:swap}
+  @font-face{font-family:"ChaohuaTitle";src:url("../../fonts/朝华标题A-subset.woff2") format("woff2");font-weight:normal;font-style:normal;font-display:swap}
+  :root{--paper:#fafaf8;--paper-rgb:250,250,248;--ink:#0a0a0a;--ink-rgb:10,10,10;--grey-1:#f0f0ee;--grey-2:#d4d4d2;--grey-3:#737373;--accent:#ff71ce;--accent-rgb:255,113,206;--accent-on:#ffffff;--text-primary:#0a0a0a;--text-secondary:#525252;--text-helper:#737373;--border-subtle:#e0e0e0;--sans:"ChaohuaType","Inter","Helvetica Neue","Helvetica","Arial","Segoe UI Variable","Segoe UI",system-ui,-apple-system,sans-serif;--sans-zh:"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans SC","Microsoft YaHei UI","Microsoft YaHei","微软雅黑",sans-serif;--mono:"JetBrains Mono","IBM Plex Mono","SF Mono","Cascadia Code","Consolas","Courier New",ui-monospace,monospace;--nav-safe-bottom:8vh}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--sans),var(--sans-zh);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  canvas.bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;opacity:.55;mix-blend-mode:multiply;pointer-events:none}
+  body.dark-bg canvas.bg{mix-blend-mode:screen;opacity:.42}
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:5.5vh 5vw 7vh 5vw;display:flex;flex-direction:column;overflow:hidden;background:var(--paper);color:var(--ink)}
+  .slide.grey{background:var(--grey-1)}.slide.dark{background:var(--ink);color:var(--paper)}.slide.accent{background:var(--accent);color:var(--accent-on)}
+  .canvas-card{width:100vw;height:100vh;background:var(--paper);color:var(--ink);padding:5.6vh 5vw 4.4vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .slide.dark .canvas-card{background:var(--ink);color:var(--paper)}
+  .slide.accent .canvas-card{background:var(--accent);color:var(--accent-on)}
+  .slide.grey .canvas-card{background:var(--grey-1);color:var(--ink)}
+  canvas.ascii-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:.92}
+  .canvas-card>*{position:relative;z-index:1}
+  .chrome-min{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper);flex:0 0 auto;margin-bottom:var(--sp-9)}
+  .slide.dark .canvas-card .chrome-min{color:rgba(255,255,255,.62)}
+  .t-meta{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper);line-height:1.45}
+  .t-cat{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-helper);line-height:1.3}
+  .t-cat.accent{color:var(--accent)}
+  .t-body{font-family:var(--sans),var(--sans-zh);font-size:18px;font-weight:400;color:var(--text-primary);line-height:1.5;letter-spacing:-.005em}
+  .t-body-emp{font-family:var(--sans),var(--sans-zh);font-size:18px;font-weight:600;color:var(--text-primary);line-height:1.5;letter-spacing:-.005em}
+  .t-helper{font-family:var(--sans),var(--sans-zh);font-size:14px;font-weight:400;color:var(--text-helper);line-height:1.5;letter-spacing:.005em}
+  .mark{background:var(--accent);color:var(--accent-on);padding:0 .2em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .accent-block{background:var(--accent);color:var(--accent-on);padding:2.4vh 2vw}
+  .ink-block{background:var(--ink);color:var(--paper);padding:2.4vh 2vw}
+  .grey-block{background:var(--grey-1);padding:2.4vh 2vw}
+  .split-half{display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1;align-items:stretch}
+  .split-half>.half{padding:5vh 3.4vw;display:flex;flex-direction:column;min-width:0}
+  .split-half>.half.b-grey{background:var(--grey-1)}
+  .split-half>.half.b-accent{background:var(--accent);color:var(--accent-on)}
+  .split-half>.half.b-ink{background:var(--ink);color:var(--paper)}
+  .stack-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;flex:1;margin-top:6vh;align-items:stretch}
+  .stack-block{display:flex;flex-direction:column;padding:3.2vh 1.8vw 2.4vh;position:relative;min-height:0}
+  .stack-block.b-accent{background:var(--accent);color:var(--accent-on)}
+  .stack-block.b-grey{background:var(--grey-1);color:var(--ink)}
+  .stack-block.b-ink{background:var(--ink);color:var(--paper)}
+  .stack-block .layer-nb{font-family:var(--mono);font-size:max(14px,.84vw);letter-spacing:.18em;opacity:.65;margin-bottom:auto}
+  .stack-block .layer-ttl{font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(17px,2vw);line-height:1.1;margin-top:1vh;letter-spacing:-.02em}
+  .stack-block .layer-desc{font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(16px,.94vw);line-height:1.55;opacity:.88;margin-top:1.4vh}
+  .sub-card{background:var(--grey-1);padding:2.4vh 1.6vw 2vh;display:flex;flex-direction:column;position:relative;border-radius:3px}
+  .sub-card.accent{background:var(--accent);color:var(--accent-on)}
+  .sub-card .ttl{font-family:var(--sans),var(--sans-zh);font-weight:500;font-size:max(17px,1.5vw);line-height:1.2;letter-spacing:-.015em;margin-bottom:1vh}
+  .sub-card .desc{font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.55;opacity:.78;margin-top:auto}
+  .duo-compare{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 3.4vw;flex:1;align-items:stretch;margin-top:8vh}
+  .duo-compare .vrule{background:var(--grey-2);width:1px;align-self:stretch}
+  .duo-compare .col{display:flex;flex-direction:column;gap:1.6vh;padding:0 .4vw}
+  .duo-compare .col-tag{font-family:var(--mono);font-size:max(14px,.78vw);letter-spacing:.16em;text-transform:uppercase;color:var(--grey-3);display:flex;align-items:center;gap:.6vw}
+  .duo-compare .col-tag .num{font-weight:600;color:var(--ink);border:1px solid var(--ink);padding:.2em .6em;font-size:.92em}
+  .duo-compare .col.accent .col-tag .num{color:var(--accent);border-color:var(--accent)}
+  .duo-compare .col-ttl{font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:3.6vw;line-height:1;letter-spacing:-.03em}
+  .duo-compare .col.accent .col-ttl{color:var(--accent)}
+  .duo-compare .col-desc{font-family:var(--sans),var(--sans-zh);font-size:max(16px,1.04vw);line-height:1.55;opacity:.78;max-width:30vw}
+  .timeline-h{--tl-axis-w:8px;--tl-dot:8px;position:relative;flex:1;display:flex;align-items:center}.timeline-h::before{content:"";position:absolute;top:50%;left:5%;right:5%;height:1px;transform:translateY(-50%);background:repeating-linear-gradient(to right,currentColor 0 4px,transparent 4px 8px);opacity:.35;pointer-events:none;z-index:0}.timeline-h .tl-row{position:relative;width:100%;display:grid;grid-template-columns:repeat(4,1fr);align-items:center}.timeline-h .th-node{position:relative;display:flex;justify-content:center}.timeline-h .th-node .dot{width:var(--tl-dot);height:var(--tl-dot);border-radius:50%;background:var(--ink);z-index:1;position:relative}.timeline-h .th-node.accent .dot{background:var(--accent)}.timeline-h .th-node .label{position:absolute;left:50%;transform:translateX(-50%);width:13vw;text-align:center;display:flex;flex-direction:column;gap:.4vh}.timeline-h .th-node.up .label{bottom:calc(50% + 22px)}.timeline-h .th-node.down .label{top:calc(50% + 22px)}.timeline-h .th-node .yr{font-family:var(--mono);font-size:max(14px,.78vw);letter-spacing:.05em;color:var(--text-helper);font-weight:500}.timeline-h .th-node.accent .yr{color:var(--accent)}.timeline-h .th-node .name{font-family:var(--sans);font-size:max(16px,1.05vw);font-weight:400;color:var(--text-primary);line-height:1.2;letter-spacing:-.005em}.timeline-h .th-node.accent .name{color:var(--accent)}.timeline-h .th-node .desc{font-family:var(--sans),var(--sans-zh);font-size:max(14px,.84vw);color:var(--text-secondary);font-weight:400;line-height:1.4}
+  .step{display:flex;flex-direction:column;gap:.6vh;padding-top:1.2vh;border-top:2px solid currentColor}.step.accent-top{border-top-color:var(--accent);border-top-width:3px}.step-nb{font-family:var(--mono);font-weight:500;font-size:max(14px,1vw);opacity:.5;letter-spacing:.04em}.step-title{font-family:var(--sans),var(--sans-zh);font-weight:700;font-size:1.4vw;letter-spacing:-.01em;line-height:1.2}.step-desc{font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(16px,.94vw);line-height:1.45;opacity:.7}
+  #nav{position:fixed;left:50%;bottom:2vh;transform:translateX(-50%);z-index:30;display:flex;gap:10px;padding:0;background:transparent;border:0}#nav .dot{width:6px;height:6px;background:rgba(0,0,0,.28);cursor:pointer;transition:all .25s ease;border:0;padding:0;border-radius:0}#nav .dot:hover{background:rgba(0,0,0,.55)}#nav .dot.active{background:var(--accent);width:18px}body.dark-bg #nav .dot{background:rgba(255,255,255,.32)}body.dark-bg #nav .dot.active{background:var(--accent)}
+  #hint{position:fixed;bottom:2.4vh;right:2.5vw;z-index:30;font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;opacity:.4;color:var(--ink-tint, currentColor)}
+  .lecture-note{position:absolute;bottom:18vh;left:5vw;background:rgba(0,0,0,.88);color:#fff;padding:1.2vh 1.6vw;border-radius:4px;font-family:var(--sans-zh),var(--sans);font-size:max(14px,.85vw);line-height:1.5;max-width:42vw;border-left:3px solid var(--accent);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:20}.lecture-note.visible{opacity:1}.lecture-note span{color:#ff71ce;font-weight:600}.highlight-box{background:rgba(255,113,206,.15);border:1px solid var(--accent);padding:.8vh 1.2vw;border-radius:3px;margin-top:.8vh}
+  [data-anim="fade-up"]{opacity:0;transform:translateY(16px)}body.motion-ready [data-anim="fade-up"]{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}[data-anim="fade-up"][data-delay="200"]{transition-delay:.2s}[data-anim="fade-up"][data-delay="400"]{transition-delay:.4s}[data-anim="scale-in"]{opacity:0;transform:scale(.92)}body.motion-ready [data-anim="scale-in"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}[data-anim="slide-left"]{opacity:0;transform:translateX(-20px)}body.motion-ready [data-anim="slide-left"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}[data-anim="slide-right"]{opacity:0;transform:translateX(20px)}body.motion-ready [data-anim="slide-right"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  @media(max-width:900px){.h-hero{font-size:16vw}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="canvas-mode">
+<canvas id="bg-grid" class="bg"></canvas>
+<div id="hint">← → 翻页 · B 静态 · ESC 索引 · N 讲师提示</div>
+<div id="deck">
+
+<!-- SLIDE 1: Cover -->
+<section class="slide accent" data-layout="S01">
+  <div class="canvas-card">
+    <canvas class="ascii-bg" aria-hidden="true"></canvas>
+    <div class="chrome-min">
+      <div class="l">G001 · C11 协作课</div>
+      <div class="r">01 / 08</div>
+    </div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
+      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">GITHUB COLLABORATION</div>
+      <h1 data-anim="fade-up" style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(8vw,14vh);line-height:.94;letter-spacing:-.025em;color:#fff">C11 GitHub协作</h1>
+      <div data-anim="fade-up" data-delay="200" style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
+        <div style="font-family:var(--sans-zh);font-size:max(16px,1.1vw);color:rgba(255,255,255,.86)">Pull Request · Code Review · 团队协作</div>
+        <div style="display:flex;justify-content:space-between;align-items:end">
+          <div class="t-meta" style="color:rgba(255,255,255,.6)">¥79 · 2节×20分钟</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe</div>
+        </div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S01">
+      <span>讲师提示：</span>本课面向有编程基础、想学习团队协作的学员。先问："你们有多少人已经用过 GitHub？"了解学情后再进入。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: 什么是 PR -->
+<section class="slide" data-layout="S02">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">C11 · 02 / 08</div>
+      <div class="r">COLLABORATION</div>
+    </div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:3vh;margin-top:2vh">
+      <div class="t-cat">什么是 Pull Request</div>
+      <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.5vw,8vh);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary)">你改的代码<br/>怎么让别人审核？</h2>
+      <div data-anim="fade-up" data-delay="100" style="border-top:1px solid var(--border-subtle);padding-top:2.4vh;display:flex;flex-direction:column;gap:2vh">
+        <p class="t-body">PR = 发起一个<span class="mark">请求</span>，请项目维护者<strong>拉取</strong>（Pull）你的代码到主分支</p>
+        <div class="sub-card" style="background:rgba(255,113,206,.08);border-left:3px solid var(--accent)">
+          <div class="ttl">类比：编辑部投稿</div>
+          <div class="desc">记者写稿 → 编辑审稿 → 通过后发表。你的 PR 就是"投稿"，维护者就是"编辑"。</div>
+        </div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S02">
+      <span>讲师提示：</span>很多学员第一次用 GitHub 就是"直接改代码推到 main 分支"。要强调：PR 是团队协作的必备流程，不是可选项。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: PR 流程 -->
+<section class="slide grey" data-layout="S03">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">C11 · 03 / 08</div>
+      <div class="r">COLLABORATION</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div class="t-cat accent" style="margin-bottom:2vh">PR 工作流</div>
+      <div class="timeline-h" style="margin-top:4vh">
+        <div class="tl-row">
+          <div class="th-node" data-anim="scale-in">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 1</div>
+              <div class="name">Fork 仓库</div>
+              <div class="desc">把项目复制到自己账号</div>
+            </div>
+          </div>
+          <div class="th-node accent" data-anim="scale-in" data-delay="100">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 2</div>
+              <div class="name">开新分支</div>
+              <div class="desc">git checkout -b feature/xxx</div>
+            </div>
+          </div>
+          <div class="th-node accent" data-anim="scale-in" data-delay="200">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 3</div>
+              <div class="name">提交代码</div>
+              <div class="desc">git commit + git push</div>
+            </div>
+          </div>
+          <div class="th-node accent" data-anim="scale-in" data-delay="300">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 4</div>
+              <div class="name">发起 PR</div>
+              <div class="desc">GitHub 网页上点 New Pull Request</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S03">
+      <span>讲师提示：</span>演示一遍完整的 PR 流程。重点：为什么不能直接推 main 分支——因为维护者的 main 可能比你新，直接推会覆盖。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: Code Review -->
+<section class="slide" data-layout="S04">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">C11 · 04 / 08</div>
+      <div class="r">COLLABORATION</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div class="t-cat accent" style="margin-bottom:2vh">Code Review 是什么</div>
+      <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:2vh">你的代码<br/>要被谁看过？</h2>
+      <div class="duo-compare" style="margin-top:4vh">
+        <div data-anim="scale-in" class="col">
+          <div class="col-tag"><span class="num" style="color:var(--grey-3);border-color:var(--grey-3)">没有 Review</span></div>
+          <div class="col-ttl" style="color:var(--grey-3)">直接合并</div>
+          <div class="col-desc">bug 进入主分支，影响所有人</div>
+          <ul class="col-list">
+            <li>代码风格不统一</li>
+            <li>bug 无人发现就上线</li>
+            <li>知识只在一个人脑子里</li>
+          </ul>
+        </div>
+        <div class="vrule"></div>
+        <div data-anim="scale-in" data-delay="150" class="col accent">
+          <div class="col-tag"><span class="num">有 Review</span></div>
+          <div class="col-ttl">团队一起看</div>
+          <div class="col-desc">PR 需要至少 1 人 Approve 才能合并</div>
+          <ul class="col-list">
+            <li>早发现 bug，减少返工</li>
+            <li>知识在团队内传播</li>
+            <li>代码质量团队共同负责</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S04">
+      <span>讲师提示：</span>强调 Code Review 的核心价值不是"挑错"，而是"知识传递"。很多团队把 Review 当审批流程，其实它是最有效的学习机制。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: 如何写好 PR 描述 -->
+<section class="slide dark" data-layout="S05">
+  <div class="canvas-card">
+    <div class="chrome-min" style="color:rgba(255,255,255,.62)">
+      <div class="l">C11 · 05 / 08</div>
+      <div class="r">COLLABORATION</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div class="t-cat" style="color:rgba(255,255,255,.78);margin-bottom:2vh">好的 PR 描述</div>
+      <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(3.5vw,6vh);line-height:1;letter-spacing:-.02em;color:var(--paper);margin-bottom:3vh">让 Reviewer 5分钟内看懂</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2vw">
+        <div data-anim="slide-left" style="background:rgba(255,255,255,.06);padding:2.4vh 1.8vw">
+          <div style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ff71ce;margin-bottom:1.4vh">必须写</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:1vh;font-family:var(--sans-zh);font-size:max(14px,.9vw);color:rgba(255,255,255,.85);line-height:1.5">
+            <li>1. 这个 PR 解决什么问题？</li>
+            <li>2. 怎么测试的？（截图/步骤）</li>
+            <li>3. 有没有影响其他功能？</li>
+          </ul>
+        </div>
+        <div data-anim="slide-left" data-delay="120" style="background:rgba(255,255,255,.06);padding:2.4vh 1.8vw">
+          <div style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#737373;margin-bottom:1.4vh">不要写</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:1vh;font-family:var(--sans-zh);font-size:max(14px,.9vw);color:rgba(255,255,255,.55);line-height:1.5">
+            <li>✗ "修复了一些bug"</li>
+            <li>✗ "更新了代码"</li>
+            <li>✗ 不写，等 reviewer 自己看</li>
+          </ul>
+        </div>
+      </div>
+      <div data-anim="fade-up" data-delay="200" class="highlight-box" style="margin-top:3vh;background:rgba(255,113,206,.1);border-color:rgba(255,113,206,.4)">
+        <div style="font-family:var(--sans-zh);font-size:max(14px,.9vw);color:rgba(255,255,255,.9)">模板：<strong style="color:#ff71ce">What / Why / How</strong> — 这个 PR 做了什么、为什么做、怎么测试的</div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S05">
+      <span>讲师提示：</span>给学员展示一个真实的好 PR 描述例子。强调：好的描述节省的是所有人的时间——包括你自己（被 merge 更快）。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: GitHub 协作礼仪 -->
+<section class="slide" data-layout="S06">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">C11 · 06 / 08</div>
+      <div class="r">COLLABORATION</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div class="t-cat accent" style="margin-bottom:2vh">协作礼仪</div>
+      <h2 data-anim="fade-up" style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">Review 别人代码的正确姿势</h2>
+      <div class="stack-row" style="margin-top:0">
+        <div data-anim="scale-in" class="stack-block b-accent">
+          <div class="layer-nb" style="color:rgba(255,255,255,.62)">建议语气</div>
+          <div class="layer-ttl" style="color:var(--accent-on)">"这里可以考虑..."</div>
+          <div class="layer-desc" style="color:rgba(255,255,255,.8)">而不是"这里错了"</div>
+        </div>
+        <div data-anim="scale-in" data-delay="120" class="stack-block b-ink">
+          <div class="layer-nb" style="color:rgba(255,255,255,.62)">具体指出</div>
+          <div class="layer-ttl" style="color:var(--paper)">指出行号+原因</div>
+          <div class="layer-desc" style="color:rgba(255,255,255,.8)">附上参考链接或文档</div>
+        </div>
+        <div data-anim="scale-in" data-delay="240" class="stack-block b-grey">
+          <div class="layer-nb">分类标签</div>
+          <div class="layer-ttl">nit / must / suggestion</div>
+          <div class="layer-desc">nit = 小问题，must = 必须改，suggestion = 建议</div>
+        </div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S06">
+      <span>讲师提示：</span>这是软技能。很多技术人 Review 时只会说"不行"。教他们用"三明治"反馈法：肯定+建议+鼓励。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: 常见错误 -->
+<section class="slide grey" data-layout="S07">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">C11 · 07 / 08</div>
+      <div class="r">COLLABORATION</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div class="t-cat accent" style="margin-bottom:2vh">新手常犯的错误</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2vh;margin-top:2vh;flex:1">
+        <div data-anim="slide-left" class="sub-card" style="background:#fff">
+          <div class="ttl" style="color:#d00">直接在 main 分支改代码</div>
+          <div class="desc">应该：开新分支 → PR → Review → 合并</div>
+        </div>
+        <div data-anim="slide-left" data-delay="100" class="sub-card" style="background:#fff">
+          <div class="ttl" style="color:#d00">PR 描述写"update"</div>
+          <div class="desc">应该：写清楚 What / Why / How</div>
+        </div>
+        <div data-anim="slide-left" data-delay="200" class="sub-card" style="background:#fff">
+          <div class="ttl" style="color:#d00">一个 PR 塞 20 个改动</div>
+          <div class="desc">应该：小步提交，每个 PR 只做一件事</div>
+        </div>
+        <div data-anim="slide-left" data-delay="300" class="sub-card" style="background:#fff">
+          <div class="ttl" style="color:#d00">不写测试就说"能跑"</div>
+          <div class="desc">应该：截图/录屏证明功能正常</div>
+        </div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S07">
+      <span>讲师提示：</span>让学员分享自己见过的"反面案例"。教学效果最好的是他们自己踩过的坑。
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: 结业 -->
+<section class="slide split" data-layout="S10">
+  <div class="canvas-card">
+    <div class="split-half">
+      <div class="half b-accent" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between;position:relative;overflow:hidden">
+        <canvas class="ascii-bg" aria-hidden="true"></canvas>
+        <div class="chrome-min" style="margin-bottom:0;position:relative;z-index:1;color:rgba(255,255,255,.62)">
+          <div class="l">C11 · 08 / 08</div>
+          <div class="r">CLOSING</div>
+        </div>
+        <div data-anim="fade-up" style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
+          <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em;margin-bottom:1.6vh">CLOSING</div>
+          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(5vw,9vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">结业<br/><span style="font-style:italic;font-weight:300">Checklist</span></h2>
+        </div>
+        <div style="position:relative;z-index:1">
+          <div class="t-meta" style="color:rgba(255,255,255,.62)">C11 GitHub协作课</div>
+        </div>
+      </div>
+      <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between">
+        <div class="chrome-min">
+          <div class="l">TAKEAWAY</div>
+          <div class="r">3 CHECKS</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div data-anim="slide-right" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+            <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">01</div>
+            <div>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">永远开分支再改代码</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary)">main 分支是神圣的，不能直接推</p>
+            </div>
+          </div>
+          <div data-anim="slide-right" data-delay="100" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+            <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">02</div>
+            <div>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">PR 描述 = 给 reviewer 的说明书</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary)">What / Why / How，5分钟内看懂</p>
+            </div>
+          </div>
+          <div data-anim="slide-right" data-delay="200" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
+            <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">03</div>
+            <div>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">Review 是学习，不是审批</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary)">每次 Review 都是知识传递的机会</p>
+            </div>
+          </div>
+        </div>
+        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ 完 · G001 C11</div>
+      </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S10">
+      <span>讲师提示：</span>结业时让学员每人创建一个 PR（可以是文档修改），互相 Review。让大家体验完整的协作流程。
+    </div>
+  </div>
+</section>
+
+</div>
+<div id="nav"></div>
+<script>
+const VS=`attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}`;
+const FS=`precision highp float;uniform vec2 u_resolution;uniform float u_time;uniform vec2 u_mouse;uniform float u_dark;uniform vec3 u_accent;float gridLine(vec2 uv, float spacing, float thickness){vec2 g = abs(fract(uv / spacing) - 0.5);float d = min(g.x, g.y);return 1.0 - smoothstep(thickness - 0.005, thickness + 0.005, d);}void main(){vec2 uv = gl_FragCoord.xy / u_resolution.xy;float aspect = u_resolution.x / u_resolution.y;vec2 p = uv;p.x *= aspect;vec2 drift = vec2(u_time * 0.008, u_time * 0.005);vec2 gp = p + drift;float mainGrid = gridLine(gp, 0.12, 0.012);float subGrid = gridLine(gp, 0.024, 0.04) * 0.4;vec2 m = u_mouse;m.x *= aspect;float md = length(p - m);float mInfluence = exp(-md * 4.0) * 0.5;float gridStrength = (mainGrid + subGrid * 0.5) * (0.45 + mInfluence);vec2 dotGrid = fract(gp * 50.0) - 0.5;float dotMask = 1.0 - smoothstep(0.05, 0.14, length(dotGrid));vec3 lineColor = mix(vec3(0.08), vec3(0.92), u_dark);vec3 bgColor = mix(vec3(0.97, 0.97, 0.96), vec3(0.06, 0.06, 0.07), u_dark);vec3 col = bgColor;col = mix(col, lineColor, gridStrength * 0.55);col = mix(col, lineColor, dotMask * 0.35);col = mix(col, u_accent, mInfluence * 0.18);gl_FragColor = vec4(col, 1.0);}`;
+const mouse={x:0.5,y:0.5};addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=1-e.clientY/innerHeight});
+function bootGL(canvasId, fsSrc){const canvas=document.getElementById(canvasId);const gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});if(!gl) return ()=>false;const mk=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh;};const prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fsSrc));gl.linkProgram(prog);gl.useProgram(prog);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(prog,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);const lRes=gl.getUniformLocation(prog,'u_resolution');const lT=gl.getUniformLocation(prog,'u_time');const lM=gl.getUniformLocation(prog,'u_mouse');const lD=gl.getUniformLocation(prog,'u_dark');const lA=gl.getUniformLocation(prog,'u_accent');const resize=()=>{const d=Math.min(window.devicePixelRatio||1,2);canvas.width=innerWidth*d;canvas.height=innerHeight*d;gl.viewport(0,0,canvas.width,canvas.height);};addEventListener('resize',resize);resize();function readAccent(){const cs = getComputedStyle(document.documentElement);const hex = cs.getPropertyValue('--accent').trim() || '#002FA7';const m = hex.match(/^#([0-9a-f]{6})$/i);if(!m) return [0, 0.18, 0.65];const n = parseInt(m[1], 16);return [((n>>16)&255)/255, ((n>>8)&255)/255, (n&255)/255];}let accent = readAccent();let dark = 0;return (tSec, isDark)=>{if(isDark !== undefined) dark = isDark ? 1 : 0;accent = readAccent();gl.uniform2f(lRes,canvas.width,canvas.height);gl.uniform1f(lT,tSec);gl.uniform2f(lM,mouse.x,mouse.y);gl.uniform1f(lD,dark);gl.uniform3f(lA,accent[0],accent[1],accent[2]);gl.drawArrays(gl.TRIANGLES,0,6);return true;};}let darkMode=false;let gridCtrl=null, gridRAF=0, gridT0=Date.now();function startGrid(){if(document.body.classList.contains('canvas-mode') || window.__lowPowerMode || gridRAF) return;if(!gridCtrl) gridCtrl = bootGL('bg-grid',FS);if(!gridCtrl) return;gridT0=Date.now();function loop(){if(window.__lowPowerMode){gridRAF=0;return;}const t=(Date.now()-gridT0)/1000;gridCtrl(t, darkMode);gridRAF=requestAnimationFrame(loop);}gridRAF=requestAnimationFrame(loop);}function stopGrid(){if(gridRAF) cancelAnimationFrame(gridRAF);gridRAF=0;}if(document.body.classList.contains('canvas-mode')){const c=document.getElementById('bg-grid');if(c) c.remove();}else{startGrid();}addEventListener('swiss-low-power-change', e=>{e.detail.on ? stopGrid() : startGrid();});
+const deck=document.getElementById('deck');const slides=deck.querySelectorAll('.slide');const nav=document.getElementById('nav');let idx=0,total=slides.length,lock=false;deck.style.width=(total*100)+'vw';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex = idx;deck.style.transform=`translateX(${-idx*100}vw)`;nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));const el=slides[idx];const isDark = el.classList.contains('dark') || el.classList.contains('accent');document.body.classList.toggle('dark-bg', isDark);darkMode = isDark;updateNotes();if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);lock=true;setTimeout(()=>lock=false,700);}let overviewOn=false;const ov=document.createElement('div');ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(250,250,248,.96);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:4vh 4vw';document.body.appendChild(ov);function buildOverview(){ov.innerHTML='';const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';slides.forEach((s,i)=>{const card=document.createElement('div');card.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--accent)':'rgba(0,0,0,.12)')+';transition:border-color .2s';card.onmouseenter=()=>card.style.borderColor='rgba(0,0,0,.4)';card.onmouseleave=()=>card.style.borderColor=i===idx?'var(--accent)':'rgba(0,0,0,.12)';const wrap=document.createElement('div');const isDark = s.classList.contains('dark') || s.classList.contains('accent');wrap.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:'+(isDark?'var(--ink)':'var(--paper)');const clone=s.cloneNode(true);clone.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';wrap.appendChild(clone);const label=document.createElement('div');label.style.cssText='padding:6px 10px;font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.7';label.textContent=(i+1)+' / '+total;card.appendChild(wrap);card.appendChild(label);card.onclick=()=>{toggleOverview();go(i)};grid.appendChild(card);});ov.appendChild(grid);}function toggleOverview(){overviewOn=!overviewOn;if(overviewOn){buildOverview();ov.style.display='block';}else{ov.style.display='none';}}addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);});let wheelTO=null,wheelAcc=0;addEventListener('wheel',e=>{wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);},{passive:true});const initialSlideParam = new URLSearchParams(location.search).get('slide');const initialSlide = initialSlideParam ? Number(initialSlideParam) - 1 : 0;go(Number.isFinite(initialSlide) ? initialSlide : 0);
+document.body.classList.add('motion-ready');
+let notesVisible = false;
+function toggleNotes(){notesVisible=!notesVisible;updateNotes();}
+function updateNotes(){document.querySelectorAll('.lecture-note').forEach(n=>n.classList.remove('visible'));if(notesVisible){const currentSlide=slides[idx];if(currentSlide){currentSlide.querySelectorAll('.lecture-note').forEach(n=>n.classList.add('visible'));}}}
+addEventListener('keydown',e=>{if(e.key==='n'||e.key==='N'){if(!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();toggleNotes();return;}}},{passive:true});
+</script>
+</body>
+</html>

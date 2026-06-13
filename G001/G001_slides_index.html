@@ -15,9 +15,9 @@
   h1{
     font-size:clamp(24px,4vw,48px);
     font-weight:200;
-    letter-spacing:-0.03em;
+    letter-spacing:-.03em;
     margin-bottom:2rem;
-    color:#ff71ce; /* brand pink */
+    color:#ff71ce;
   }
   .subtitle{
     font-size:clamp(12px,1.5vw,16px);
@@ -25,6 +25,22 @@
     margin-bottom:4rem;
     letter-spacing:0.05em;
     text-transform:uppercase;
+  }
+  .section{margin-bottom:5rem}
+  .section-header{
+    display:flex;align-items:baseline;gap:2rem;margin-bottom:1.5rem;
+    border-bottom:1px solid #2a2a2a;padding-bottom:1rem;
+  }
+  .section-title{
+    font-size:clamp(14px,1.5vw,18px);font-weight:500;
+    color:#ff71ce;letter-spacing:0.05em;
+  }
+  .section-desc{font-size:clamp(12px,1vw,14px);color:#737373}
+  .端午-tag{
+    display:inline-block;font-size:11px;padding:3px 8px;
+    background:#ff71ce;color:#000;font-weight:600;
+    letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;
+    margin-left:auto;
   }
   .grid{
     display:grid;
@@ -74,14 +90,138 @@
   }
   .tag-实战{color:#ff71ce;border-color:#ff71ce}
   .tag-轻课{color:#b6ff00;border-color:#b6ff00}
+  .tag-端午{border-color:#ff71ce;background:rgba(255,113,206,.15);color:#ff71ce}
+  .info-box{
+    background:#1a1a1a;border:1px solid #2a2a2a;
+    padding:2rem;margin-bottom:4rem;
+    border-left:3px solid #ff71ce;
+  }
+  .info-box h2{
+    font-size:clamp(16px,1.5vw,20px);font-weight:500;
+    color:#ff71ce;margin-bottom:1rem;
+  }
+  .info-box p{font-size:clamp(13px,1vw,15px);color:#a0a0a0;line-height:1.7;margin-bottom:0.8rem}
+  .info-box strong{color:#fafaf8}
+  .info-box .highlight{color:#ff71ce;font-weight:500}
+  .numbering-table{
+    width:100%;border-collapse:collapse;
+    font-size:clamp(12px,.9vw,14px);
+    margin-top:1rem;
+  }
+  .numbering-table th,.numbering-table td{
+    text-align:left;padding:0.8rem 1rem;
+    border-bottom:1px solid #2a2a2a;
+  }
+  .numbering-table th{color:#737373;text-transform:uppercase;letter-spacing:0.1em;font-weight:500}
+  .numbering-table td{color:#fafaf8}
+  .numbering-table .num{color:#ff71ce;font-weight:600}
+  .pricing-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem
+  }
+  .pricing-card{
+    background:#0f0f0f;border:1px solid #2a2a2a;
+    padding:1.5rem;text-align:center;
+  }
+  .pricing-card.featured{
+    border-color:#ff71ce;
+    background:rgba(255,113,206,.05);
+  }
+  .pricing-label{font-size:11px;color:#737373;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+  .pricing-price{font-size:clamp(24px,2vw,32px);font-weight:200;color:#fafaf8;letter-spacing:-0.02em}
+  .pricing-card.featured .pricing-price{color:#ff71ce}
+  .pricing-desc{font-size:12px;color:#737373;margin-top:0.5rem}
 </style>
 </head>
 <body>
 
 <h1>G001 微课程 Slides</h1>
-<p class="subtitle">SheNicest品牌色 · 瑞士国际主义风格 · ← → 翻页 · ESC 索引</p>
+<p class="subtitle">SheNicest品牌色 · 瑞士国际主义风格 · ← → 翻页 · ESC 索引 · N 显示讲师提示</p>
 
-<div class="grid">
+<!-- 端午打包说明 -->
+<div class="info-box">
+  <h2>端午轻课包 · 限时 ¥199（原价 ¥196）</h2>
+  <p><strong>时间：</strong>6月19-22日（端午期间）每晚一节，30-40分钟/节</p>
+  <p><strong>组合逻辑：</strong>四节轻课打包，专为端午开课设计，填充式教学 + 案例 + Q&A + 飞行嘉宾</p>
+  <p><strong>课程组合：</strong>C06（Vibe课）+ C07（Prompt课）+ C08（产品课）+ C10（边缘课）= <span class="highlight">¥199</span></p>
+  <p><strong>编号说明：</strong>C06-C08 为认知基础课（15分钟/节），C10 边缘课讲 AI 偏见与伦理</p>
+  <p style="margin-top:1rem"><strong>端午后：</strong>每周六晚上一节实战课（40分钟/节），¥79-99/节，轻松节奏</p>
+</div>
+
+<!-- 编号体系说明 -->
+<div class="info-box">
+  <h2>课程编号体系</h2>
+  <table class="numbering-table">
+    <tr><th>编号范围</th><th>课程类型</th><th>时长</th><th>单价</th><th>说明</th></tr>
+    <tr><td class="num">C06-C08</td><td>轻课</td><td>15分钟</td><td>¥49/节</td><td>认知课，端午打包 ¥199</td></tr>
+    <tr><td class="num">C10</td><td>轻课</td><td>15分钟</td><td>¥49</td><td>边缘案例课（AI偏见）</td></tr>
+    <tr><td class="num">C01-C03</td><td>实战课</td><td>2×20分钟</td><td>¥99/节</td><td>部署·美化·PRD，端午后开</td></tr>
+    <tr><td class="num">C04-C05</td><td>实战课</td><td>2×20分钟</td><td>¥79/节</td><td>Debug·API，端午后开</td></tr>
+    <tr><td class="num">C09</td><td>实战课</td><td>20分钟</td><td>¥79</td><td>Pitch课，Demo前必学</td></tr>
+    <tr><td class="num">C11</td><td>实战课</td><td>2×20分钟</td><td>¥79</td><td>GitHub协作：PR/Code Review</td></tr>
+    <tr><td class="num">C12</td><td>实战课</td><td>2×20分钟</td><td>¥79</td><td>商业化：赵迪×Vivian×Angel</td></tr>
+  </table>
+  <p style="margin-top:1rem;font-size:12px;color:#737373">* 实战课为2节连上（20min×2=40min），含实操练习</p>
+</div>
+
+<!-- 端午轻课包 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">端午轻课包</div>
+    <div class="section-desc">6月19-22日 · 每晚一节 · ¥199四节</div>
+    <div class="端午-tag">限时</div>
+  </div>
+  <div class="grid">
+
+  <a class="card" href="C06_Vibe课/G001_C06_Vibe课_slides.html">
+    <div class="card-num">C06 · 轻课</div>
+    <div class="card-title">Vibe Coding是什么</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+  <a class="card" href="C07_Prompt课/G001_C07_Prompt课_slides.html">
+    <div class="card-num">C07 · 轻课</div>
+    <div class="card-title">Prompt课：怎么跟AI说话</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+  <a class="card" href="C08_产品课/G001_C08_产品课_slides.html">
+    <div class="card-num">C08 · 轻课</div>
+    <div class="card-title">产品课：痛点·痒点·爽点</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+  <a class="card" href="C10_边缘课/G001_C10_边缘课_slides.html">
+    <div class="card-num">C10 · 轻课</div>
+    <div class="card-title">边缘课：AI偏见与边缘案例</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+</div>
+</div>
+
+<!-- 实战课 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">实战课</div>
+    <div class="section-desc">端午后每周六 · 2×20分钟/节</div>
+  </div>
+  <div class="grid">
 
   <a class="card" href="C01_部署课/G001_C01_部署课_slides.html">
     <div class="card-num">C01 · 实战课</div>
@@ -133,36 +273,6 @@
     </div>
   </a>
 
-  <a class="card" href="C06_Vibe课/G001_C06_Vibe课_slides.html">
-    <div class="card-num">C06 · 轻课</div>
-    <div class="card-title">Vibe Coding是什么</div>
-    <div class="card-meta">
-      <span class="card-tag tag-轻课">15min</span>
-      <span class="card-tag">¥49</span>
-      AI边界三问
-    </div>
-  </a>
-
-  <a class="card" href="C07_Prompt课/G001_C07_Prompt课_slides.html">
-    <div class="card-num">C07 · 轻课</div>
-    <div class="card-title">Prompt课：<br>怎么跟AI说话</div>
-    <div class="card-meta">
-      <span class="card-tag tag-轻课">15min</span>
-      <span class="card-tag">¥49</span>
-      结构化Prompt四要素
-    </div>
-  </a>
-
-  <a class="card" href="C08_产品课/G001_C08_产品课_slides.html">
-    <div class="card-num">C08 · 轻课</div>
-    <div class="card-title">产品课：<br>痛点·痒点·爽点</div>
-    <div class="card-meta">
-      <span class="card-tag tag-轻课">15min</span>
-      <span class="card-tag">¥49</span>
-      产品idea评估框架
-    </div>
-  </a>
-
   <a class="card" href="C09_Pitch课/G001_C09_Pitch课_slides.html">
     <div class="card-num">C09 · 实战课</div>
     <div class="card-title">Pitch课：<br>5分钟讲清楚产品</div>
@@ -173,20 +283,58 @@
     </div>
   </a>
 
-  <a class="card" href="C10_边缘课/G001_C10_边缘课_slides.html">
-    <div class="card-num">C10 · 轻课</div>
-    <div class="card-title">边缘课：<br>AI偏见与边缘案例</div>
+  <a class="card" href="C11_GitHub协作课/G001_C11_GitHub协作课_slides.html">
+    <div class="card-num">C11 · 实战课</div>
+    <div class="card-title">GitHub协作课：<br>PR / Code Review</div>
     <div class="card-meta">
-      <span class="card-tag tag-轻课">15min</span>
-      <span class="card-tag">¥49</span>
-      谁被忽略了？
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥79</span>
+      PR / 协作礼仪
+    </div>
+  </a>
+
+  <a class="card" href="C12_商业化课/G001_C12_商业化课_slides.html">
+    <div class="card-num">C12 · 实战课</div>
+    <div class="card-title">商业化课：<br>从 Demo 到第一笔付费</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥79</span>
+      赵迪×Vivian×Angel
     </div>
   </a>
 
 </div>
+</div>
+
+<!-- 定价总览 -->
+<div class="info-box">
+  <h2>定价总览</h2>
+  <div class="pricing-grid">
+    <div class="pricing-card featured">
+      <div class="pricing-label">端午轻课包</div>
+      <div class="pricing-price">¥199</div>
+      <div class="pricing-desc">C06+C07+C08+C10<br/><span style="color:#ff71ce">限时 · 端午四节</span></div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">轻课单节</div>
+      <div class="pricing-price">¥49</div>
+      <div class="pricing-desc">C06 / C07 / C08 / C10<br/>15分钟</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">实战课</div>
+      <div class="pricing-price">¥79</div>
+      <div class="pricing-desc">C04 / C05 / C09 / C11 / C12<br/>2×20min 或 20min</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">实战课</div>
+      <div class="pricing-price">¥99</div>
+      <div class="pricing-desc">C01 / C02 / C03<br/>2×20min</div>
+    </div>
+  </div>
+</div>
 
 <p style="margin-top:4rem;font-size:12px;color:#525252;line-height:1.8">
-  操作说明：← → 键盘翻页 &nbsp;|&nbsp; ESC 打开索引 &nbsp;|&nbsp; B 切换静态/动态模式<br>
+  操作说明：← → 键盘翻页 &nbsp;|&nbsp; ESC 打开索引 &nbsp;|&nbsp; B 切换静态/动态模式 &nbsp;|&nbsp; N 显示讲师提示<br>
   文件夹位置：D:\Creation\Work\SheNicest\docs\10-前置工作坊\
 </p>
 </body>

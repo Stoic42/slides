@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C12 商业化课 slides</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --pink:#ff71ce;--bg:#0a0a0a;--surface:#1a1a1a;--text:#fafaf8;--muted:#737373;
+    --lime:#b6ff00;--blue:#00d4ff;
+  }
+  html{font-size:16px}
+  body{font-family:"Inter","PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden}
+  .slides{width:100vw;height:100vh;position:relative}
+  .slide{display:none;width:100%;height:100%;padding:8vh 8vw;position:absolute;top:0;left:0}
+  .slide.active{display:flex;flex-direction:column;justify-content:center}
+  .slide.dark{background:var(--bg);color:var(--text)}
+  .slide.light{background:#fafaf8;color:#1a1a1a}
+  .slide.light{--text:#1a1a1a;--muted:#666}
+  h1{font-size:clamp(2rem,5vw,4rem);font-weight:200;letter-spacing:-.03em;line-height:1.1}
+  h2{font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:200;letter-spacing:-.02em;margin-bottom:2rem}
+  h3{font-size:clamp(1rem,2vw,1.3rem);font-weight:500;margin-bottom:1rem;color:var(--pink)}
+  p{font-size:clamp(0.9rem,1.5vw,1.1rem);line-height:1.8;max-width:70ch}
+  .meta{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+  .tag{display:inline-block;font-size:.65rem;padding:3px 8px;border:1px solid var(--pink);color:var(--pink);letter-spacing:.1em;text-transform:uppercase;margin-right:.5rem}
+  .tag.lime{border-color:var(--lime);color:var(--lime)}
+  .tag.blue{border-color:var(--blue);color:var(--blue)}
+  .grid{display:grid;gap:1.5rem;margin-top:2rem}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .card{background:var(--surface);border:1px solid #2a2a2a;padding:2rem;border-radius:4px}
+  .card h3{font-size:1rem;margin-bottom:.5rem}
+  .card p{font-size:.9rem;color:var(--muted);line-height:1.6}
+  .card .emoji{font-size:2rem;margin-bottom:.5rem}
+  .highlight-box{background:rgba(255,113,206,.08);border:1px solid var(--pink);padding:2rem;margin:2rem 0;border-radius:4px}
+  .highlight-box p{max-width:none}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  .quote{font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:200;line-height:1.5;letter-spacing:-.02em;border-left:3px solid var(--pink);padding-left:2rem;margin:2rem 0}
+  .speaker-card{display:flex;gap:1.5rem;align-items:flex-start;background:var(--surface);border:1px solid #2a2a2a;padding:1.5rem;border-radius:4px;margin-bottom:1rem}
+  .speaker-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--blue));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+  .speaker-info{flex:1}
+  .speaker-info h3{color:var(--text);margin-bottom:.25rem;font-size:1rem}
+  .speaker-info .role{font-size:.8rem;color:var(--muted);margin-bottom:.5rem}
+  .speaker-info .topic{font-size:.85rem;color:var(--pink)}
+  ul{list-style:none;padding:0}
+  ul li{position:relative;padding-left:1.5rem;margin-bottom:.75rem;font-size:clamp(0.85rem,1.3vw,1rem);line-height:1.6}
+  ul li::before{content:"—";position:absolute;left:0;color:var(--pink)}
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:1.5rem}
+  th,td{text-align:left;padding:.8rem 1rem;border-bottom:1px solid #2a2a2a}
+  th{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:500;font-size:.75rem}
+  td{color:var(--text)}
+  .slide.light th{color:var(--muted)}
+  .slide.light td{border-color:#e0e0e0}
+  .number{color:var(--pink);font-weight:600}
+  .center{text-align:center}
+  .btn{display:inline-block;padding:.8rem 2rem;border:1px solid var(--pink);color:var(--pink);text-decoration:none;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+  .btn:hover{background:var(--pink);color:#000}
+  .progress{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem}
+  .progress .dot{width:8px;height:8px;border-radius:50%;background:#2a2a2a;cursor:pointer}
+  .progress .dot.active{background:var(--pink)}
+  .key-hint{position:fixed;bottom:2rem;right:2rem;font-size:.65rem;color:var(--muted);letter-spacing:.1em}
+  .notes-btn{position:fixed;top:1rem;right:1rem;font-size:.65rem;color:var(--muted);letter-spacing:.1em;cursor:pointer;padding:.5rem 1rem;border:1px solid #2a2a2a;background:var(--surface)}
+  .note-tooltip{display:none;position:absolute;top:3rem;right:0;background:#1a1a1a;border:1px solid var(--pink);padding:1rem 1.5rem;width:280px;font-size:.8rem;color:#ccc;line-height:1.6;text-align:left;z-index:100}
+  .note-tooltip.visible{display:block}
+  .slide-num{position:fixed;top:1rem;left:1rem;font-size:.65rem;color:var(--muted);letter-spacing:.1em}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes scaleIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+  @keyframes slideLeft{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+  .motion-ready [data-anim]{opacity:0}
+  .motion-ready [data-anim].anim{animation:fillUp 0.6s ease forwards}
+  @keyframes fillUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+  [data-anim].anim{animation:fillUp 0.6s ease forwards}
+  [data-anim="scale-in"].anim{animation:scaleIn 0.5s ease forwards}
+  [data-anim="slide-left"].anim{animation:slideLeft 0.5s ease forwards}
+  .delay-1{animation-delay:.1s!important}
+  .delay-2{animation-delay:.2s!important}
+  .delay-3{animation-delay:.3s!important}
+  .delay-4{animation-delay:.4s!important}
+  .delay-5{animation-delay:.5s!important}
+</style>
+</head>
+<body>
+<div class="slides">
+
+<!-- ========== C12 S01: Cover ========== -->
+<section class="slide dark" data-layout="S01">
+  <div class="meta"><span class="tag">实战课</span> 2节×20分钟 · ¥79</div>
+  <h1 data-anim>商业化课：<br>从 Demo 到第一笔付费</h1>
+  <p data-anim class="delay-1" style="margin-top:1.5rem;color:var(--muted)">
+    M001 嘉宾分享整理：赵迪 × Vivian × Angel<br>
+    SheNicest G001 前置工作坊 · 2026年6月
+  </p>
+  <div class="note-tooltip" data-note="S01">
+    <strong>讲师提示</strong><br>
+    问候同学 → 直接点明今天的主题：做出Demo之后，下一步是什么？<br>
+    停顿2秒 → "今天我们讲的不是怎么融资，是怎么拿到第一笔付费。"<br>
+    简单提一下三位嘉宾的背景：赵迪（可梦）、Vivian（奇绩被投）、Angel（连续创业者）
+  </div>
+</section>
+
+<!-- ========== C12 S02: 为什么商业化比产品更难 ========== -->
+<section class="slide dark" data-layout="S02">
+  <div class="slide-num">S02</div>
+  <h2 data-anim>为什么商业化比产品更难</h2>
+  <div class="two-col" data-anim class="delay-1">
+    <div>
+      <p style="margin-bottom:1.5rem">黑客松做完 Demo，有团队，有媒体报道——但就是没有付费用户。</p>
+      <p style="margin-bottom:1.5rem">赵迪说：<strong>"MVP 不是缩小版的产品，是缩小版的价值验证。"</strong></p>
+      <p>很多人以为 MVP = 功能少一点。其实 MVP = 先验证用户真的愿意付钱。</p>
+    </div>
+    <div class="card">
+      <h3>MVP 陷阱</h3>
+      <ul>
+        <li>功能做了一大堆 → 没人用</li>
+        <li>用户说"不错" → 但不付费</li>
+        <li>Demo 很精美 → 商业化路径没想清楚</li>
+      </ul>
+      <p style="margin-top:1rem;color:var(--pink);font-size:.85rem">先有付费意愿，才有产品</p>
+    </div>
+  </div>
+  <div class="note-tooltip" data-note="S02">
+    <strong>讲师提示</strong><br>
+    问同学："你们觉得 MVP 是什么？" → 让2-3人回答<br>
+    引出赵迪的核心观点：MVP 是价值验证，不是功能集合<br>
+    停顿强调："付费意愿比功能完整更重要"
+  </div>
+</section>
+
+<!-- ========== C12 S03: 需求验证 ========== -->
+<section class="slide dark" data-layout="S03">
+  <div class="slide-num">S03</div>
+  <h2 data-anim>赵迪：需求验证四步法</h2>
+  <div class="grid grid-2" data-anim class="delay-1">
+    <div class="card">
+      <div class="emoji">1️⃣</div>
+      <h3>找到愿意聊的人</h3>
+      <p>不是随便问，是找<strong>真的有过这个痛点</strong>的人。朋友不算。</p>
+    </div>
+    <div class="card">
+      <div class="emoji">2️⃣</div>
+      <h3>问痛点，不问方案</h3>
+      <p>"这个问题有多痛？" 比 "你觉得这个功能好不好？" 更重要。</p>
+    </div>
+    <div class="card">
+      <div class="emoji">3️⃣</div>
+      <h3>问钱，不问意愿</h3>
+      <p>"你愿意为这个付多少钱？" 比 "你会用吗？" 更真实。</p>
+    </div>
+    <div class="card">
+      <div class="emoji">4️⃣</div>
+      <h3>验证支付渠道</h3>
+      <p>中国用户习惯微信/支付宝；海外用户习惯 Stripe/PayPal。支付方式决定转化率。</p>
+    </div>
+  </div>
+  <div class="note-tooltip" data-note="S03">
+    <strong>讲师提示</strong><br>
+    四步可以打乱顺序讲，重点是第3步"问钱"<br>
+    强调：问"愿不愿意付费"没用，要问"愿意付多少"<br>
+    案例：赵迪 可梦 的真实用户访谈案例（如果有）
+  </div>
+</section>
+
+<!-- ========== C12 S04: Vivian - 痛点优先 ========== -->
+<section class="slide dark" data-layout="S04">
+  <div class="slide-num">S04</div>
+  <h2 data-anim>Vivian：女性做产品的独特优势</h2>
+  <div class="two-col" data-anim class="delay-1">
+    <div class="quote">
+      <p>"女性 founder 的 Demo 完成度往往更高，但获得的关注远少于男性。"</p>
+    </div>
+    <div>
+      <h3 style="color:var(--lime)">Vivian 的核心观点</h3>
+      <ul>
+        <li><strong>痛点优先</strong>：先确认这个痛点真实存在，再动手</li>
+        <li><strong>女性更懂女性用户</strong>：自己就是目标用户，更容易发现真实需求</li>
+        <li><strong>不要追 VC 喜欢的词</strong>：researcher founder / FDE / harness —— 先把产品讲清楚</li>
+        <li><strong>先有 traction，再讲故事</strong>：数字比叙事更重要</li>
+      </ul>
+    </div>
+  </div>
+  <div class="highlight-box" data-anim class="delay-2">
+    <p><strong>Vivian 特别提醒：</strong>奇绩喜欢的词你都没套上——researcher founder、FDE、harness。先把"为谁做什么事"讲清楚。</p>
+  </div>
+  <div class="note-tooltip" data-note="S04">
+    <strong>讲师提示</strong><br>
+    停顿 → "Vivian 是奇绩被投 CEO，她观察了大量早期项目"<br>
+    重点讲"女性更懂女性用户"——这是 SheNicest 的核心叙事<br>
+    强调：不要追风口词，先把 traction 做出来
+  </div>
+</section>
+
+<!-- ========== C12 S05: Angel - Pitch 与自信心 ========== -->
+<section class="slide dark" data-layout="S05">
+  <div class="slide-num">S05</div>
+  <h2 data-anim>Angel：Pitch 给投资人 + 自信心</h2>
+  <div class="grid grid-2" data-anim class="delay-1">
+    <div>
+      <h3 style="color:var(--blue)">Pitch 的核心结构</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>部分</th><th>内容</th><th>时长</th></tr>
+          <tr><td class="number">1</td><td>你是谁</td><td>30秒</td></tr>
+          <tr><td class="number">2</td><td>你解决了什么问题</td><td>1分钟</td></tr>
+          <tr><td class="number">3</td><td>你的解决方案</td><td>1分钟</td></tr>
+          <tr><td class="number">4</td><td> traction + 数据</td><td>1分钟</td></tr>
+          <tr><td class="number">5</td><td>你需要什么</td><td>30秒</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Angel 的 BP 结构建议</h3>
+      <ul>
+        <li><strong>一句话定位</strong>：第一页就说清楚你是谁、做什么</li>
+        <li><strong>痛点要具体</strong>：不是"大家都有这个问题"，是"某类人在某场景下的具体痛苦"</li>
+        <li><strong>数据说话</strong>：没有 traction 就先展示用户访谈结果</li>
+        <li><strong>团队页要真诚</strong>：不是所有人都要 CTO，名片要真实</li>
+      </ul>
+      <p style="margin-top:1rem;color:var(--pink)">自信心比完美更重要</p>
+    </div>
+  </div>
+  <div class="note-tooltip" data-note="S05">
+    <strong>讲师提示</strong><br>
+    带着同学快速过一遍 BP 结构 → 可以打开一个真实 BP 当案例<br>
+    强调"自信心比完美"——很多女性 founder 过度准备、害怕不完美<br>
+    停顿：问同学"你们觉得自己现在最缺的是自信还是内容？"
+  </div>
+</section>
+
+<!-- ========== C12 S06: 支付渠道与商业化路径 ========== -->
+<section class="slide dark" data-layout="S06">
+  <div class="slide-num">S06</div>
+  <h2 data-anim>赵迪：支付渠道与商业化路径</h2>
+  <div class="grid grid-3" data-anim class="delay-1">
+    <div class="card">
+      <div class="emoji">🏧</div>
+      <h3>国内渠道</h3>
+      <ul>
+        <li>微信小商店（最常用）</li>
+        <li>有赞 / 微店</li>
+        <li>抖音小黄车</li>
+        <li>支付宝收款码（最简单）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="emoji">🌏</div>
+      <h3>海外渠道</h3>
+      <ul>
+        <li>Stripe（最推荐）</li>
+        <li>PayPal Business</li>
+        <li>Gumroad（创作者经济）</li>
+        <li>Product Hunt</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="emoji">🤝</div>
+      <h3>平台合作</h3>
+      <ul>
+        <li>SheNicest 平台（奖励型众筹）</li>
+        <li>小红书店铺</li>
+        <li>摩点 / 众筹平台</li>
+        <li>私域微信转账</li>
+      </ul>
+    </div>
+  </div>
+  <div class="highlight-box" data-anim class="delay-2">
+    <p><strong>赵迪提醒：</strong>支付方式决定转化率。中国用户习惯微信/支付宝，海外用户习惯 Stripe。先想清楚用户在哪个平台，再决定产品形态。</p>
+  </div>
+  <div class="note-tooltip" data-note="S06">
+    <strong>讲师提示</strong><br>
+    快速过一遍每个渠道的特点 → 重点推荐 SheNicest 平台<br>
+    强调：私域转账无法规模化，平台是下一步<br>
+    可以问："你们有同学已经开始变现了吗？" → 引出真实案例
+  </div>
+</section>
+
+<!-- ========== C12 S07: 商业化检查清单 ========== -->
+<section class="slide dark" data-layout="S07">
+  <div class="slide-num">S07</div>
+  <h2 data-anim>商业化自检清单</h2>
+  <p data-anim class="delay-1" style="color:var(--muted);margin-bottom:2rem">做完 Demo 之后，问自己这 5 个问题</p>
+  <div class="table-wrap" data-anim class="delay-2">
+    <table>
+      <tr><th>#</th><th>问题</th><th>验证方式</th></tr>
+      <tr><td class="number">1</td><td>谁是我的第一笔钱？</td><td>访谈10个真实用户，问愿意付多少</td></tr>
+      <tr><td class="number">2</td><td>他们在哪个平台付款？</td><td>微信小商店 / Stripe / 私域</td></tr>
+      <tr><td class="number">3</td><td>定价多少？</td><td>不低于成本，先跑起来再说</td></tr>
+      <tr><td class="number">4</td><td>第一批用户从哪来？</td><td>社群 / 小红书 / 黑客松社群</td></tr>
+      <tr><td class="number">5</td><td>有没有 MVP 以外的需求？</td><td>访谈中问："你还想要什么？"</td></tr>
+    </table>
+  </div>
+  <div class="note-tooltip" data-note="S07">
+    <strong>讲师提示</strong><br>
+    带同学一个个过 → 可以让同学自己填<br>
+    第1题最难：很多人答不上来 → "那你还没准备好商业化"<br>
+    第5题最容易被忽略：用户会主动告诉你下一步做什么
+  </div>
+</section>
+
+<!-- ========== C12 S08: 结业 ========== -->
+<section class="slide dark" data-layout="S08">
+  <div class="slide-num">S08</div>
+  <h2 data-anim>下一步：让你的 Demo 被付费支持</h2>
+  <div class="grid grid-2" data-anim class="delay-1">
+    <div class="card">
+      <h3>课程金句</h3>
+      <ul>
+        <li><strong>赵迪：</strong>"MVP 是缩小版的价值验证，不是缩小版的产品"</li>
+        <li><strong>Vivian：</strong>"先有 traction，再讲故事"</li>
+        <li><strong>Angel：</strong>"自信心比完美更重要"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>课后行动</h3>
+      <ul>
+        <li>找3个真实用户完成需求验证访谈</li>
+        <li>确认你的支付渠道</li>
+        <li>写一份100字的一一句话定位</li>
+        <li>上架 SheNicest 平台申请内测</li>
+      </ul>
+    </div>
+  </div>
+  <div class="highlight-box" data-anim class="delay-2">
+    <p style="text-align:center;font-size:1.1rem"><strong>SheNicest 平台</strong>：Demo 期项目可以申请内测支持，让第一批真实用户提前付费 harness 你的产品</p>
+  </div>
+  <div class="note-tooltip" data-note="S08">
+    <strong>讲师提示</strong><br>
+    快速回顾三位嘉宾的核心观点 → 每位30秒<br>
+    重点：课后行动的第4条"上架 SheNicest"——这是我们和其他课程的连接点<br>
+    结语："Demo 做完了，下一步不是融资，是找到第一批相信你的人"
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="notes-btn" id="notesBtn" onclick="toggleNotes()">N 显示讲师提示</div>
+<div class="key-hint">← → 翻页 · ESC 索引 · N 讲师提示</div>
+
+<script>
+const sections = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+let current = 0;
+let notesVisible = false;
+
+// Build progress dots
+sections.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => go(i);
+  progress.appendChild(dot);
+});
+
+// Init animations on first slide
+function animIn(idx) {
+  const slide = sections[idx];
+  slide.classList.add('motion-ready');
+  const els = slide.querySelectorAll('[data-anim]');
+  requestAnimationFrame(() => {
+    els.forEach((el, i) => {
+      setTimeout(() => el.classList.add('anim'), i * 80);
+    });
+  });
+}
+
+function go(idx) {
+  if (idx < 0 || idx >= sections.length) return;
+  sections[current].classList.remove('active');
+  document.querySelectorAll('.dot')[current].classList.remove('active');
+  current = idx;
+  sections[current].classList.add('active');
+  document.querySelectorAll('.dot')[current].classList.add('active');
+  // Reset and re-anim
+  const slide = sections[current];
+  slide.querySelectorAll('[data-anim]').forEach(el => el.classList.remove('anim'));
+  slide.classList.remove('motion-ready');
+  animIn(current);
+  updateNotes();
+}
+
+function toggleNotes() {
+  notesVisible = !notesVisible;
+  document.getElementById('notesBtn').textContent = notesVisible ? 'N 隐藏讲师提示' : 'N 显示讲师提示';
+  updateNotes();
+}
+
+function updateNotes() {
+  const slide = sections[current];
+  slide.querySelectorAll('.note-tooltip').forEach(n => {
+    n.classList.toggle('visible', notesVisible);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'n' || e.key === 'N') toggleNotes();
+});
+
+animIn(0);
+</script>
+</body>
+</html>
