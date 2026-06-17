@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C08 产品课 | 痛点·痒点·爽点 | 15分钟轻课</title>
+<title>L07 Prompt课 | 怎么跟AI说话 | 15分钟轻课</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -24,11 +24,24 @@
     font-display: swap;
   }
   :root{
-    --paper:#fafaf8;--paper-rgb:250,250,248;--ink:#0a0a0a;--ink-rgb:10,10,10;
-    --grey-1:#f0f0ee;--grey-2:#d4d4d2;--grey-3:#737373;
-    --accent:#ff71ce;--accent-rgb:255,113,206;--accent-on:#ffffff;--accent-bright:#ff9ee7;
-    --text-primary:#0a0a0a;--text-secondary:#525252;--text-helper:#737373;--text-placeholder:#a3a3a3;--text-on-color:#ffffff;
-    --border-subtle:#e0e0e0;--border-strong:#a3a3a3;
+    --paper:#fafaf8;
+    --paper-rgb:250,250,248;
+    --ink:#0a0a0a;
+    --ink-rgb:10,10,10;
+    --grey-1:#f0f0ee;
+    --grey-2:#d4d4d2;
+    --grey-3:#737373;
+    --accent:#ff71ce;
+    --accent-rgb:255,113,206;
+    --accent-on:#ffffff;
+    --accent-bright:#ff9ee7;
+    --text-primary:#0a0a0a;
+    --text-secondary:#525252;
+    --text-helper:#737373;
+    --text-placeholder:#a3a3a3;
+    --text-on-color:#ffffff;
+    --border-subtle:#e0e0e0;
+    --border-strong:#a3a3a3;
     --sans:"ChaohuaType","Inter","Helvetica Neue","Helvetica","Arial","Segoe UI Variable","Segoe UI",system-ui,-apple-system,sans-serif;
     --sans-zh:"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans SC","Microsoft YaHei UI","Microsoft YaHei","微软雅黑",sans-serif;
     --mono:"JetBrains Mono","IBM Plex Mono","SF Mono","Cascadia Code","Consolas","Courier New",ui-monospace,monospace;
@@ -125,9 +138,6 @@
   .t-cat{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-helper);line-height:1.3}
   .t-cat.accent{color:var(--accent)}
   .t-helper{font-family:var(--sans),var(--sans-zh);font-size:14px;font-weight:400;color:var(--text-helper);line-height:1.5;letter-spacing:.005em}
-  .pipeline-section{margin-top:3.2vh;padding-top:2.2vh;border-top:1px solid rgba(127,127,127,.3)}
-  .pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1vw}
-  .step{display:flex;flex-direction:column;gap:.6vh;padding-top:1.2vh;border-top:2px solid currentColor}
   #nav{position:fixed;left:50%;bottom:2vh;transform:translateX(-50%);z-index:30;display:flex;gap:10px;padding:0;background:transparent;border:0}
   #nav .dot{width:6px;height:6px;background:rgba(0,0,0,.28);cursor:pointer;transition:all .25s ease;border:0;padding:0;border-radius:0}
   #nav .dot:hover{background:rgba(0,0,0,.55)}
@@ -148,14 +158,14 @@
   <div class="canvas-card">
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
     <div class="chrome-min">
-      <div class="l">G001 · C08</div>
-      <div class="r">01 / 07</div>
+      <div class="l">O001 · L07</div>
+      <div class="r">01 / 08</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
-      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">PRODUCT DESIGN</div>
-      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(8.4vw,15vh);line-height:.94;letter-spacing:-.025em;color:#fff">C08 产品课</h1>
+      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">PROMPT ENGINEERING</div>
+      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(8.4vw,15vh);line-height:.94;letter-spacing:-.025em;color:#fff">L07 Prompt课</h1>
       <div style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
-        <div class="lead" style="max-width:52ch;color:rgba(255,255,255,.86)">痛点·痒点·爽点 · 15分钟轻课</div>
+        <div class="lead" style="max-width:52ch;color:rgba(255,255,255,.86)">怎么跟AI说话 · 15分钟轻课</div>
         <div style="display:flex;justify-content:space-between;align-items:end">
           <div class="t-meta" style="color:rgba(255,255,255,.6)">¥49</div>
           <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe / arrow keys</div>
@@ -169,108 +179,110 @@
 <section class="slide" data-layout="S03">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C08</div>
-      <div class="r">02 / 07</div>
+      <div class="l">O001 · L07</div>
+      <div class="r">02 / 08</div>
     </div>
     <div class="split-half">
       <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:center">
         <div class="t-cat" style="margin-bottom:2vh">课前问题</div>
-        <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4vw,7.5vh);line-height:1;letter-spacing:-.025em;color:var(--text-primary)">你的idea解决的是用户真正需要解决的问题吗？</h2>
+        <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.5vw,8vh);line-height:1;letter-spacing:-.025em;color:var(--text-primary)">为什么AI经常"听不懂"？</h2>
       </div>
       <div class="half b-grey" style="padding:5.6vh 3.6vw 4.4vh;justify-content:center">
-        <div class="t-cat accent" style="margin-bottom:2vh">还是你觉得</div>
-        <p class="body" style="font-size:max(20px,1.8vw)">用户需要的问题？</p>
+        <div class="t-cat accent" style="margin-bottom:2vh">答案</div>
+        <p class="body" style="font-size:max(20px,1.8vw)">问题不在AI<br/>在于你的<span class="mark">Prompt结构</span></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SLIDE 3: Six Cells S04 - 三个概念 -->
+<!-- SLIDE 3: Six Cells S04 - 四要素模板 -->
 <section class="slide grey" data-layout="S04">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C08</div>
-      <div class="r">03 / 07</div>
+      <div class="l">O001 · L07</div>
+      <div class="r">03 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">三个概念</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">痛点 · 痒点 · 爽点</h2>
+      <div class="t-cat accent" style="margin-bottom:2vh">结构化Prompt · 四要素模板</div>
+      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">把你脑子里的"大概想要"变成"清晰的要求"</h2>
       <div class="sub-grid-3-2">
         <div class="sub-card accent">
-          <div class="ttl" style="color:var(--accent-on)">痛点</div>
-          <div class="desc" style="color:var(--accent-on);opacity:.9">必须解决<br/>不解决影响基本使用</div>
+          <div class="ttl" style="color:var(--accent-on)">角色</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">你希望AI扮演什么？</div>
         </div>
-        <div class="sub-card" style="background:var(--grey-2)">
-          <div class="ttl">痒点</div>
-          <div class="desc">想要更好<br/>不解决也能凑合</div>
+        <div class="sub-card accent">
+          <div class="ttl" style="color:var(--accent-on)">任务</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">你要AI做什么？</div>
         </div>
-        <div class="sub-card ink">
-          <div class="ttl" style="color:var(--paper)">爽点</div>
-          <div class="desc" style="color:rgba(255,255,255,.8)">超预期<br/>用了忍不住分享</div>
+        <div class="sub-card accent">
+          <div class="ttl" style="color:var(--accent-on)">约束</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">有什么限制条件？</div>
+        </div>
+        <div class="sub-card ink" style="grid-column:span 3">
+          <div class="ttl">格式</div>
+          <div class="desc">输出什么形式？Markdown表格？代码块？清单？</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SLIDE 4: Three Layers S05 - 举例 -->
+<!-- SLIDE 4: Three Layers S05 - 四要素示例 -->
 <section class="slide" data-layout="S05">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C08</div>
-      <div class="r">04 / 07</div>
+      <div class="l">O001 · L07</div>
+      <div class="r">04 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">举例</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:2vh">真实场景对照</h2>
+      <div class="t-cat accent" style="margin-bottom:2vh">四要素示例</div>
+      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:2vh">完整Prompt长这样</h2>
       <div class="stack-row">
         <div class="stack-block b-accent">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">痛点</div>
-          <div class="layer-ttl" style="color:var(--accent-on)">医院挂号排不上队</div>
-          <div class="layer-desc" style="color:rgba(255,255,255,.8)">外卖不能用手机点餐</div>
-        </div>
-        <div class="stack-block b-grey">
-          <div class="layer-nb">痒点</div>
-          <div class="layer-ttl">记账自动归类</div>
-          <div class="layer-desc">健身个性化计划</div>
+          <div class="layer-nb" style="color:rgba(255,255,255,.62)">角色</div>
+          <div class="layer-ttl" style="color:var(--accent-on)">你是一个有5年经验的UX设计师</div>
         </div>
         <div class="stack-block b-ink">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">爽点</div>
-          <div class="layer-ttl" style="color:var(--paper)">超预期数据报告</div>
-          <div class="layer-desc" style="color:rgba(255,255,255,.8)">坚持成就徽章</div>
+          <div class="layer-nb">任务</div>
+          <div class="layer-ttl" style="color:var(--paper)">帮我设计记账App首页</div>
+        </div>
+        <div class="stack-block b-grey">
+          <div class="layer-nb">约束</div>
+          <div class="layer-ttl">粉色系，单手操作，底部导航3个入口</div>
         </div>
       </div>
+      <div class="t-body" style="margin-top:3vh;padding:2vh2vw;background:var(--grey-1)">格式：Markdown表格</div>
     </div>
   </div>
 </section>
 
-<!-- SLIDE 5: Duo Compare S08 - 成功vs失败 -->
+<!-- SLIDE 5: Duo Compare S08 - 模糊vs结构化 -->
 <section class="slide" data-layout="S08">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C08</div>
-      <div class="r">05 / 07</div>
+      <div class="l">O001 · L07</div>
+      <div class="r">05 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">成功 vs 失败案例</div>
+      <div class="t-cat accent" style="margin-bottom:2vh">模糊 vs 结构化</div>
       <div class="duo-compare" style="margin-top:4vh">
-        <div class="col accent">
-          <div class="col-tag"><span class="num">成功</span></div>
-          <div class="col-ttl">「活一下」App</div>
+        <div class="col">
+          <div class="col-tag"><span class="num" style="color:var(--grey-3);border-color:var(--grey-3)">模糊</span></div>
+          <div class="col-ttl" style="color:var(--grey-3)">"帮我做一个记账App"</div>
           <ul class="col-list">
-            <li>解决职业倦怠者的行动力问题</li>
-            <li>痛点真实、具体、有社会意义</li>
-            <li>评委认可 → 上架App Store</li>
+            <li>结果：随机、不可预测</li>
+            <li>AI：只能靠猜</li>
+            <li>你：反复修改浪费时间</li>
           </ul>
         </div>
         <div class="vrule"></div>
-        <div class="col">
-          <div class="col-tag"><span class="num" style="color:var(--grey-3);border-color:var(--grey-3)">失败</span></div>
-          <div class="col-ttl" style="color:var(--grey-3)">功能蔓延的App</div>
+        <div class="col accent">
+          <div class="col-tag"><span class="num">结构化</span></div>
+          <div class="col-ttl">"UX设计师，设计记账App首页，粉色系，单手操作"</div>
           <ul class="col-list">
-            <li>做了很多痒点功能</li>
-            <li>用户只用一个</li>
-            <li>其余都是"痒点伪装成痛点"</li>
+            <li>结果：精准、可用</li>
+            <li>AI：知道具体要求</li>
+            <li>你：一次到位</li>
           </ul>
         </div>
       </div>
@@ -278,31 +290,28 @@
   </div>
 </section>
 
-<!-- SLIDE 6: Three Layers S05 - 优先级 -->
-<section class="slide dark" data-layout="S05">
+<!-- SLIDE 6: Six Cells S04 - 追问三技巧 -->
+<section class="slide" data-layout="S04">
   <div class="canvas-card">
-    <div class="chrome-min tight" style="color:rgba(255,255,255,.62)">
-      <div class="l" style="color:rgba(255,255,255,.62)">G001 · C08</div>
-      <div class="r" style="color:rgba(255,255,255,.62)">06 / 07</div>
+    <div class="chrome-min tight">
+      <div class="l">O001 · L07</div>
+      <div class="r">06 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat" style="color:rgba(255,255,255,.62);margin-bottom:2vh">优先级</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:2vh;color:var(--paper)">先做痛点，再做痒点，最后爽点</h2>
-      <div class="stack-row">
-        <div class="stack-block b-accent">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">第一步</div>
-          <div class="layer-ttl" style="color:var(--accent-on)">痛点</div>
-          <div class="layer-desc" style="color:rgba(255,255,255,.8)">基础可用</div>
+      <div class="t-cat accent" style="margin-bottom:2vh">追问三技巧</div>
+      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">让AI给出更精准的答案</h2>
+      <div class="sub-grid-3-2">
+        <div class="sub-card accent">
+          <div class="ttl" style="color:var(--accent-on)">技巧1</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">"请具体说明[某个点]"</div>
         </div>
-        <div class="stack-block b-grey">
-          <div class="layer-nb">第二步</div>
-          <div class="layer-ttl">痒点</div>
-          <div class="layer-desc">体验提升</div>
+        <div class="sub-card accent">
+          <div class="ttl" style="color:var(--accent-on)">技巧 2</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">"给出3个不同方向的方案"</div>
         </div>
-        <div class="stack-block" style="background:var(--grey-3);color:var(--paper)">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">第三步</div>
-          <div class="layer-ttl">爽点</div>
-          <div class="layer-desc">超预期传播</div>
+        <div class="sub-card accent">
+          <div class="ttl" style="color:var(--accent-on)">技巧 3</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">"如果[条件]不一样，你会怎么做？"</div>
         </div>
       </div>
     </div>
@@ -316,15 +325,15 @@
       <div class="half b-accent" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between;position:relative;overflow:hidden">
         <canvas class="ascii-bg" aria-hidden="true"></canvas>
         <div class="chrome-min" style="margin-bottom:0;position:relative;z-index:1;color:rgba(255,255,255,.62)">
-          <div class="l">07 / 07</div>
+          <div class="l">07 / 08</div>
           <div class="r">CLOSING</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
-          <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em;margin-bottom:1.6vh">C08产品课 · 完成</div>
-          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(5vw,9vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">先做痛点<br/>再做痒点<br/>最后爽点</h2>
+          <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em;margin-bottom:1.6vh">核心认知</div>
+          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(5.5vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">Prompt不是打字比赛<br/>Prompt是<span style="font-style:italic;font-weight:300">认知整理</span></h2>
         </div>
         <div style="position:relative;z-index:1">
-          <div class="t-meta" style="color:rgba(255,255,255,.62)">G001 · C08</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.62)">O001 · L07</div>
         </div>
       </div>
       <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between">
@@ -336,26 +345,26 @@
           <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">01</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">区分三种点</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">痛点必须解决，痒点锦上添花，爽点超预期传播</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">你自己想清楚要什么</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">Prompt是外化思维的过程</p>
             </div>
           </div>
           <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">02</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">从「活一下」学什么</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">真实痛点 + 社会意义 = 评委认可</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">用四要素模板结构化</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">角色+任务+约束+格式</p>
             </div>
           </div>
           <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">03</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">优先级行动指南</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">先痛点→基础可用，再痒点→体验提升，最后爽点→超预期传播</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">带着四要素模板去实践</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">结业：结业</p>
             </div>
           </div>
         </div>
-        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ 完 · G001 C08</div>
+        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ 完 · O001 L07</div>
       </div>
     </div>
   </div>

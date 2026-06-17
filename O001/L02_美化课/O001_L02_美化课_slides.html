@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C05 API课 | G001</title>
+<title>L02 美化课 | O001</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -33,21 +33,23 @@
 <div id="hint">← → 翻页 · B 静态 · ESC 索引</div>
 <div id="deck">
 
-<!-- C05 S01: Cover -->
+<!-- SLIDES_HERE -->
+
+<!-- C02 S01: Cover -->
 <section class="slide accent" data-layout="S01">
   <div class="canvas-card">
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
     <div class="chrome-min">
-      <div class="l">G001 · C05 API课</div>
+      <div class="l">O001 · L02 美化课</div>
       <div class="r">01 / 12</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
-      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">API · 数据连接课</div>
-      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(9.6vw,16vh);line-height:.94;letter-spacing:-.025em;color:#fff">C05 API课<br/><span style="font-style:italic;font-weight:300">数据连接</span></h1>
+      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">STYLING · 美化课</div>
+      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(9.6vw,16vh);line-height:.94;letter-spacing:-.025em;color:#fff">L02 美化课<br/><span style="font-style:italic;font-weight:300">从丑到能看</span></h1>
       <div style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
-        <div class="t-meta" style="color:rgba(255,255,255,.86)">2节 × 20分钟 · ¥79</div>
+        <div class="t-meta" style="color:rgba(255,255,255,.86)">2节 × 20分钟 · ¥99</div>
         <div style="display:flex;justify-content:space-between;align-items:end">
-          <div class="t-meta" style="color:rgba(255,255,255,.6)">G001 前置工作坊</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.6)">O001 前置工作坊</div>
           <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe</div>
         </div>
       </div>
@@ -55,304 +57,288 @@
   </div>
 </section>
 
-<!-- C05 S02: 课前问题 -->
+<!-- C02 S02: 课前问题 -->
 <section class="slide" data-layout="S03">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">C05 · 02 / 12</div>
-      <div class="r">API</div>
+      <div class="l">L02 · 02 / 12</div>
+      <div class="r">STYLING</div>
     </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat">课前自检</div>
-      <div class="grid-4" style="margin-top:0;gap:1.6vw">
-        <div class="sub-card">
-          <div class="nb-corner">01</div>
-          <div class="ttl">API 是什么</div>
-          <div class="desc">你是否知道 API 和普通代码的区别？</div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:3vh;margin-top:2vh">
+      <div class="t-cat">课前问题</div>
+      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.8vw,8.5vh);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary)">作品功能都实现了<br/>但看起来总觉得哪里不对？</h2>
+      <div style="border-top:1px solid var(--border-subtle);padding-top:2.4vh;display:flex;flex-direction:column;gap:2vh">
+        <div class="t-cat accent">AI味是什么</div>
+        <p class="t-body" style="max-width:52ch">所有东西都一样重要，所有颜色都一样鲜艳，所有文字都一样大小，<span class="mark">没有视觉层级</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C02 S03: AI味 vs 专业感 -->
+<section class="slide dark" data-layout="S08">
+  <div class="canvas-card">
+    <div class="chrome-min" style="color:rgba(255,255,255,.62)">
+      <div class="l">L02 · 03 / 12</div>
+      <div class="r">STYLING</div>
+    </div>
+    <div class="duo-compare" style="margin-top:6vh">
+      <div class="col">
+        <div class="col-tag"><span class="num">01</span> AI味</div>
+        <div class="col-ttl" style="color:var(--paper)">所有东西挤在一起</div>
+        <div class="col-desc">没有重点，色彩平均分配，文字没有层次感</div>
+      </div>
+      <span class="vrule"></span>
+      <div class="col accent">
+        <div class="col-tag"><span class="num">02</span> 专业感</div>
+        <div class="col-ttl">3秒内知道重点</div>
+        <div class="col-desc">3秒内回答：这是什么网站？我能做什么？我怎么开始？</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C02 S04: 3秒法则 -->
+<section class="slide" data-layout="S06">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">L02 · 04 / 12</div>
+      <div class="r">STYLING</div>
+    </div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
+      <div class="t-cat">3秒法则</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4vw;align-items:center">
+        <div>
+          <div class="kpi-thin-sm accent" style="font-size:min(5.6vw,10vh)">3秒</div>
+          <p class="t-body" style="margin-top:2vh">用户打开界面，3秒内要能回答这三个问题</p>
         </div>
-        <div class="sub-card">
-          <div class="nb-corner">02</div>
-          <div class="ttl">接口文档</div>
-          <div class="desc">你有没有看过第三方 API 的文档？</div>
-        </div>
-        <div class="sub-card">
-          <div class="nb-corner">03</div>
-          <div class="ttl">密钥管理</div>
-          <div class="desc">你知道什么是 API Key 吗？</div>
-        </div>
-        <div class="sub-card accent">
-          <div class="nb-corner" style="color:rgba(255,255,255,.55)">04</div>
-          <div class="ttl">实际调用</div>
-          <div class="desc">你是否调用过地图、天气等真实 API？</div>
+        <div style="display:flex;flex-direction:column;gap:2vh">
+          <div class="stat-card accent-top">
+            <div class="stat-label">问题1</div>
+            <div class="stat-nb" style="font-size:3.2vw">这是什么？</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">问题 2</div>
+            <div class="stat-nb" style="font-size:3.2vw">我能做什么？</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">问题 3</div>
+            <div class="stat-nb" style="font-size:3.2vw">我怎么开始？</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- C05 S03: API是什么 -->
+<!-- C02 S05: CRAP四原则 -->
+<section class="slide grey" data-layout="S05">
+  <div class="canvas-card">
+    <div class="chrome-min">
+      <div class="l">L02 · 05 / 12</div>
+      <div class="r">STYLING</div>
+    </div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
+      <div class="t-cat">CRAP 四原则</div>
+      <div class="stack-row" style="margin-top:0">
+        <div class="stack-block b-accent">
+          <div class="layer-nb">C</div>
+          <div class="layer-ttl">Contrast 对比</div>
+          <div class="layer-desc">让重要的更突出，不重要的事物弱化</div>
+        </div>
+        <div class="stack-block b-grey">
+          <div class="layer-nb">R</div>
+          <div class="layer-ttl">Repetition 重复</div>
+          <div class="layer-desc">强化视觉一致性，统一设计语言</div>
+        </div>
+        <div class="stack-block b-ink">
+          <div class="layer-nb">A</div>
+          <div class="layer-ttl" style="color:var(--paper)">Alignment 对齐</div>
+          <div class="layer-desc" style="color:rgba(255,255,255,.78)">每个元素都有视觉连接，不孤立</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C02 S06: Proximity亲密性 -->
 <section class="slide" data-layout="S04">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">C05 · 03 / 12</div>
-      <div class="r">API</div>
+      <div class="l">L02 · 06 / 12</div>
+      <div class="r">STYLING</div>
     </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat">API 是什么</div>
-      <div class="duo-compare">
-        <div class="col">
-          <div class="col-tag"><span class="num">不</span> 没有 API</div>
-          <div class="col-ttl">点菜 = 进厨房</div>
-          <ul class="col-list">
-            <li>你需要知道厨房里有什么</li>
-            <li>你需要自己动手做</li>
-            <li>没有标准流程，质量不稳定</li>
-          </ul>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
+      <div class="t-cat">CRAP · Proximity 亲密性</div>
+      <div class="sub-grid-3-2" style="grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr)">
+        <div class="sub-card">
+          <span class="nb-corner">P</span>
+          <div class="ttl">相关项靠近</div>
+          <div class="desc">相关的内容放在一起，不相关的内容拉开距离</div>
         </div>
-        <div class="vrule"></div>
-        <div class="col accent">
-          <div class="col-tag"><span class="num" style="color:var(--accent);border-color:var(--accent)">有</span> 有 API</div>
-          <div class="col-ttl">点菜 = 菜单</div>
-          <ul class="col-list">
-            <li>只需看菜单（接口文档）</li>
-            <li>说出需求，厨房完成</li>
-            <li>标准化、稳定、可复用</li>
-          </ul>
+        <div class="sub-card accent">
+          <span class="nb-corner" style="color:var(--accent-on)">P</span>
+          <div class="ttl" style="color:var(--accent-on)">分组清晰</div>
+          <div class="desc" style="color:rgba(255,255,255,.82)">让用户一眼分辨信息组别</div>
+        </div>
+        <div class="sub-card">
+          <span class="nb-corner">配色</span>
+          <div class="ttl">先定主色</div>
+          <div class="desc">颜色太多没有主色，先选一个主色再配辅助色</div>
+        </div>
+        <div class="sub-card">
+          <span class="nb-corner">工具</span>
+          <div class="ttl">换肤工具</div>
+          <div class="desc">灵光重新生成 / Stitch 一键换肤 / Canva品牌套件</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- C05 S04: 高德地图API -->
-<section class="slide" data-layout="S05">
-  <div class="canvas-card">
-    <div class="chrome-min">
-      <div class="l">C05 · 04 / 12</div>
-      <div class="r">API</div>
-    </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:1.6vh">
-      <div class="t-cat">实战：高德地图 API</div>
-      <div class="stack-row" style="margin-top:0">
-        <div class="stack-block b-accent">
-          <div class="layer-nb">Step 1</div>
-          <div class="layer-ttl">申请 Key</div>
-          <div class="layer-desc">高德开放平台 → 控制台 → 创建应用 → 获取 Web服务 API Key</div>
-        </div>
-        <div class="stack-block b-grey">
-          <div class="layer-nb">Step 2</div>
-          <div class="layer-ttl">调用示例</div>
-          <div class="layer-desc">fetch('https://restapi.amap.com/v3/ip?key=你的KEY')</div>
-        </div>
-        <div class="stack-block b-ink">
-          <div class="layer-nb">Step 3</div>
-          <div class="layer-ttl" style="color:var(--paper)">解析结果</div>
-          <div class="layer-desc" style="color:rgba(255,255,255,.78)">返回 JSON，包含城市、省份等信息</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- C05 S05: 实操 -->
-<section class="slide grey" data-layout="S08">
-  <div class="canvas-card">
-    <div class="chrome-min">
-      <div class="l">C05 · 05 / 12</div>
-      <div class="r">API · PRACTICE</div>
-    </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat">实操练习</div>
-      <div style="display:flex;flex-direction:column;gap:1.6vh">
-        <div class="callout">
-          <p style="font-family:var(--sans),var(--sans-zh);font-size:max(18px,1.6vw);line-height:1.7;margin-bottom:1.6vh;font-weight:400">打开浏览器控制台，输入：</p>
-          <pre style="font-family:var(--mono);font-size:max(15px,1.3vw);background:var(--ink);color:#a8ff78;padding:2vh 2vw;border-radius:0;line-height:1.6;overflow-x:auto">fetch('https://restapi.amap.com/v3/ip?key=<span style="color:#ff79c6">你的KEY</span>')
-  .then(r => r.json())
-  .then(console.log)</pre>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.4vw">
-          <div class="sub-card">
-            <div class="ttl">成功响应</div>
-            <div class="desc">{ status: "1", info: "OK", province: "北京市", city: "北京市" }</div>
-          </div>
-          <div class="sub-card">
-            <div class="ttl">失败响应</div>
-            <div class="desc">{ status: "0", info: "INVALID_KEY" } — 检查 Key 是否正确</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- C05 S06: 第二节封面 -->
-<section class="slide dark" data-layout="S01">
+<!-- C02 S07: 第2节封面 -->
+<section class="slide accent" data-layout="S01">
   <div class="canvas-card">
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
+    <div class="chrome-min">
+      <div class="l">O001 · L02 美化课</div>
+      <div class="r">07 / 12</div>
+    </div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
+      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">SECTION02</div>
+      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(8vw,13vh);line-height:.94;letter-spacing:-.025em;color:#fff">第2节<br/><span style="font-style:italic;font-weight:300">从能看到好看</span></h1>
+      <div style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
+        <div class="t-meta" style="color:rgba(255,255,255,.86)">SVG图标 / 微交互 / 移动端适配</div>
+        <div style="display:flex;justify-content:space-between;align-items:end">
+          <div class="t-meta" style="color:rgba(255,255,255,.6)">O001 前置工作坊</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C02 S08: 上节回顾 + emoji问题 -->
+<section class="slide dark" data-layout="S08">
+  <div class="canvas-card">
     <div class="chrome-min" style="color:rgba(255,255,255,.62)">
-      <div class="l">C05 · 06 / 12</div>
-      <div class="r">SECTION 02</div>
+      <div class="l">L02 · 08 / 12</div>
+      <div class="r">STYLING</div>
     </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.4vh">
-      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">SECTION 02 · 进阶</div>
-      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(9.6vw,16vh);line-height:.94;letter-spacing:-.025em;color:#fff">三个必须<br/><span style="font-style:italic;font-weight:300">处理的坑</span></h1>
-      <div style="display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
-        <div class="t-meta" style="color:rgba(255,255,255,.6)">API 课 · 第二节</div>
-        <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe</div>
+    <div class="duo-compare" style="margin-top:6vh">
+      <div class="col">
+        <div class="col-tag"><span class="num">上节</span> 回顾</div>
+        <div class="col-ttl" style="color:var(--paper)">3秒法则</div>
+        <div class="col-list">
+          <li>这是什么网站？</li>
+          <li>我能做什么？</li>
+          <li>我怎么开始？</li>
+        </div>
+      </div>
+      <span class="vrule"></span>
+      <div class="col accent">
+        <div class="col-tag"><span class="num">本节</span> 问题</div>
+        <div class="col-ttl">Emoji 不一致</div>
+        <div class="col-desc">Emoji 在不同设备显示不一致，SVG 可以用 CSS 控制大小和颜色</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- C05 S07: 三个必须处理 -->
-<section class="slide" data-layout="S04">
-  <div class="canvas-card">
-    <div class="chrome-min">
-      <div class="l">C05 · 07 / 12</div>
-      <div class="r">API</div>
-    </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat">三个必须处理的坑</div>
-      <div class="grid-3" style="margin-top:0">
-        <div class="sub-card accent">
-          <div class="nb-corner" style="color:rgba(255,255,255,.55)">01</div>
-          <div class="ttl">CORS 跨域</div>
-          <div class="desc">浏览器阻止你调用第三方 API？用后端代理或 JSONP 绕开</div>
-        </div>
-        <div class="sub-card">
-          <div class="nb-corner">02</div>
-          <div class="ttl">密钥暴露</div>
-          <div class="desc">不要把 API Key 写在前端代码里，会被爬取。用环境变量或后端中转</div>
-        </div>
-        <div class="sub-card">
-          <div class="nb-corner">03</div>
-          <div class="ttl">请求限制</div>
-          <div class="desc">免费 API 有调用次数限制。加缓存、做请求合并、申请企业版</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- C05 S08: 代码模板 -->
-<section class="slide grey" data-layout="S06">
-  <div class="canvas-card">
-    <div class="chrome-min">
-      <div class="l">C05 · 08 / 12</div>
-      <div class="r">API</div>
-    </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat">代码模板</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2vw;flex:1;align-content:start">
-        <div style="background:var(--ink);padding:2.4vh 2vw;display:flex;flex-direction:column;gap:1.6vh">
-          <div class="t-cat" style="color:rgba(255,255,255,.6)">前端调用（不推荐）</div>
-          <pre style="font-family:var(--mono);font-size:max(14px,1.1vw);color:#a8ff78;line-height:1.7;overflow-x:auto">// 危险！Key 会暴露
-const key = '你的KEY';
-fetch(`https://api.xxx.com?key=${key}`)</pre>
-        </div>
-        <div style="background:var(--ink);padding:2.4vh 2vw;display:flex;flex-direction:column;gap:1.6vh">
-          <div class="t-cat" style="color:rgba(255,255,255,.6)">后端中转（推荐）</div>
-          <pre style="font-family:var(--mono);font-size:max(14px,1.1vw);color:#a8ff78;line-height:1.7;overflow-x:auto">// Next.js API Route
-export async function GET() {
-  const res = await fetch('https://api.xxx.com',
-    { headers: { 'x-api-key': process.env.KEY }}
-  );
-  return Response.json(await res.json());
-}</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- C05 S09: 进阶-灵光Skills -->
+<!-- C02 S09: SVG图标工具 -->
 <section class="slide" data-layout="S05">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">C05 · 09 / 12</div>
-      <div class="r">API</div>
+      <div class="l">L02 · 09 / 12</div>
+      <div class="r">STYLING</div>
     </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:1.6vh">
-      <div class="t-cat accent">进阶 · 灵光 Skills</div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
+      <div class="t-cat">图标工具</div>
       <div class="stack-row" style="margin-top:0">
         <div class="stack-block b-accent">
-          <div class="layer-nb">Skill 1</div>
-          <div class="layer-ttl">自然语言生成 API</div>
-          <div class="layer-desc">灵光 AI 可以帮你生成调用代码，只需要描述你要做什么</div>
+          <div class="layer-nb">Tool01</div>
+          <div class="layer-ttl">Phosphor Icons</div>
+          <div class="layer-desc">选择图标 → 复制 SVG → 粘贴，用 CSS 控制颜色和大小</div>
         </div>
         <div class="stack-block b-grey">
-          <div class="layer-nb">Skill 2</div>
-          <div class="layer-ttl">API 文档解读</div>
-          <div class="layer-desc">把 API 文档丢给 AI，让它帮你总结必读参数和示例</div>
+          <div class="layer-nb">Tool 02</div>
+          <div class="layer-ttl">Lucide</div>
+          <div class="layer-desc">与模板内置相同，引入 CDN 即可使用</div>
         </div>
         <div class="stack-block b-ink">
-          <div class="layer-nb">Skill 3</div>
-          <div class="layer-ttl" style="color:var(--paper)">错误调试</div>
-          <div class="layer-desc" style="color:rgba(255,255,255,.78)">把 API 返回的错误信息丢给 AI，它会告诉你如何修复</div>
+          <div class="layer-nb">用法</div>
+          <div class="layer-ttl" style="color:var(--paper)">CSS 控制</div>
+          <div class="layer-desc" style="color:rgba(255,255,255,.78)">用 CSS 的 color 和 width/height 属性精确控制图标</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- C05 S10: 本节总结 -->
-<section class="slide" data-layout="S03">
+<!-- C02 S10: 微交互 -->
+<section class="slide" data-layout="S04">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">C05 · 10 / 12</div>
-      <div class="r">API</div>
+      <div class="l">L02 · 10 / 12</div>
+      <div class="r">STYLING</div>
     </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat">本节总结</div>
-      <div class="h-bar-chart">
-        <div class="row-lbl">API = 菜单</div>
-        <div class="row-track"><div class="row-fill" style="width:85%"></div></div>
-        <div class="row-val">标准化接口，无需了解内部实现</div>
-      </div>
-      <div class="h-bar-chart">
-        <div class="row-lbl">高德地图</div>
-        <div class="row-track"><div class="row-fill" style="width:65%"></div></div>
-        <div class="row-val">申请 Key → 调用接口 → 解析结果</div>
-      </div>
-      <div class="h-bar-chart">
-        <div class="row-lbl">安全原则</div>
-        <div class="row-track"><div class="row-fill accent" style="width:45%"></div></div>
-        <div class="row-val">Key 不暴露在前端，用后端代理</div>
-      </div>
-      <div class="h-bar-chart">
-        <div class="row-lbl">AI 辅助</div>
-        <div class="row-track"><div class="row-fill accent" style="width:25%"></div></div>
-        <div class="row-val" style="color:var(--accent)">让灵光帮你写代码、调文档、修错误</div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
+      <div class="t-cat">微交互 · Hover效果</div>
+      <div class="sub-grid-3-2" style="grid-template-columns:1fr;grid-template-rows:repeat(3,1fr)">
+        <div class="sub-card">
+          <span class="nb-corner">作用</span>
+          <div class="ttl">告诉用户"这个可以点击"</div>
+          <div class="desc">按钮 hover 时给视觉反馈，引导用户交互</div>
+        </div>
+        <div class="sub-card">
+          <span class="nb-corner">CSS</span>
+          <div class="ttl">常用 Hover 效果</div>
+          <div class="desc">transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);</div>
+        </div>
+        <div class="sub-card accent">
+          <span class="nb-corner">原则</span>
+          <div class="ttl" style="color:var(--accent-on)">轻量克制</div>
+          <div class="desc" style="color:rgba(255,255,255,.82)">动效不要太重，0.2s 足够，轻微上浮 + 阴影加深</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- C05 S11: 本节作业 -->
-<section class="slide grey" data-layout="S03">
+<!-- C02 S11: 移动端适配 -->
+<section class="slide grey" data-layout="S11">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">C05 · 11 / 12</div>
-      <div class="r">API · HOMEWORK</div>
+      <div class="l">L02 · 11 / 12</div>
+      <div class="r">STYLING</div>
     </div>
-    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2.4vh;margin-top:1.6vh">
-      <div class="t-cat accent">本节作业</div>
-      <div style="display:flex;flex-direction:column;gap:2vh">
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw">
-          <div class="sub-card">
-            <div class="nb-corner">H1</div>
-            <div class="ttl">调用一次天气 API</div>
-            <div class="desc">使用高德或和风天气 API，获取你所在城市的实时天气（控制台测试）</div>
+    <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
+      <div class="t-cat">移动端适配</div>
+      <div class="timeline-h" style="margin-top:4vh">
+        <div class="tl-row">
+          <div class="th-node">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 1</div>
+              <div class="name">F12 打开 DevTools</div>
+              <div class="desc">浏览器开发者工具</div>
+            </div>
           </div>
-          <div class="sub-card">
-            <div class="nb-corner">H2</div>
-            <div class="ttl">用 AI 生成代码</div>
-            <div class="desc">让灵光根据你描述的需求，生成一段调用 API 的完整代码</div>
+          <div class="th-node accent">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 2</div>
+              <div class="name">切换设备模拟</div>
+              <div class="desc">点击设备工具栏 → 选择 iPhone</div>
+            </div>
           </div>
-          <div class="sub-card accent">
-            <div class="nb-corner" style="color:rgba(255,255,255,.55)">H3</div>
-            <div class="ttl">集成到你的项目</div>
-            <div class="desc">在你黑客松项目中使用至少一个第三方 API（地图/天气/AI）</div>
+          <div class="th-node accent">
+            <div class="dot"></div>
+            <div class="label down">
+              <div class="yr">Step 3</div>
+              <div class="name">检查三项</div>
+              <div class="desc">文字大小 / 按钮宽度 / 横向滚动</div>
+            </div>
           </div>
         </div>
       </div>
@@ -360,14 +346,14 @@ export async function GET() {
   </div>
 </section>
 
-<!-- C05 S12: 结业 -->
+<!-- C02 S12: 结业 -->
 <section class="slide split" data-layout="S10">
   <div class="canvas-card">
     <div class="split-half">
       <div class="half b-accent" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between;position:relative;overflow:hidden">
         <canvas class="ascii-bg" aria-hidden="true"></canvas>
         <div class="chrome-min" style="margin-bottom:0;position:relative;z-index:1;color:rgba(255,255,255,.62)">
-          <div class="l">C05 · 12 / 12</div>
+          <div class="l">L02 · 12 / 12</div>
           <div class="r">CLOSING</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
@@ -375,39 +361,32 @@ export async function GET() {
           <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(6vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">结业<br/><span style="font-style:italic;font-weight:300">Checklist</span></h2>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh;position:relative;z-index:1">
-          <div class="t-meta" style="color:rgba(255,255,255,.62)">C05 API课</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.62)">L02 美化课</div>
           <div class="t-meta" style="color:rgba(255,255,255,.62)">12 / 12</div>
         </div>
       </div>
       <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between">
         <div class="chrome-min">
           <div class="l">TAKEAWAYS</div>
-          <div class="r">3 CHECKS</div>
+          <div class="r">2 CHECKS</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:0">
           <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">01</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">API = 菜单</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">标准化接口，看文档调用，无需了解内部</p>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
-            <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">02</div>
-            <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">安全原则</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">Key 不暴露前端，用后端代理保护</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">能用的作品 (C01部署)</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">全世界可访问的 URL</p>
             </div>
           </div>
           <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
-            <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">03</div>
+            <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">02</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">AI 辅助</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">灵光帮你生成代码、解读文档、调试错误</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">能看的界面 (C02美化)</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">3秒法则 + CRAP四原则 + 移动端适配</p>
             </div>
           </div>
         </div>
-        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ C06 Vibe课</div>
+        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ C03 PRD课</div>
       </div>
     </div>
   </div>

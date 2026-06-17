@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C10 边缘课 | AI偏见与边缘案例 | 15分钟轻课</title>
+<title>L09 Pitch课 | 5分钟讲清楚你的产品 | 20分钟实战课</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -11,14 +11,14 @@
   /* Chaohua fonts */
   @font-face {
     font-family: "ChaohuaType";
-    src: url("../../website/fonts/朝华打字机-subset.woff2") format("woff2");
+    src: url("../../fonts/朝华打字机-subset.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: "ChaohuaTitle";
-    src: url("../../website/fonts/朝华标题A-subset.woff2") format("woff2");
+    src: url("../../fonts/朝华标题A-subset.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -29,7 +29,7 @@
   canvas.bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;opacity:.55;mix-blend-mode:multiply;pointer-events:none}
   body.dark-bg canvas.bg{mix-blend-mode:screen;opacity:.42}
   #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
-  .slide{width:100vw;height:100vh;flex:0 0100vw;position:relative;padding:5.5vh 5vw 7vh 5vw;display:flex;flex-direction:column;overflow:hidden;background:var(--paper);color:var(--ink)}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:0;display:flex;flex-direction:column;overflow:hidden;background:var(--paper);color:var(--ink)}
   .slide.grey{background:var(--grey-1)}
   .slide.dark{background:var(--ink);color:var(--paper)}
   .slide.accent{background:var(--accent);color:var(--accent-on)}
@@ -98,7 +98,7 @@
   .step-nb{font-family:var(--mono);font-weight:500;font-size:max(14px,1vw);opacity:.5;letter-spacing:.04em}
   .step-title{font-family:var(--sans),var(--sans-zh);font-weight:700;font-size:1.4vw;letter-spacing:-.01em;line-height:1.2}
   .step-desc{font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(16px,.94vw);line-height:1.45;opacity:.7}
-  .canvas-card{width:100vw;height:100vh;background:var(--paper);color:var(--ink);padding:5.6vh 5vw 4.4vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .canvas-card{width:100%;height:100%;background:var(--paper);color:var(--ink);padding:5.6vh 5vw 4.4vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
   .slide.dark .canvas-card{background:var(--ink);color:var(--paper)}
   .slide.accent .canvas-card{background:var(--accent);color:var(--accent-on)}
   .slide.grey .canvas-card{background:var(--grey-1);color:var(--ink)}
@@ -112,6 +112,13 @@
   .t-cat{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-helper);line-height:1.3}
   .t-cat.accent{color:var(--accent)}
   .t-helper{font-family:var(--sans),var(--sans-zh);font-size:14px;font-weight:400;color:var(--text-helper);line-height:1.5;letter-spacing:.005em}
+  .bar-chart{display:flex;flex-direction:column;gap:1.4vh}
+  .bar-row{display:grid;grid-template-columns:8em minmax(0,1fr) minmax(9em,18vw);gap:1.4vw;align-items:center}
+  .bar-row .bar-label{font-family:var(--mono);font-size:max(14px,.84vw);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+  .bar-row .bar-track{height:14px;background:rgba(127,127,127,.18);position:relative}
+  .bar-row .bar-fill{height:100%;background:var(--accent);position:absolute;left:0;top:0}
+  .bar-row .bar-fill.ink{background:currentColor}
+  .bar-row .bar-value{font-family:var(--sans),var(--sans-zh);font-weight:700;font-size:max(16px,1.05vw);text-align:right;font-feature-settings:"tnum";line-height:1.25;overflow-wrap:anywhere}
   #nav{position:fixed;left:50%;bottom:2vh;transform:translateX(-50%);z-index:30;display:flex;gap:10px;padding:0;background:transparent;border:0}
   #nav .dot{width:6px;height:6px;background:rgba(0,0,0,.28);cursor:pointer;transition:all .25s ease;border:0;padding:0;border-radius:0}
   #nav .dot:hover{background:rgba(0,0,0,.55)}
@@ -120,6 +127,16 @@
   body.dark-bg #nav .dot.active{background:var(--accent)}
   #hint{position:fixed;bottom:2.4vh;right:2.5vw;z-index:30;font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;opacity:.4;color:var(--ink-tint, currentColor)}
   @media (max-width:900px){.h-hero-zh{font-size:13vw}.h-xl-zh{font-size:8vw}.grid-3{grid-template-columns:repeat(2,1fr)}}
+  .lecture-note{position:absolute;bottom:18vh;left:5vw;background:rgba(0,0,0,.88);color:#fff;padding:1.2vh 1.6vw;border-radius:4px;font-family:var(--sans-zh),var(--sans);font-size:max(14px,.85vw);line-height:1.5;max-width:42vw;border-left:3px solid var(--accent);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:20}
+  .lecture-note.visible{opacity:1}
+  .lecture-note span{color:#ff71ce;font-weight:600}
+  .highlight-box{background:rgba(255,113,206,.15);border:1px solid var(--accent);padding:.8vh 1.2vw;border-radius:3px;margin-top:.8vh}
+  [data-anim="fade-up"]{opacity:0;transform:translateY(16px)}body.motion-ready [data-anim="fade-up"]{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+  [data-anim="fade-up"][data-delay="200"]{transition-delay:.2s}
+  [data-anim="fade-up"][data-delay="400"]{transition-delay:.4s}
+  [data-anim="scale-in"]{opacity:0;transform:scale(.92)}body.motion-ready [data-anim="scale-in"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  [data-anim="slide-left"]{opacity:0;transform:translateX(-20px)}body.motion-ready [data-anim="slide-left"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+  [data-anim="slide-right"]{opacity:0;transform:translateX(20px)}body.motion-ready [data-anim="slide-right"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
 </style>
 </head>
 <body class="canvas-mode">
@@ -132,19 +149,23 @@
   <div class="canvas-card">
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
     <div class="chrome-min">
-      <div class="l">G001 · C10</div>
+      <div class="l">O001 · L09</div>
       <div class="r">01 / 08</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
-      <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">AI BIAS · EDGE CASES</div>
-      <h1 style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(8.4vw,15vh);line-height:.94;letter-spacing:-.025em;color:#fff">C10 边缘课</h1>
-      <div style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
-        <div class="lead" style="max-width:52ch;color:rgba(255,255,255,.86)">AI偏见与边缘案例 · 15分钟轻课</div>
+      <div data-anim="fade-up" class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">PITCH ENGINEERING</div>
+      <h1 data-anim="fade-up" data-delay="150" style="align-self:center;font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(8.4vw,15vh);line-height:.94;letter-spacing:-.025em;color:#fff">L09 Pitch课</h1>
+      <div data-anim="fade-up" data-delay="300" style="display:grid;grid-template-rows:auto auto;gap:1.6vh;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh">
+        <div class="lead" style="max-width:52ch;color:rgba(255,255,255,.86)">5分钟讲清楚你的产品 · 20分钟实战课</div>
         <div style="display:flex;justify-content:space-between;align-items:end">
-          <div class="t-meta" style="color:rgba(255,255,255,.6)">¥49</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.6)">¥79</div>
           <div class="t-meta" style="color:rgba(255,255,255,.6)">→ swipe / arrow keys</div>
         </div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S01">
+      <span>讲师提示：</span>开场问大家"你们有没有遇到过很棒的产品但讲不清楚的情况？"收集2-3个例子后引出 pitch 结构的重要性。
     </div>
   </div>
 </section>
@@ -153,104 +174,132 @@
 <section class="slide" data-layout="S03">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C10</div>
+      <div class="l">O001 · L09</div>
       <div class="r">02 / 08</div>
     </div>
     <div class="split-half">
-      <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:center">
+      <div data-anim="slide-left" class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:center">
         <div class="t-cat" style="margin-bottom:2vh">课前问题</div>
-        <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.5vw,8vh);line-height:1;letter-spacing:-.025em;color:var(--text-primary)">问AI"推荐一个好产品"，它给的是男性工程师视角的答案</h2>
+        <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:200;font-size:min(4.5vw,8vh);line-height:1;letter-spacing:-.025em;color:var(--text-primary)">为什么有些产品明明很好，但讲出来没人记得住？</h2>
       </div>
-      <div class="half b-grey" style="padding:5.6vh 3.6vw 4.4vh;justify-content:center">
-        <div class="t-cat accent" style="margin-bottom:2vh">问题在</div>
-        <p class="body" style="font-size:max(20px,1.8vw)">训练数据的历史<span class="mark">偏见</span></p>
+      <div data-anim="slide-right" data-delay="150" class="half b-grey" style="padding:5.6vh 3.6vw 4.4vh;justify-content:center">
+        <div class="t-cat accent" style="margin-bottom:2vh">答案</div>
+        <p class="body" style="font-size:max(20px,1.8vw)">问题不在产品<br/>在于<span class="mark">pitch结构</span></p>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S03">
+      <span>讲师提示：</span>让学员自由发言2分钟。引导他们发现：好的 pitch 不是把话说完整，而是把最关键的一点讲清楚。
     </div>
   </div>
 </section>
 
-<!-- SLIDE 3: Six Cells S04 - 什么是边缘案例 -->
-<section class="slide grey" data-layout="S04">
+<!-- SLIDE 3: Three Layers S05 - Pitch结构 -->
+<section class="slide" data-layout="S05">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C10</div>
+      <div class="l">O001 · L09</div>
       <div class="r">03 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">什么是边缘案例</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">边缘案例 = 不在"大多数"范围内的用户需求</h2>
-      <div class="sub-grid-3-2">
-        <div class="sub-card accent">
-          <div class="ttl" style="color:var(--accent-on)">场景1</div>
-          <div class="desc" style="color:var(--accent-on);opacity:.9">健身App大多数能运动的人</div>
+      <div data-anim="fade-up" class="t-cat accent" style="margin-bottom:2vh">Pitch结构 · 1分钟版本</div>
+      <h2 data-anim="fade-up" data-delay="100" style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:2vh">60秒讲清楚</h2>
+      <div class="stack-row">
+        <div data-anim="scale-in" class="stack-block b-accent">
+          <div class="layer-nb" style="color:rgba(255,255,255,.62)">30秒</div>
+          <div class="layer-ttl" style="color:var(--accent-on)">展示作品</div>
+          <div class="layer-desc" style="color:rgba(255,255,255,.8)">这是什么+为谁做+解决什么痛点</div>
         </div>
-        <div class="sub-card accent">
-          <div class="ttl" style="color:var(--accent-on)">但...</div>
-          <div class="desc" style="color:var(--accent-on);opacity:.9">坐轮椅的用户呢？</div>
+        <div data-anim="scale-in" data-delay="120" class="stack-block b-ink">
+          <div class="layer-nb" style="color:rgba(255,255,255,.62)">20秒</div>
+          <div class="layer-ttl" style="color:var(--paper)">创作亮点</div>
+          <div class="layer-desc" style="color:rgba(255,255,255,.8)">最满意的一点+数据或场景</div>
         </div>
-        <div class="sub-card accent">
-          <div class="ttl" style="color:var(--accent-on)">场景2</div>
-          <div class="desc" style="color:var(--accent-on);opacity:.9">外卖App大多数能接电话的人</div>
+        <div data-anim="scale-in" data-delay="240" class="stack-block b-grey">
+          <div class="layer-nb">10秒</div>
+          <div class="layer-ttl">下一步</div>
+          <div class="layer-desc">现在在哪+下一步+怎么联系</div>
         </div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S05">
+      <span>讲师提示：</span>这60秒的结构是经过大量黑客松验证的安全框架。记住：评委的时间比你少，你的任务是让他们轻松理解而不是证明你有多努力。
     </div>
   </div>
 </section>
 
-<!-- SLIDE 4: Three Layers S05 - Apple案例 -->
-<section class="slide dark" data-layout="S05">
+<!-- SLIDE 4: Horizontal Bar S07 - 时间示例 -->
+<section class="slide grey" data-layout="S07">
   <div class="canvas-card">
-    <div class="chrome-min tight" style="color:rgba(255,255,255,.62)">
-      <div class="l" style="color:rgba(255,255,255,.62)">G001 · C10</div>
-      <div class="r" style="color:rgba(255,255,255,.62)">04 / 08</div>
+    <div class="chrome-min tight">
+      <div class="l">O001 · L09</div>
+      <div class="r">04 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat" style="color:rgba(255,255,255,.62);margin-bottom:2vh">真实案例</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:2vh;color:var(--paper)">Apple Health 2014年</h2>
-      <div class="stack-row">
-        <div class="stack-block b-ink">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">追踪了</div>
-          <div class="layer-ttl" style="color:var(--paper)">睡眠 · 心率 · 营养</div>
+      <div class="t-cat accent" style="margin-bottom:2vh">时间示例</div>
+      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">「活一下」App Pitch演示</h2>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">[0:00-0:30]</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+          <div class="bar-value">30秒</div>
         </div>
-        <div class="stack-block" style="background:var(--grey-3);color:var(--paper)">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">但没有</div>
-          <div class="layer-ttl">月经追踪功能</div>
+        <div class="bar-row">
+          <div class="bar-label">展示作品</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--ink)"></div></div>
+          <div class="bar-value" style="font-size:max(14px,.9vw)">我做了一款叫'活一下'的App，专门帮助因为职业倦怠而丧失行动力的年轻人</div>
         </div>
-        <div class="stack-block b-accent">
-          <div class="layer-nb" style="color:rgba(255,255,255,.62)">原因</div>
-          <div class="layer-ttl" style="color:var(--accent-on)">设计团队<br/>以男性为主</div>
+        <div class="bar-row" style="margin-top:2vh">
+          <div class="bar-label">[0:30-0:50]</div>
+          <div class="bar-track"><div class="bar-fill" style="width:33%"></div></div>
+          <div class="bar-value">20秒</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">创作亮点</div>
+          <div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--ink)"></div></div>
+          <div class="bar-value" style="font-size:max(14px,.9vw)">我最满意的是'盲盒行动'功能，用户平均每天完成3.2个任务</div>
+        </div>
+        <div class="bar-row" style="margin-top:2vh">
+          <div class="bar-label">[0:50-1:00]</div>
+          <div class="bar-track"><div class="bar-fill" style="width:17%"></div></div>
+          <div class="bar-value">10秒</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">下一步</div>
+          <div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--ink)"></div></div>
+          <div class="bar-value" style="font-size:max(14px,.9vw)">App已上架，下一步想融资100万</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SLIDE 5: Duo Compare S08 - AI时代重演 -->
+<!-- SLIDE 5: Duo Compare S08 - 常见错误 -->
 <section class="slide" data-layout="S08">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C10</div>
+      <div class="l">O001 · L09</div>
       <div class="r">05 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">AI时代重演</div>
+      <div class="t-cat accent" style="margin-bottom:2vh">Pitch常见错误</div>
       <div class="duo-compare" style="margin-top:4vh">
         <div class="col">
-          <div class="col-tag"><span class="num" style="color:var(--grey-3);border-color:var(--grey-3)">问AI</span></div>
-          <div class="col-ttl" style="color:var(--grey-3)">"设计一个社交App"</div>
+          <div class="col-tag"><span class="num" style="color:var(--grey-3);border-color:var(--grey-3)">错误</span></div>
+          <div class="col-ttl" style="color:var(--grey-3)">功能列表型</div>
           <ul class="col-list">
-            <li>→ 年轻人视角</li>
-            <li>→ 异性恋视角</li>
-            <li>→ 健全人视角</li>
+            <li>"我们的App有登录注册、个人中心、任务系统..."</li>
+            <li>技术细节型："我们用了React Native+Node.js"</li>
           </ul>
         </div>
         <div class="vrule"></div>
         <div class="col accent">
-          <div class="col-tag"><span class="num">问AI</span></div>
-          <div class="col-ttl">"设计健康管理App"</div>
+          <div class="col-tag"><span class="num">正确</span></div>
+          <div class="col-ttl">价值聚焦型</div>
           <ul class="col-list">
-            <li>→ 忽略心理健康中的文化因素</li>
-            <li>→ 默认西方标准</li>
+            <li>"这是帮X用户解决Y问题的产品"</li>
+            <li>一句话：用户+问题+解决方案</li>
           </ul>
         </div>
       </div>
@@ -258,36 +307,28 @@
   </div>
 </section>
 
-<!-- SLIDE 6: Six Cells S04 - 边缘案例追问清单 -->
+<!-- SLIDE 6: Six Cells S04 - 实操 -->
 <section class="slide grey" data-layout="S04">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">G001 · C10</div>
+      <div class="l">O001 · L09</div>
       <div class="r">06 / 08</div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">边缘案例追问清单</div>
-      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">主动问AI："请考虑以下边缘群体"</h2>
+      <div class="t-cat accent" style="margin-bottom:2vh">实操练习</div>
+      <h2 style="font-family:var(--sans),var(--sans-zh);font-weight:300;font-size:min(3vw,5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:4vh">用3句话写出你的1分钟版本</h2>
       <div class="sub-grid-3-2">
-        <div class="sub-card">
-          <div class="ttl">1</div>
-          <div class="desc">老年人/青少年/非技术背景用户？</div>
-        </div>
-        <div class="sub-card">
-          <div class="ttl">2</div>
-          <div class="desc">视障/听障/行动不便/认知障碍？</div>
-        </div>
-        <div class="sub-card">
-          <div class="ttl">3</div>
-          <div class="desc">方言/少数民族语言/低识字率？</div>
+        <div class="sub-card accent">
+          <div class="ttl" style="color:var(--accent-on)">第1句</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">我的产品是什么<br/>为谁做的</div>
         </div>
         <div class="sub-card accent">
-          <div class="ttl" style="color:var(--accent-on)">4</div>
-          <div class="desc" style="color:var(--accent-on);opacity:.9">低收入/弱网络/老旧设备？</div>
+          <div class="ttl" style="color:var(--accent-on)">第2句</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">我最满意的一点</div>
         </div>
         <div class="sub-card accent">
-          <div class="ttl" style="color:var(--accent-on)">5</div>
-          <div class="desc" style="color:var(--accent-on);opacity:.9">焦虑症/抑郁症用户？</div>
+          <div class="ttl" style="color:var(--accent-on)">第3句</div>
+          <div class="desc" style="color:var(--accent-on);opacity:.9">下一步是什么</div>
         </div>
       </div>
     </div>
@@ -304,13 +345,13 @@
           <div class="l">07 / 08</div>
           <div class="r">CLOSING</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
+        <div data-anim="fade-up" style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em;margin-bottom:1.6vh">核心认知</div>
-          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(5.5vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">AI默认走向<br/>"大多数情况"</h2>
-          <p style="font-family:var(--sans),var(--sans-zh);font-size:max(18px,1.2vw);line-height:1.5;color:rgba(255,255,255,.86);max-width:36ch;margin-top:1.4vh">作为设计师，你有责任主动问："谁被忽略了？"</p>
+          <h2 style="font-family:var(--sans),var(--sans-zh);font-size:min(5.5vw,10vh);line-height:.94;letter-spacing:-.025em;font-weight:200;color:#fff">Pitch不是背台词</h2>
+          <p style="font-family:var(--sans),var(--sans-zh);font-size:max(18px,1.2vw);line-height:1.5;color:rgba(255,255,255,.86);max-width:36ch;margin-top:1.4vh">Pitch是用最简单的话让陌生人说"这个我想试试"</p>
         </div>
         <div style="position:relative;z-index:1">
-          <div class="t-meta" style="color:rgba(255,255,255,.62)">G001 · C10</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.62)">O001 · L09</div>
         </div>
       </div>
       <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between">
@@ -319,30 +360,34 @@
           <div class="r">结业</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:0">
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+          <div data-anim="slide-right" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">01</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">认识AI的偏见</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">训练数据有历史偏见，AI会默认复制</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">60秒结构</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">30秒展示+20秒亮点+10秒下一步</p>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
+          <div data-anim="slide-right" data-delay="100" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--text-primary)">02</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">主动追问边缘群体</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">用5问清单检查你的设计</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--text-primary);margin-bottom:1vh">价值聚焦</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">用户+问题+解决方案，不用技术细节</p>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
+          <div data-anim="slide-right" data-delay="200" style="display:grid;grid-template-columns:auto 1fr;gap:2vw;align-items:start;padding:2.6vh 0;border-top:1px solid var(--border-subtle);border-bottom:2px solid var(--accent)">
             <div style="font-family:var(--sans);font-weight:200;font-size:min(4.4vw,7.8vh);line-height:.9;color:var(--accent)">03</div>
             <div>
-              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">问："谁被忽略了？"</h3>
-              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">设计师的责任是主动问这个问题</p>
+              <h3 style="font-family:var(--sans),var(--sans-zh);font-weight:400;font-size:max(18px,1.8vw);line-height:1.2;letter-spacing:-.015em;color:var(--accent);margin-bottom:1vh">让陌生人说"我想试试"</h3>
+              <p style="font-family:var(--sans),var(--sans-zh);font-size:max(16px,.94vw);line-height:1.6;color:var(--text-secondary);font-weight:400">Pitch是价值传递，不是背台词</p>
             </div>
           </div>
         </div>
-        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ 完 · G001 C10</div>
+        <div class="t-meta" style="color:var(--text-helper);text-align:right">→ 完 · O001 L09</div>
       </div>
+    </div>
+    <!-- 讲解要点浮层 -->
+    <div class="lecture-note" data-note="S10">
+      <span>讲师提示：</span>结业时让学员现场练习 30 秒 pitch，随机挑 2-3 人。结束后问："你们觉得自己的 pitch 能在 5 分钟内打动陌生人吗？"
     </div>
   </div>
 </section>
@@ -354,7 +399,9 @@ const VS=`attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0)
 const FS=`precision highp float;uniform vec2 u_resolution;uniform float u_time;uniform vec2 u_mouse;uniform float u_dark;uniform vec3 u_accent;float gridLine(vec2 uv, float spacing, float thickness){vec2 g = abs(fract(uv / spacing) - 0.5);float d = min(g.x, g.y);return 1.0 - smoothstep(thickness - 0.005, thickness + 0.005, d);}void main(){vec2 uv = gl_FragCoord.xy / u_resolution.xy;float aspect = u_resolution.x / u_resolution.y;vec2 p = uv;p.x *= aspect;vec2 drift = vec2(u_time * 0.008, u_time * 0.005);vec2 gp = p + drift;float mainGrid = gridLine(gp, 0.12, 0.012);float subGrid = gridLine(gp, 0.024, 0.04) * 0.4;vec2 m = u_mouse;m.x *= aspect;float md = length(p - m);float mInfluence = exp(-md * 4.0) * 0.5;float gridStrength = (mainGrid + subGrid * 0.5) * (0.45 + mInfluence);vec2 dotGrid = fract(gp * 50.0) - 0.5;float dotMask = 1.0 - smoothstep(0.05, 0.14, length(dotGrid));vec3 lineColor = mix(vec3(0.08), vec3(0.92), u_dark);vec3 bgColor = mix(vec3(0.97, 0.97, 0.96), vec3(0.06, 0.06, 0.07), u_dark);vec3 col = bgColor;col = mix(col, lineColor, gridStrength * 0.55);col = mix(col, lineColor, dotMask * 0.35);col = mix(col, u_accent, mInfluence * 0.18);gl_FragColor = vec4(col, 1.0);}`;
 const mouse={x:0.5,y:0.5};addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=1-e.clientY/innerHeight});
 function bootGL(canvasId, fsSrc){const canvas=document.getElementById(canvasId);const gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});if(!gl) return ()=>false;const mk=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh;};const prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fsSrc));gl.linkProgram(prog);gl.useProgram(prog);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(prog,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);const lRes=gl.getUniformLocation(prog,'u_resolution');const lT=gl.getUniformLocation(prog,'u_time');const lM=gl.getUniformLocation(prog,'u_mouse');const lD=gl.getUniformLocation(prog,'u_dark');const lA=gl.getUniformLocation(prog,'u_accent');const resize=()=>{const d=Math.min(window.devicePixelRatio||1,2);canvas.width=innerWidth*d;canvas.height=innerHeight*d;gl.viewport(0,0,canvas.width,canvas.height);};addEventListener('resize',resize);resize();function readAccent(){const cs = getComputedStyle(document.documentElement);const hex = cs.getPropertyValue('--accent').trim() || '#002FA7';const m = hex.match(/^#([0-9a-f]{6})$/i);if(!m) return [0, 0.18, 0.65];const n = parseInt(m[1], 16);return [((n>>16)&255)/255, ((n>>8)&255)/255, (n&255)/255];}let accent = readAccent();let dark = 0;return (tSec, isDark)=>{if(isDark !== undefined) dark = isDark ? 1 : 0;accent = readAccent();gl.uniform2f(lRes,canvas.width,canvas.height);gl.uniform1f(lT,tSec);gl.uniform2f(lM,mouse.x,mouse.y);gl.uniform1f(lD,dark);gl.uniform3f(lA,accent[0],accent[1],accent[2]);gl.drawArrays(gl.TRIANGLES,0,6);return true;};}let darkMode=false;let gridCtrl=null, gridRAF=0, gridT0=Date.now();function startGrid(){if(document.body.classList.contains('canvas-mode') || window.__lowPowerMode || gridRAF) return;if(!gridCtrl) gridCtrl = bootGL('bg-grid',FS);if(!gridCtrl) return;gridT0=Date.now();function loop(){if(window.__lowPowerMode){gridRAF=0;return;}const t=(Date.now()-gridT0)/1000;gridCtrl(t, darkMode);gridRAF=requestAnimationFrame(loop);}gridRAF=requestAnimationFrame(loop);}function stopGrid(){if(gridRAF) cancelAnimationFrame(gridRAF);gridRAF=0;}if(document.body.classList.contains('canvas-mode')){const c=document.getElementById('bg-grid');if(c) c.remove();}else{startGrid();}addEventListener('swiss-low-power-change', e=>{e.detail.on ? stopGrid() : startGrid();});
-const deck=document.getElementById('deck');const slides=deck.querySelectorAll('.slide');const nav=document.getElementById('nav');let idx=0,total=slides.length,lock=false;deck.style.width=(total*100)+'vw';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex = idx;deck.style.transform=`translateX(${-idx*100}vw)`;nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));const el=slides[idx];const isDark = el.classList.contains('dark') || el.classList.contains('accent');document.body.classList.toggle('dark-bg', isDark);darkMode = isDark;if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);lock=true;setTimeout(()=>lock=false,700);}addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);});addEventListener('touchend',e=>{const dx=(e.changedTouches[0].clientX-tx);if(Math.abs(dx)>50){go(idx+(dx<0?1:-1));}},{passive:true});const initialSlideParam = new URLSearchParams(location.search).get('slide');const initialSlide = initialSlideParam ? Number(initialSlideParam) - 1 : 0;go(Number.isFinite(initialSlide) ? initialSlide : 0);
+const deck=document.getElementById('deck');const slides=deck.querySelectorAll('.slide');const nav=document.getElementById('nav');let idx=0,total=slides.length,lock=false;deck.style.width=(total*100)+'vw';slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});let notesVisible=false;function toggleNotes(){notesVisible=!notesVisible;updateNotes();}function updateNotes(){document.querySelectorAll('.lecture-note').forEach(n=>n.classList.remove('visible'));if(notesVisible){const currentSlide=slides[idx];if(currentSlide){currentSlide.querySelectorAll('.lecture-note').forEach(n=>n.classList.add('visible'));}}}function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex = idx;deck.style.transform=`translateX(${-idx*100}vw)`;nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));const el=slides[idx];const isDark = el.classList.contains('dark') || el.classList.contains('accent');document.body.classList.toggle('dark-bg', isDark);darkMode = isDark;updateNotes();if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);lock=true;setTimeout(()=>lock=false,700);}addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);if(e.key==='n'||e.key==='N'){if(!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();toggleNotes();return;}}});addEventListener('touchend',e=>{const dx=(e.changedTouches[0].clientX-tx);if(Math.abs(dx)>50){go(idx+(dx<0?1:-1));}},{passive:true});const initialSlideParam = new URLSearchParams(location.search).get('slide');const initialSlide = initialSlideParam ? Number(initialSlideParam) - 1 : 0;go(Number.isFinite(initialSlide) ? initialSlide : 0);
+// motion-ready class for animations
+document.body.classList.add('motion-ready');
 </script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
