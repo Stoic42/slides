@@ -85,11 +85,30 @@
   font-size: 0.88em;
   border: 1px solid rgba(255,255,255,0.08);
 }
+  /* slides-layout-fix: keep generated slides inside the viewport. */
+  body.canvas-mode .slide{padding:0;align-items:stretch;justify-content:stretch}
+  body.canvas-mode .canvas-card,.canvas-card{width:100%;height:100%;max-width:100%;max-height:100%}
+  .slide.split .canvas-card{padding:0}
+  .bar-row{grid-template-columns:8em minmax(0,1fr) minmax(9em,18vw)}
+  .bar-row .bar-value{font-family:var(--sans),var(--sans-zh);line-height:1.25;overflow-wrap:anywhere}
+  .h-bar-chart{grid-template-columns:11em minmax(0,1fr) minmax(16em,22vw)}
+  .h-bar-chart .row-val{font-family:var(--sans),var(--sans-zh);font-size:clamp(18px,1.35vw,28px);line-height:1.08;overflow-wrap:anywhere}
+
+  /* o001-brand-system */
+  :root{--brand-logo:url("../../slides/slides/images/shenicest-logo.svg")}
+  .brand-lockup{display:inline-flex!important;align-items:center;gap:.75em;max-width:none!important;white-space:nowrap}
+  .brand-mark{width:5.8em;height:1.05em;display:inline-block;flex:0 0 auto;background:currentColor;opacity:.9;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat}
+  .slide.accent .brand-mark,.slide.dark .brand-mark,.split-half .half.b-ink .brand-mark{opacity:.86}
+  .slide.accent .brand-lockup,.slide.accent .canvas-card .brand-lockup{color:rgba(255,255,255,.86)!important}
+
+  /* o001-floating-brand */
+  body::before{content:"";position:fixed;left:34px;top:26px;width:112px;height:20px;background:#df017e;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat;z-index:9999;pointer-events:none;opacity:.92}
+  body::after{content:"O001";position:fixed;right:34px;top:26px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:#df017e;z-index:9999;pointer-events:none;opacity:.72}
 </style>
 </head>
 <body><div class="reveal"><div class="slides">
 
-<!-- O001 W3 封面 -->
+<!-- W3 封面 -->
 <section class="center" data-background-color="#1a1a2e">
   <h2 style="color:#ff6b9d; font-size:1.8em; margin-bottom:20px;">O001 · Week 3</h2>
   <h1 style="font-size:2em; line-height:1.3;">MVP开发冲刺<br/>从PRD到可运行产品</h1>
@@ -316,7 +335,7 @@
   </div>
 </section>
 
-<!-- O001 W3 总结 -->
+<!-- W3 总结 -->
 <section class="center" data-background-color="#1a1a2e">
   <h2 style="color:#ff6b9d;">W3 总结</h2>
   <div class="glass-card" style="max-width:700px; margin:30px auto; text-align:left;">

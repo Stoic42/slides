@@ -79,6 +79,17 @@
   .delay-3{animation-delay:.3s!important}
   .delay-4{animation-delay:.4s!important}
   .delay-5{animation-delay:.5s!important}
+
+  /* o001-brand-system */
+  :root{--brand-logo:url("../../slides/images/shenicest-logo.svg")}
+  .brand-lockup{display:inline-flex!important;align-items:center;gap:.75em;max-width:none!important;white-space:nowrap}
+  .brand-mark{width:5.8em;height:1.05em;display:inline-block;flex:0 0 auto;background:currentColor;opacity:.9;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat}
+  .slide.accent .brand-mark,.slide.dark .brand-mark,.split-half .half.b-ink .brand-mark{opacity:.86}
+  .slide.accent .brand-lockup,.slide.accent .canvas-card .brand-lockup{color:rgba(255,255,255,.86)!important}
+
+  /* o001-floating-brand */
+  body::before{content:"";position:fixed;left:34px;top:26px;width:112px;height:20px;background:#df017e;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat;z-index:9999;pointer-events:none;opacity:.92}
+  body::after{content:"O001";position:fixed;right:34px;top:26px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:#df017e;z-index:9999;pointer-events:none;opacity:.72}
 </style>
 </head>
 <body>

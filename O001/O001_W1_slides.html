@@ -23,11 +23,51 @@
 .term-tag { display: inline-block; background: rgba(77,171,247,0.2); border: 1px solid rgba(77,171,247,0.4); color: #4dabf7; font-size: 0.6em; padding: 2px 8px; border-radius: 4px; margin-right: 5px; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 0.8em; }
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; font-size: 0.75em; }
+.visual-split { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 34px; align-items: center; }
+.visual-note { color: rgba(255,255,255,0.72); font-size: 0.72em; line-height: 1.55; }
+.case-shot { background: #f7f5f3; color: #17171c; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.34); border: 1px solid rgba(255,255,255,0.15); }
+.shot-top { height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #ece8e5; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.shot-dot { width: 9px; height: 9px; border-radius: 50%; background: #ff6b9d; }
+.shot-dot:nth-child(2) { background: #ffd166; }
+.shot-dot:nth-child(3) { background: #51cf66; }
+.app-mockup { padding: 18px; display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 14px; min-height: 300px; }
+.app-sidebar { background: #17171c; border-radius: 10px; color: white; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.app-pill { height: 26px; border-radius: 999px; background: rgba(255,255,255,0.12); }
+.app-pill.hot { background: #ff6b9d; }
+.app-canvas { border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: white; }
+.chat-row { display: flex; gap: 8px; align-items: flex-start; }
+.chat-bubble { padding: 10px 12px; border-radius: 14px; background: #f1eef2; font-size: 15px; line-height: 1.35; }
+.chat-row.user { justify-content: flex-end; }
+.chat-row.user .chat-bubble { background: #ff6b9d; color: white; }
+.phone-shot { width: 250px; margin: 0 auto; border-radius: 28px; padding: 14px; background: #111116; box-shadow: 0 24px 70px rgba(0,0,0,0.42); }
+.phone-screen { background: #fffafc; color: #17171c; min-height: 390px; border-radius: 20px; padding: 18px 16px; display: flex; flex-direction: column; gap: 14px; }
+.health-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.08); font-size: 16px; }
+.missing-tile { margin-top: auto; border: 2px dashed #ff6b9d; border-radius: 14px; padding: 16px; color: #df017e; font-size: 16px; line-height: 1.35; background: rgba(255,107,157,0.08); }
+.annotation { display: inline-block; color: #ff6b9d; font-weight: 700; }
+  /* slides-layout-fix: keep generated slides inside the viewport. */
+  body.canvas-mode .slide{padding:0;align-items:stretch;justify-content:stretch}
+  body.canvas-mode .canvas-card,.canvas-card{width:100%;height:100%;max-width:100%;max-height:100%}
+  .slide.split .canvas-card{padding:0}
+  .bar-row{grid-template-columns:8em minmax(0,1fr) minmax(9em,18vw)}
+  .bar-row .bar-value{font-family:var(--sans),var(--sans-zh);line-height:1.25;overflow-wrap:anywhere}
+  .h-bar-chart{grid-template-columns:11em minmax(0,1fr) minmax(16em,22vw)}
+  .h-bar-chart .row-val{font-family:var(--sans),var(--sans-zh);font-size:clamp(18px,1.35vw,28px);line-height:1.08;overflow-wrap:anywhere}
+
+  /* o001-brand-system */
+  :root{--brand-logo:url("../../slides/slides/images/shenicest-logo.svg")}
+  .brand-lockup{display:inline-flex!important;align-items:center;gap:.75em;max-width:none!important;white-space:nowrap}
+  .brand-mark{width:5.8em;height:1.05em;display:inline-block;flex:0 0 auto;background:currentColor;opacity:.9;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat}
+  .slide.accent .brand-mark,.slide.dark .brand-mark,.split-half .half.b-ink .brand-mark{opacity:.86}
+  .slide.accent .brand-lockup,.slide.accent .canvas-card .brand-lockup{color:rgba(255,255,255,.86)!important}
+
+  /* o001-floating-brand */
+  body::before{content:"";position:fixed;left:34px;top:26px;width:112px;height:20px;background:#df017e;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat;z-index:9999;pointer-events:none;opacity:.92}
+  body::after{content:"O001";position:fixed;right:34px;top:26px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:#df017e;z-index:9999;pointer-events:none;opacity:.72}
 </style>
 </head>
 <body><div class="reveal"><div class="slides">
 
-<!-- O001 W1 封面 -->
+<!-- W1 封面 -->
 <section class="center" data-background-color="#1a1a2e">
   <h2 style="color:#ff6b9d; font-size:1.8em; margin-bottom:20px;">O001 · Week 1</h2>
   <h1 style="font-size:2.2em; line-height:1.3;">AI+创造<br/>从零到第一个页面</h1>
@@ -188,7 +228,7 @@
   </div>
 </section>
 
-<!-- O001 W1 总结 -->
+<!-- W1 总结 -->
 <section class="center" data-background-color="#1a1a2e">
   <h2 style="color:#ff6b9d;">W1 总结</h2>
   <div class="glass-card" style="max-width:700px; margin:30px auto; text-align:left;">

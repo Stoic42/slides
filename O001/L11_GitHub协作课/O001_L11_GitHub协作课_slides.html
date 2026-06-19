@@ -69,6 +69,13 @@
   .lecture-note{position:absolute;bottom:18vh;left:5vw;background:rgba(0,0,0,.88);color:#fff;padding:1.2vh 1.6vw;border-radius:4px;font-family:var(--sans-zh),var(--sans);font-size:max(14px,.85vw);line-height:1.5;max-width:42vw;border-left:3px solid var(--accent);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:20}.lecture-note.visible{opacity:1}.lecture-note span{color:#ff71ce;font-weight:600}.highlight-box{background:rgba(255,113,206,.15);border:1px solid var(--accent);padding:.8vh 1.2vw;border-radius:3px;margin-top:.8vh}
   [data-anim="fade-up"]{opacity:0;transform:translateY(16px)}body.motion-ready [data-anim="fade-up"]{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}[data-anim="fade-up"][data-delay="200"]{transition-delay:.2s}[data-anim="fade-up"][data-delay="400"]{transition-delay:.4s}[data-anim="scale-in"]{opacity:0;transform:scale(.92)}body.motion-ready [data-anim="scale-in"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}[data-anim="slide-left"]{opacity:0;transform:translateX(-20px)}body.motion-ready [data-anim="slide-left"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}[data-anim="slide-right"]{opacity:0;transform:translateX(20px)}body.motion-ready [data-anim="slide-right"]{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
   @media(max-width:900px){.h-hero{font-size:16vw}.grid-2{grid-template-columns:1fr}}
+
+  /* o001-brand-system */
+  :root{--brand-logo:url("../../slides/images/shenicest-logo.svg")}
+  .brand-lockup{display:inline-flex!important;align-items:center;gap:.75em;max-width:none!important;white-space:nowrap}
+  .brand-mark{width:5.8em;height:1.05em;display:inline-block;flex:0 0 auto;background:currentColor;opacity:.9;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat}
+  .slide.accent .brand-mark,.slide.dark .brand-mark,.split-half .half.b-ink .brand-mark{opacity:.86}
+  .slide.accent .brand-lockup,.slide.accent .canvas-card .brand-lockup{color:rgba(255,255,255,.86)!important}
 </style>
 </head>
 <body class="canvas-mode">
@@ -81,7 +88,7 @@
   <div class="canvas-card">
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
     <div class="chrome-min">
-      <div class="l">O001 · L11 协作课</div>
+      <div class="l brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L11 协作课</span></div>
       <div class="r">01 / 08</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
