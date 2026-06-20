@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O001 课程导航 | SheNicest</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Inter","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:#0a0a0a;color:#fafaf8;
+    min-height:100vh;padding:8vh 8vw;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{
+    font-size:clamp(24px,4vw,48px);
+    font-weight:200;
+    letter-spacing:-.03em;
+    margin-bottom:2rem;
+    color:#ff71ce;
+  }
+  .subtitle{
+    font-size:clamp(12px,1.5vw,16px);
+    color:#737373;
+    margin-bottom:4rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .section{margin-bottom:5rem}
+  .section-header{
+    display:flex;align-items:baseline;gap:2rem;margin-bottom:1.5rem;
+    border-bottom:1px solid #2a2a2a;padding-bottom:1rem;
+  }
+  .section-title{
+    font-size:clamp(14px,1.5vw,18px);font-weight:500;
+    color:#ff71ce;letter-spacing:0.05em;
+  }
+  .section-desc{font-size:clamp(12px,1vw,14px);color:#737373}
+  .端午-tag{
+    display:inline-block;font-size:11px;padding:3px 8px;
+    background:#ff71ce;color:#000;font-weight:600;
+    letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;
+    margin-left:auto;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:1.5rem;
+  }
+  a.card{
+    display:block;
+    background:#1a1a1a;
+    border:1px solid #2a2a2a;
+    padding:2rem;
+    text-decoration:none;
+    color:#fafaf8;
+    transition:border-color 0.2s,background 0.2s;
+  }
+  a.card:hover{
+    border-color:#ff71ce;
+    background:#111116;
+  }
+  .card-num{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#ff71ce;
+    margin-bottom:0.75rem;
+  }
+  .card-title{
+    font-size:clamp(16px,2vw,20px);
+    font-weight:400;
+    margin-bottom:0.5rem;
+    line-height:1.3;
+  }
+  .card-meta{
+    font-size:12px;
+    color:#737373;
+    margin-top:0.75rem;
+  }
+  .card-tag{
+    display:inline-block;
+    font-size:10px;
+    padding:2px 6px;
+    border:1px solid #2a2a2a;
+    margin-right:4px;
+    color:#737373;
+    letter-spacing:0.05em;
+  }
+  .tag-实战{color:#ff71ce;border-color:#ff71ce}
+  .tag-轻课{color:#b6ff00;border-color:#b6ff00}
+  .tag-端午{border-color:#ff71ce;background:rgba(255,113,206,.15);color:#ff71ce}
+  .info-box{
+    background:#1a1a1a;border:1px solid #2a2a2a;
+    padding:2rem;margin-bottom:4rem;
+    border-left:3px solid #ff71ce;
+  }
+  .info-box h2{
+    font-size:clamp(16px,1.5vw,20px);font-weight:500;
+    color:#ff71ce;margin-bottom:1rem;
+  }
+  .info-box p{font-size:clamp(13px,1vw,15px);color:#a0a0a0;line-height:1.7;margin-bottom:0.8rem}
+  .info-box strong{color:#fafaf8}
+  .info-box .highlight{color:#ff71ce;font-weight:500}
+  .instructor-box{
+    display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2rem;align-items:center;
+    background:#111116;border:1px solid #2a2a2a;border-left:3px solid #b6ff00;
+    padding:2rem;margin-bottom:4rem;
+  }
+  .instructor-box h2{font-size:clamp(20px,2.4vw,30px);font-weight:400;margin-bottom:.7rem}
+  .instructor-box p{max-width:760px;font-size:clamp(13px,1vw,15px);color:#a0a0a0;line-height:1.7}
+  .instructor-stats{color:#b6ff00;font-family:monospace;letter-spacing:.04em;margin-top:.7rem}
+  .profile-link{
+    display:inline-block;border:1px solid #b6ff00;color:#b6ff00;text-decoration:none;
+    padding:.85rem 1.1rem;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .profile-link:hover{background:#b6ff00;color:#0a0a0a}
+  @media(max-width:720px){.instructor-box{grid-template-columns:1fr}.profile-link{justify-self:start}}
+  .numbering-table{
+    width:100%;border-collapse:collapse;
+    font-size:clamp(12px,.9vw,14px);
+    margin-top:1rem;
+  }
+  .numbering-table th,.numbering-table td{
+    text-align:left;padding:0.8rem 1rem;
+    border-bottom:1px solid #2a2a2a;
+  }
+  .numbering-table th{color:#737373;text-transform:uppercase;letter-spacing:0.1em;font-weight:500}
+  .numbering-table td{color:#fafaf8}
+  .numbering-table .num{color:#ff71ce;font-weight:600}
+  .pricing-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem
+  }
+  .pricing-card{
+    background:#0f0f0f;border:1px solid #2a2a2a;
+    padding:1.5rem;text-align:center;
+  }
+  .pricing-card.featured{
+    border-color:#ff71ce;
+    background:rgba(255,113,206,.05);
+  }
+  .pricing-label{font-size:11px;color:#737373;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+  .pricing-price{font-size:clamp(24px,2vw,32px);font-weight:200;color:#fafaf8;letter-spacing:-0.02em}
+  .pricing-card.featured .pricing-price{color:#ff71ce}
+  .pricing-desc{font-size:12px;color:#737373;margin-top:0.5rem}
+</style>
+</head>
+<body>
+
+<h1>O001 课程导航</h1>
+<p class="subtitle">SheNicest 第一次线上课 · L01-L12 · 点击课程卡片开始</p>
+
+<section class="instructor-box" aria-label="课程讲师">
+  <div>
+    <h2>课程讲师 · Desal</h2>
+    <p>AI-Native 技术领航、SheNicest 核心组织者与计算机教师。课程来自真实工作坊、黑客松与社区协作现场，目标是把复杂技术拆成普通人可以理解、练习并带走的成果。</p>
+    <p class="instructor-stats">12 场工作坊 · 3 场受邀演讲 · 2 次黑客松驻场</p>
+  </div>
+  <a class="profile-link" href="../../../../Self/desal-speaker-card-2026.html">查看 Speaker Card →</a>
+</section>
+
+<!-- 端午打包说明 -->
+<div class="info-box">
+  <h2>端午轻课包 · 限时 ¥199（原价 ¥196）</h2>
+  <p><strong>时间：</strong>6月19-22日（端午期间）每晚一节，30-40分钟/节</p>
+  <p><strong>组合逻辑：</strong>四节轻课打包，专为端午开课设计，填充式教学 + 案例 + Q&A + 飞行嘉宾</p>
+  <p><strong>课程组合：</strong>L06（Vibe课）+ L07（Prompt课）+ L08（产品课）+ L10（边缘课）= <span class="highlight">¥199</span></p>
+  <p><strong>编号说明：</strong>L06-L08 为认知基础课（15分钟/节），L10 边缘课讲 AI 偏见与伦理</p>
+  <p style="margin-top:1rem"><strong>端午后：</strong>每周六晚上一节实战课（40分钟/节），¥79-99/节，轻松节奏</p>
+</div>
+
+<!-- 编号体系说明 -->
+<div class="info-box">
+  <h2>课程编号体系</h2>
+  <table class="numbering-table">
+    <tr><th>编号范围</th><th>课程类型</th><th>时长</th><th>单价</th><th>说明</th></tr>
+    <tr><td class="num">L06-L08</td><td>轻课</td><td>15分钟</td><td>¥49/节</td><td>认知基础课</td></tr>
+    <tr><td class="num">L10</td><td>轻课</td><td>15分钟</td><td>¥49</td><td>边缘案例课（AI偏见）</td></tr>
+    <tr><td class="num">L01-L03</td><td>实战课</td><td>2×20分钟</td><td>¥99/节</td><td>部署·美化·PRD</td></tr>
+    <tr><td class="num">L04-L05</td><td>实战课</td><td>2×20分钟</td><td>¥79/节</td><td>Debug·API</td></tr>
+    <tr><td class="num">L09</td><td>实战课</td><td>20分钟</td><td>¥79</td><td>Pitch课，Demo前必学</td></tr>
+    <tr><td class="num">L11</td><td>实战课</td><td>2×20分钟</td><td>¥79</td><td>GitHub协作：PR/Code Review</td></tr>
+    <tr><td class="num">L12</td><td>实战课</td><td>2×20分钟</td><td>¥79</td><td>商业化：从 Demo 到第一笔付费</td></tr>
+  </table>
+  <p style="margin-top:1rem;font-size:12px;color:#737373">* 实战课为2节连上（20min×2=40min），含实操练习</p>
+</div>
+
+<!-- 端午轻课包 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">端午轻课包</div>
+    <div class="section-desc">6月19-22日 · 每晚一节 · ¥199四节</div>
+    <div class="端午-tag">限时</div>
+  </div>
+  <div class="grid">
+
+  <a class="card" href="L06_Vibe课/O001_L06_Vibe课_slides.html">
+    <div class="card-num">L06 · 轻课</div>
+    <div class="card-title">Vibe Coding是什么</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+  <a class="card" href="L07_Prompt课/O001_L07_Prompt课_slides.html">
+    <div class="card-num">L07 · 轻课</div>
+    <div class="card-title">Prompt课：怎么跟AI说话</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+  <a class="card" href="L08_产品课/O001_L08_产品课_slides.html">
+    <div class="card-num">L08 · 轻课</div>
+    <div class="card-title">产品课：痛点·痒点·爽点</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+  <a class="card" href="L10_边缘课/O001_L10_边缘课_slides.html">
+    <div class="card-num">L10 · 轻课</div>
+    <div class="card-title">边缘课：AI偏见与边缘案例</div>
+    <div class="card-meta">
+      <span class="card-tag tag-轻课">15min</span>
+      <span class="card-tag tag-端午">端午</span>
+      ¥49
+    </div>
+  </a>
+
+</div>
+</div>
+
+<!-- 实战课 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">实战课</div>
+    <div class="section-desc">端午后每周六 · 2×20分钟/节</div>
+  </div>
+  <div class="grid">
+
+  <a class="card" href="L01_部署课/O001_L01_部署课_slides.html">
+    <div class="card-num">L01 · 实战课</div>
+    <div class="card-title">部署课：<br>从本地到线上</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥99</span>
+      灵光 × Vercel
+    </div>
+  </a>
+
+  <a class="card" href="L02_美化课/O001_L02_美化课_slides.html">
+    <div class="card-num">L02 · 实战课</div>
+    <div class="card-title">美化课：<br>从丑到能看</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥99</span>
+      CRAP四原则
+    </div>
+  </a>
+
+  <a class="card" href="L03_PRD课/O001_L03_PRD课_slides.html">
+    <div class="card-num">L03 · 实战课</div>
+    <div class="card-title">PRD课：<br>PRD即时验证</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥99</span>
+      Garrett五层模型
+    </div>
+  </a>
+
+  <a class="card" href="L04_Debug课/O001_L04_Debug课_slides.html">
+    <div class="card-num">L04 · 实战课</div>
+    <div class="card-title">Debug课：<br>AI追问排错</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥79</span>
+      CoT追问模板
+    </div>
+  </a>
+
+  <a class="card" href="L05_API课/O001_L05_API课_slides.html">
+    <div class="card-num">L05 · 实战课</div>
+    <div class="card-title">API课：<br>数据连接</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥79</span>
+      高德地图 API
+    </div>
+  </a>
+
+  <a class="card" href="L09_Pitch课/O001_L09_Pitch课_slides.html">
+    <div class="card-num">L09 · 实战课</div>
+    <div class="card-title">Pitch课：<br>5分钟讲清楚产品</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">20min</span>
+      <span class="card-tag">¥79</span>
+      30+20+10结构
+    </div>
+  </a>
+
+  <a class="card" href="L11_GitHub协作课/O001_L11_GitHub协作课_slides.html">
+    <div class="card-num">L11 · 实战课</div>
+    <div class="card-title">GitHub协作课：<br>PR / Code Review</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥79</span>
+      PR / 协作礼仪
+    </div>
+  </a>
+
+  <a class="card" href="L12_商业化课/O001_L12_商业化课_slides.html">
+    <div class="card-num">L12 · 实战课</div>
+    <div class="card-title">商业化课：<br>从 Demo 到第一笔付费</div>
+    <div class="card-meta">
+      <span class="card-tag tag-实战">2节×20min</span>
+      <span class="card-tag">¥79</span>
+      赵迪×Vivian×Angel
+    </div>
+  </a>
+
+</div>
+</div>
+
+<!-- 定价总览 -->
+<div class="info-box">
+  <h2>定价总览</h2>
+  <div class="pricing-grid">
+    <div class="pricing-card featured">
+      <div class="pricing-label">端午轻课包</div>
+      <div class="pricing-price">¥199</div>
+      <div class="pricing-desc">L06+L07+L08+L10<br/><span style="color:#ff71ce">限时 · 端午四节</span></div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">轻课单节</div>
+      <div class="pricing-price">¥49</div>
+      <div class="pricing-desc">L06 / L07 / L08 / L10<br/>15分钟</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">实战课</div>
+      <div class="pricing-price">¥79</div>
+      <div class="pricing-desc">L04 / L05 / L09 / L11 / L12<br/>2×20min 或 20min</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-label">实战课</div>
+      <div class="pricing-price">¥99</div>
+      <div class="pricing-desc">L01 / L02 / L03<br/>2×20min</div>
+    </div>
+  </div>
+</div>
+
+<p style="margin-top:4rem;font-size:12px;color:#525252;line-height:1.8">
+  操作说明：← → 键盘翻页 &nbsp;|&nbsp; ESC 打开索引 &nbsp;|&nbsp; B 切换静态/动态模式 &nbsp;|&nbsp; N 显示讲师提示<br>
+  文件夹位置：D:\Creation\Work\SheNicest\slides\O001\
+</p>
+</body>
+</html>

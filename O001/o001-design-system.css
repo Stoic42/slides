@@ -1,0 +1,99 @@
+/*
+ * O001 shared course identity layer
+ * Keeps SheNicest pink as the brand signal while giving each lesson a
+ * restrained secondary color for diagrams, examples, and navigation.
+ */
+:root{
+  --o001-pink:#ff71ce;
+  --o001-deep-pink:#df017e;
+  --o001-paper:#fafaf8;
+  --o001-ink:#0a0a0a;
+  --course-signal:#ff71ce;
+  --course-signal-rgb:255,113,206;
+}
+
+body[data-course="L01"]{--course-signal:#2774ff;--course-signal-rgb:39,116,255}
+body[data-course="L02"]{--course-signal:#ff8a3d;--course-signal-rgb:255,138,61}
+body[data-course="L03"]{--course-signal:#8957ff;--course-signal-rgb:137,87,255}
+body[data-course="L04"]{--course-signal:#ff4d4d;--course-signal-rgb:255,77,77}
+body[data-course="L05"]{--course-signal:#00a878;--course-signal-rgb:0,168,120}
+body[data-course="L06"]{--course-signal:#31a8ff;--course-signal-rgb:49,168,255}
+body[data-course="L07"]{--course-signal:#9d62ff;--course-signal-rgb:157,98,255}
+body[data-course="L08"]{--course-signal:#ff7a59;--course-signal-rgb:255,122,89}
+body[data-course="L09"]{--course-signal:#e93cac;--course-signal-rgb:233,60,172}
+body[data-course="L10"]{--course-signal:#008f7a;--course-signal-rgb:0,143,122}
+body[data-course="L11"]{--course-signal:#238636;--course-signal-rgb:35,134,54}
+body[data-course="L12"]{--course-signal:#f0a500;--course-signal-rgb:240,165,0}
+
+body[data-course]::after{
+  content:"";
+  position:fixed;
+  z-index:28;
+  right:0;
+  top:0;
+  width:4px;
+  height:100vh;
+  background:linear-gradient(to bottom,var(--o001-pink) 0 32%,var(--course-signal) 32% 100%);
+  pointer-events:none;
+}
+
+body[data-course] .chrome-min .l:not(.brand-lockup)::before{
+  content:"";
+  width:5.4em;
+  height:1em;
+  display:inline-block;
+  margin-right:.8em;
+  vertical-align:-.12em;
+  background:currentColor;
+  opacity:.82;
+  -webkit-mask:var(--brand-logo) center/contain no-repeat;
+  mask:var(--brand-logo) center/contain no-repeat;
+}
+
+.course-signal{color:var(--course-signal)!important}
+.course-signal-bg{background:var(--course-signal)!important;color:#fff!important}
+.course-signal-border{border-color:var(--course-signal)!important}
+
+/* Consistent editorial labels for case, demo, practice, and checkpoints. */
+.o001-page-type{
+  display:inline-flex;
+  align-items:center;
+  gap:.65em;
+  font-family:var(--mono,ui-monospace,monospace);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--course-signal);
+}
+.o001-page-type::before{
+  content:"";
+  width:18px;
+  height:2px;
+  background:currentColor;
+}
+
+/* Shared product-evidence frame for later screenshots and UI reconstructions. */
+.o001-evidence{
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  color:var(--o001-ink);
+  border:1px solid rgba(10,10,10,.14);
+  box-shadow:0 18px 50px rgba(10,10,10,.08);
+}
+.o001-evidence::before{
+  content:"";
+  display:block;
+  height:28px;
+  border-bottom:1px solid rgba(10,10,10,.1);
+  background:
+    radial-gradient(circle at 14px 14px,#ff5f57 0 4px,transparent 4.5px),
+    radial-gradient(circle at 30px 14px,#febc2e 0 4px,transparent 4.5px),
+    radial-gradient(circle at 46px 14px,#28c840 0 4px,transparent 4.5px),
+    #f5f5f3;
+}
+
+@media(max-width:900px){
+  body[data-course]::after{width:3px}
+}

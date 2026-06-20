@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L01 部署课 | O001</title>
+<link rel="stylesheet" href="../o001-design-system.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -155,7 +156,7 @@
   .deploy-result-url{font-family:var(--mono);font-size:clamp(13px,.8vw,17px);letter-spacing:.04em;color:var(--accent-bright);white-space:nowrap}
 </style>
 </head>
-<body class="canvas-mode">
+<body class="canvas-mode" data-course="L01">
 <script>if(/Win/i.test(navigator.platform||navigator.userAgentData?.platform||'')){document.body.classList.add('is-win');}(function(){const KEY='guizang-ppt-low-power';const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const stored=localStorage.getItem(KEY);window.__lowPowerMode=stored==='1'||(stored===null&&reduced);function updateHint(){const hint=document.getElementById('hint');if(hint)hint.textContent=`← → 翻页 · B ${window.__lowPowerMode?'动态':'静态'} · ESC 索引`;}window.__setLowPowerMode=function(on,opts={}){window.__lowPowerMode=!!on;document.body.classList.toggle('low-power',window.__lowPowerMode);if(opts.persist!==false)localStorage.setItem(KEY,window.__lowPowerMode?'1':'0');if(window.__lowPowerMode&&document.getAnimations){document.getAnimations().forEach(a=>a.cancel());}updateHint();dispatchEvent(new CustomEvent('swiss-low-power-change',{detail:{on:window.__lowPowerMode}}));if(window.__playSlide)window.__playSlide(window.__currentSlideIndex||0);};document.body.classList.toggle('low-power',window.__lowPowerMode);addEventListener('DOMContentLoaded',updateHint,{once:true});})();</script>
 <canvas id="bg-grid" class="bg"></canvas>
 <div id="hint">← → 翻页 · B 静态 · ESC 索引</div>
@@ -169,7 +170,7 @@
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
     <div class="chrome-min">
       <div class="l brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L01 部署课</span></div>
-      <div class="r">01 / 12</div>
+      <div class="r">01 / 13</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
       <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">DEPLOYMENT · 部署课</div>
@@ -185,11 +186,47 @@
   </div>
 </section>
 
-<!-- ========== L01 S02: 课前 + 什么是部署 ========== -->
+<!-- ========== L01 S02: 讲师介绍 ========== -->
+<section class="slide dark" data-layout="S08">
+  <div class="canvas-card">
+    <div class="chrome-min" style="color:rgba(255,255,255,.62)">
+      <div class="l brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · 课程讲师</span></div>
+      <div class="r">02 / 13</div>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:7fr 5fr;gap:5vw;align-items:center">
+      <div>
+        <div class="t-cat accent" style="margin-bottom:2vh">ABOUT THE INSTRUCTOR</div>
+        <h2 style="font-family:var(--sans);font-weight:200;font-size:min(9vw,15vh);line-height:.9;letter-spacing:-.04em;color:var(--paper)">Desal</h2>
+        <p class="t-body" style="max-width:38ch;margin-top:3vh;color:rgba(255,255,255,.78)">AI-Native 技术领航 · SheNicest 核心组织者 · 计算机教师</p>
+        <p class="t-body-sm" style="max-width:48ch;margin-top:2vh;color:rgba(255,255,255,.62)">课程来自真实工作坊、黑客松与社区协作现场。复杂技术会被拆成可以立刻理解、练习并带走的动作。</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.2vh 2vw">
+        <div class="stat-card accent-top">
+          <div class="stat-nb" style="color:var(--paper)">12</div>
+          <div class="stat-label" style="color:rgba(255,255,255,.62)">WORKSHOPS</div>
+        </div>
+        <div class="stat-card accent-top">
+          <div class="stat-nb" style="color:var(--paper)">3</div>
+          <div class="stat-label" style="color:rgba(255,255,255,.62)">INVITED TALKS</div>
+        </div>
+        <div class="stat-card accent-top">
+          <div class="stat-nb" style="color:var(--paper)">2</div>
+          <div class="stat-label" style="color:rgba(255,255,255,.62)">HACKATHONS</div>
+        </div>
+        <div style="border-top:3px solid var(--accent);padding-top:1.6vh">
+          <div class="t-body-emp" style="color:var(--accent)">讲 10 分钟<br>练 20 分钟</div>
+          <div class="t-helper" style="margin-top:.8vh;color:rgba(255,255,255,.62)">带走一个能展示的小成果</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== L01 S03: 课前 + 什么是部署 ========== -->
 <section class="slide" data-layout="S03">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">L01 · 02 / 12</div>
+      <div class="l">L01 · 03 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:3vh;margin-top:2vh">
@@ -203,11 +240,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S03: Duo Compare - 对比 ========== -->
+<!-- ========== L01 S04: Duo Compare - 对比 ========== -->
 <section class="slide dark" data-layout="S08">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">L01 · 03 / 12</div>
+      <div class="l">L01 · 04 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div class="duo-compare" style="margin-top:6vh">
@@ -226,11 +263,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S04: 工具 ========== -->
+<!-- ========== L01 S05: 工具 ========== -->
 <section class="slide" data-layout="S05">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">L01 · 04 / 12</div>
+      <div class="l">L01 · 05 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
@@ -256,11 +293,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S05: Step1-2-3 ========== -->
+<!-- ========== L01 S06: Step1-2-3 ========== -->
 <section class="slide grey" data-layout="S11">
   <div class="canvas-card">
     <div class="chrome-min tight">
-      <div class="l">L01 · 05 / 12</div>
+      <div class="l">L01 · 06 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div class="deploy-flow">
@@ -327,11 +364,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S06: 成功 ========== -->
+<!-- ========== L01 S07: 成功 ========== -->
 <section class="slide accent" data-layout="S06">
   <div class="canvas-card">
     <div class="chrome-min" style="color:rgba(255,255,255,.62)">
-      <div class="l">L01 · 06 / 12</div>
+      <div class="l">L01 · 07 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
@@ -356,11 +393,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S07: 自定义域名 ========== -->
+<!-- ========== L01 S08: 自定义域名 ========== -->
 <section class="slide" data-layout="S04">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">L01 · 07 / 12</div>
+      <div class="l">L01 · 08 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
@@ -391,14 +428,14 @@
   </div>
 </section>
 
-<!-- ========== L01 S08: 本节总结 ========== -->
+<!-- ========== L01 S09: 本节总结 ========== -->
 <section class="slide" data-layout="S10">
   <div class="canvas-card">
     <div class="split-half">
       <div class="half b-accent" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between;position:relative;overflow:hidden">
         <canvas class="ascii-bg" aria-hidden="true"></canvas>
         <div class="chrome-min" style="margin-bottom:0;position:relative;z-index:1;color:rgba(255,255,255,.62)">
-          <div class="l">L01 · 08 / 12</div>
+          <div class="l">L01 · 09 / 13</div>
           <div class="r">SUMMARY</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
@@ -407,7 +444,7 @@
         </div>
         <div style="display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.62)">部署课</div>
-          <div class="t-meta" style="color:rgba(255,255,255,.62)">01 / 12</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.62)">SECTION 01</div>
         </div>
       </div>
       <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between">
@@ -444,13 +481,13 @@
   </div>
 </section>
 
-<!-- ========== L01 S09: 第2节封面 ========== -->
+<!-- ========== L01 S10: 第2节封面 ========== -->
 <section class="slide accent" data-layout="S01">
   <div class="canvas-card">
     <canvas class="ascii-bg" aria-hidden="true"></canvas>
     <div class="chrome-min">
       <div class="l brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L01 部署课</span></div>
-      <div class="r">09 / 12</div>
+      <div class="r">10 / 13</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr auto;gap:2.6vh">
       <div class="t-meta" style="color:rgba(255,255,255,.78);letter-spacing:.22em">SECTION02</div>
@@ -466,11 +503,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S10: 危险 vs 解决方案 ========== -->
+<!-- ========== L01 S11: 危险 vs 解决方案 ========== -->
 <section class="slide dark" data-layout="S08">
   <div class="canvas-card">
     <div class="chrome-min" style="color:rgba(255,255,255,.62)">
-      <div class="l">L01 · 10 / 12</div>
+      <div class="l">L01 · 11 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div class="duo-compare" style="margin-top:6vh">
@@ -489,11 +526,11 @@
   </div>
 </section>
 
-<!-- ========== L01 S11: 实操环境变量 ========== -->
+<!-- ========== L01 S12: 实操环境变量 ========== -->
 <section class="slide" data-layout="S05">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">L01 · 11 / 12</div>
+      <div class="l">L01 · 12 / 13</div>
       <div class="r">DEPLOYMENT</div>
     </div>
     <div style="flex:1;padding:0;display:grid;grid-template-rows:auto 1fr;gap:2vh;margin-top:2vh">
@@ -522,14 +559,14 @@
   </div>
 </section>
 
-<!-- ========== L01 S12: 结业 ========== -->
+<!-- ========== L01 S13: 结业 ========== -->
 <section class="slide split" data-layout="S10">
   <div class="canvas-card">
     <div class="split-half">
       <div class="half b-accent" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between;position:relative;overflow:hidden">
         <canvas class="ascii-bg" aria-hidden="true"></canvas>
         <div class="chrome-min" style="margin-bottom:0;position:relative;z-index:1;color:rgba(255,255,255,.62)">
-          <div class="l">L01 · 12 / 12</div>
+          <div class="l">L01 · 13 / 13</div>
           <div class="r">CLOSING</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:2vh;position:relative;z-index:1">
@@ -538,7 +575,7 @@
         </div>
         <div style="display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:2vh;position:relative;z-index:1">
           <div class="t-meta" style="color:rgba(255,255,255,.62)">L01 部署课</div>
-          <div class="t-meta" style="color:rgba(255,255,255,.62)">12 / 12</div>
+          <div class="t-meta" style="color:rgba(255,255,255,.62)">13 / 13</div>
         </div>
       </div>
       <div class="half" style="padding:5.6vh 3.6vw 4.4vh;justify-content:space-between">

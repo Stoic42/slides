@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L12 商业化课 slides</title>
+<title>L12 商业化课 | 从 Demo 到第一笔付费 | O001</title>
+<link rel="stylesheet" href="../o001-design-system.css">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -90,19 +91,63 @@
   /* o001-floating-brand */
   body::before{content:"";position:fixed;left:34px;top:26px;width:112px;height:20px;background:#df017e;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat;z-index:9999;pointer-events:none;opacity:.92}
   body::after{content:"O001";position:fixed;right:34px;top:26px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:#df017e;z-index:9999;pointer-events:none;opacity:.72}
+
+  /* L12 rebuild: bring the commercialization lesson into the O001 system. */
+  body::before{display:none}
+  body::after{content:"";right:0;top:0;width:4px;height:100vh;background:linear-gradient(to bottom,var(--pink) 0 32%,var(--course-signal) 32% 100%);opacity:1}
+  .slide{padding:5.6vh 5vw 5vh}
+  .slide.active{justify-content:flex-start}
+  .slide.grey{background:#f0f0ee;color:#0a0a0a;--text:#0a0a0a;--muted:#666}
+  .slide.accent{background:var(--pink);color:#fff;--text:#fff;--muted:rgba(255,255,255,.68)}
+  .course-chrome{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5vh;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .course-chrome .brand-lockup{color:inherit}
+  .course-chrome .brand-mark{width:7.2em;height:1.15em}
+  .slide.accent .course-chrome,.slide.dark .course-chrome{color:rgba(255,255,255,.68)}
+  h1{max-width:14ch;font-size:clamp(3rem,6.7vw,8rem);line-height:.94}
+  h2{font-size:clamp(2rem,3.4vw,4.6rem);line-height:1;margin-bottom:3.4vh}
+  h3{color:var(--course-signal)}
+  .slide.accent h3{color:#fff}
+  .slide.light .card,.slide.grey .card{background:#fff;border-color:#dededb}
+  .slide.light .card p,.slide.grey .card p{color:#666}
+  .slide.light table td,.slide.grey table td{color:#0a0a0a}
+  .slide.light th,.slide.light td,.slide.grey th,.slide.grey td{border-color:#dededb}
+  .slide.light ul li,.slide.grey ul li{color:#222}
+  .slide.light .highlight-box,.slide.grey .highlight-box{background:rgba(255,113,206,.08)}
+  .step-index{width:42px;height:42px;display:grid;place-items:center;margin-bottom:2vh;background:var(--pink);color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-weight:700;letter-spacing:.06em}
+  .channel-code{display:inline-flex;align-items:center;min-height:42px;margin-bottom:2vh;padding:0 12px;border:1px solid currentColor;color:var(--course-signal);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;font-weight:700;letter-spacing:.14em}
+  .cover-grid{flex:1;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);gap:5vw;align-items:end}
+  .cover-side{align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;padding:3vh 2vw;background:rgba(255,255,255,.12);border-top:2px solid #fff}
+  .cover-side strong{font-size:clamp(1.4rem,2vw,2.4rem);font-weight:500}
+  .cover-side span{margin-top:1vh;font-size:clamp(.9rem,1.05vw,1.2rem);line-height:1.6;color:rgba(255,255,255,.76)}
+  .closing-action{margin-top:auto;display:grid;grid-template-columns:1fr auto;gap:3vw;align-items:end;padding-top:3vh;border-top:1px solid rgba(255,255,255,.24)}
+  .closing-action strong{font-size:clamp(1.4rem,2vw,2.5rem);font-weight:400;line-height:1.2}
+  .closing-action span{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,.68)}
+  .notes-btn{top:4.5rem;right:2rem}
 </style>
 </head>
-<body>
+<body data-course="L12">
 <div class="slides">
 
 <!-- ========== L12 S01: Cover ========== -->
-<section class="slide dark" data-layout="S01">
-  <div class="meta"><span class="tag">实战课</span> 2节×20分钟 · ¥79</div>
-  <h1 data-anim>商业化课：<br>从 Demo 到第一笔付费</h1>
-  <p data-anim class="delay-1" style="margin-top:1.5rem;color:var(--muted)">
-    M001 嘉宾分享整理：赵迪 × Vivian × Angel<br>
-    SheNicest O001 前置工作坊 · 2026年6月
-  </p>
+<section class="slide accent" data-layout="S01">
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12 商业化课</span></div>
+    <div>01 / 08</div>
+  </div>
+  <div class="cover-grid">
+    <div>
+      <div class="meta" style="color:rgba(255,255,255,.76)"><span class="tag" style="border-color:#fff;color:#fff">实战课</span> 2节 × 20分钟 · ¥79</div>
+      <h1 data-anim>从 Demo 到<br>第一笔付费</h1>
+      <p data-anim class="delay-1" style="margin-top:2.4vh;color:rgba(255,255,255,.72)">
+        嘉宾分享整理：赵迪 × Vivian × Angel<br>
+        SheNicest O001 前置工作坊 · L12
+      </p>
+    </div>
+    <div class="cover-side">
+      <strong>不是融资课。</strong>
+      <span>这一课只解决一件事：怎样验证真的有人愿意为你的产品付钱。</span>
+    </div>
+  </div>
   <div class="note-tooltip" data-note="S01">
     <strong>讲师提示</strong><br>
     问候同学 → 直接点明今天的主题：做出Demo之后，下一步是什么？<br>
@@ -112,8 +157,11 @@
 </section>
 
 <!-- ========== L12 S02: 为什么商业化比产品更难 ========== -->
-<section class="slide dark" data-layout="S02">
-  <div class="slide-num">S02</div>
+<section class="slide light" data-layout="S02">
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12</span></div>
+    <div>02 / 08 · VALUE</div>
+  </div>
   <h2 data-anim>为什么商业化比产品更难</h2>
   <div class="two-col" data-anim class="delay-1">
     <div>
@@ -140,27 +188,30 @@
 </section>
 
 <!-- ========== L12 S03: 需求验证 ========== -->
-<section class="slide dark" data-layout="S03">
-  <div class="slide-num">S03</div>
+<section class="slide grey" data-layout="S03">
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12</span></div>
+    <div>03 / 08 · VALIDATION</div>
+  </div>
   <h2 data-anim>赵迪：需求验证四步法</h2>
   <div class="grid grid-2" data-anim class="delay-1">
     <div class="card">
-      <div class="emoji">1️⃣</div>
+      <div class="step-index">01</div>
       <h3>找到愿意聊的人</h3>
       <p>不是随便问，是找<strong>真的有过这个痛点</strong>的人。朋友不算。</p>
     </div>
     <div class="card">
-      <div class="emoji">2️⃣</div>
+      <div class="step-index">02</div>
       <h3>问痛点，不问方案</h3>
       <p>"这个问题有多痛？" 比 "你觉得这个功能好不好？" 更重要。</p>
     </div>
     <div class="card">
-      <div class="emoji">3️⃣</div>
+      <div class="step-index">03</div>
       <h3>问钱，不问意愿</h3>
       <p>"你愿意为这个付多少钱？" 比 "你会用吗？" 更真实。</p>
     </div>
     <div class="card">
-      <div class="emoji">4️⃣</div>
+      <div class="step-index">04</div>
       <h3>验证支付渠道</h3>
       <p>中国用户习惯微信/支付宝；海外用户习惯 Stripe/PayPal。支付方式决定转化率。</p>
     </div>
@@ -174,8 +225,11 @@
 </section>
 
 <!-- ========== L12 S04: Vivian - 痛点优先 ========== -->
-<section class="slide dark" data-layout="S04">
-  <div class="slide-num">S04</div>
+<section class="slide light" data-layout="S04">
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12</span></div>
+    <div>04 / 08 · FOUNDER</div>
+  </div>
   <h2 data-anim>Vivian：女性做产品的独特优势</h2>
   <div class="two-col" data-anim class="delay-1">
     <div class="quote">
@@ -204,7 +258,10 @@
 
 <!-- ========== L12 S05: Angel - Pitch 与自信心 ========== -->
 <section class="slide dark" data-layout="S05">
-  <div class="slide-num">S05</div>
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12</span></div>
+    <div>05 / 08 · PITCH</div>
+  </div>
   <h2 data-anim>Angel：Pitch 给投资人 + 自信心</h2>
   <div class="grid grid-2" data-anim class="delay-1">
     <div>
@@ -240,12 +297,15 @@
 </section>
 
 <!-- ========== L12 S06: 支付渠道与商业化路径 ========== -->
-<section class="slide dark" data-layout="S06">
-  <div class="slide-num">S06</div>
+<section class="slide light" data-layout="S06">
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12</span></div>
+    <div>06 / 08 · PAYMENT</div>
+  </div>
   <h2 data-anim>赵迪：支付渠道与商业化路径</h2>
   <div class="grid grid-3" data-anim class="delay-1">
     <div class="card">
-      <div class="emoji">🏧</div>
+      <div class="channel-code">CN</div>
       <h3>国内渠道</h3>
       <ul>
         <li>微信小商店（最常用）</li>
@@ -255,7 +315,7 @@
       </ul>
     </div>
     <div class="card">
-      <div class="emoji">🌏</div>
+      <div class="channel-code">GLOBAL</div>
       <h3>海外渠道</h3>
       <ul>
         <li>Stripe（最推荐）</li>
@@ -265,7 +325,7 @@
       </ul>
     </div>
     <div class="card">
-      <div class="emoji">🤝</div>
+      <div class="channel-code">COMMUNITY</div>
       <h3>平台合作</h3>
       <ul>
         <li>SheNicest 平台（奖励型众筹）</li>
@@ -287,8 +347,11 @@
 </section>
 
 <!-- ========== L12 S07: 商业化检查清单 ========== -->
-<section class="slide dark" data-layout="S07">
-  <div class="slide-num">S07</div>
+<section class="slide grey" data-layout="S07">
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12</span></div>
+    <div>07 / 08 · CHECKPOINT</div>
+  </div>
   <h2 data-anim>商业化自检清单</h2>
   <p data-anim class="delay-1" style="color:var(--muted);margin-bottom:2rem">做完 Demo 之后，问自己这 5 个问题</p>
   <div class="table-wrap" data-anim class="delay-2">
@@ -311,7 +374,10 @@
 
 <!-- ========== L12 S08: 结业 ========== -->
 <section class="slide dark" data-layout="S08">
-  <div class="slide-num">S08</div>
+  <div class="course-chrome">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L12 商业化课</span></div>
+    <div>08 / 08 · CLOSING</div>
+  </div>
   <h2 data-anim>下一步：让你的 Demo 被付费支持</h2>
   <div class="grid grid-2" data-anim class="delay-1">
     <div class="card">
@@ -327,13 +393,17 @@
       <ul>
         <li>找3个真实用户完成需求验证访谈</li>
         <li>确认你的支付渠道</li>
-        <li>写一份100字的一一句话定位</li>
+        <li>写一份100字的一句话定位</li>
         <li>上架 SheNicest 平台申请内测</li>
       </ul>
     </div>
   </div>
   <div class="highlight-box" data-anim class="delay-2">
-    <p style="text-align:center;font-size:1.1rem"><strong>SheNicest 平台</strong>：Demo 期项目可以申请内测支持，让第一批真实用户提前付费 harness 你的产品</p>
+    <p style="text-align:center;font-size:1.1rem"><strong>SheNicest 平台</strong>：Demo 期项目可以申请内测支持，让第一批真实用户提前付费验证你的产品</p>
+  </div>
+  <div class="closing-action">
+    <strong>下一步不是继续加功能，<br>而是找到第一个愿意付钱的人。</strong>
+    <span>O001 COMPLETE →</span>
   </div>
   <div class="note-tooltip" data-note="S08">
     <strong>讲师提示</strong><br>
@@ -409,6 +479,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'n' || e.key === 'N') toggleNotes();
 });
 
+sections[0].classList.add('active');
 animIn(0);
 </script>
 </body>

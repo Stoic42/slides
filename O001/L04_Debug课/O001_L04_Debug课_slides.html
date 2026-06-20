@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L04 Debug课 | O001</title>
+<link rel="stylesheet" href="../o001-design-system.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -42,7 +43,7 @@
   .slide.accent .brand-lockup,.slide.accent .canvas-card .brand-lockup{color:rgba(255,255,255,.86)!important}
 </style>
 </head>
-<body class="canvas-mode">
+<body class="canvas-mode" data-course="L04">
 <script>if(/Win/i.test(navigator.platform||navigator.userAgentData?.platform||'')){document.body.classList.add('is-win');}(function(){const KEY='guizang-ppt-low-power';const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const stored=localStorage.getItem(KEY);window.__lowPowerMode=stored==='1'||(stored===null&&reduced);function updateHint(){const hint=document.getElementById('hint');if(hint)hint.textContent=`← → 翻页 · B ${window.__lowPowerMode?'动态':'静态'} · ESC 索引`;}window.__setLowPowerMode=function(on,opts={}){window.__lowPowerMode=!!on;document.body.classList.toggle('low-power',window.__lowPowerMode);if(opts.persist!==false)localStorage.setItem(KEY,window.__lowPowerMode?'1':'0');if(window.__lowPowerMode&&document.getAnimations){document.getAnimations().forEach(a=>a.cancel());}updateHint();dispatchEvent(new CustomEvent('swiss-low-power-change',{detail:{on:window.__lowPowerMode}}));if(window.__playSlide)window.__playSlide(window.__currentSlideIndex||0);};document.body.classList.toggle('low-power',window.__lowPowerMode);addEventListener('DOMContentLoaded',updateHint,{once:true});})();</script>
 <canvas id="bg-grid" class="bg"></canvas>
 <div id="hint">← → 翻页 · B 静态 · ESC 索引</div>

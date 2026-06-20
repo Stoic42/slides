@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L11 GitHub协作课 | PR / Code Review | O001</title>
+<link rel="stylesheet" href="../o001-design-system.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -22,6 +23,8 @@
   .slide.dark .canvas-card{background:var(--ink);color:var(--paper)}
   .slide.accent .canvas-card{background:var(--accent);color:var(--accent-on)}
   .slide.grey .canvas-card{background:var(--grey-1);color:var(--ink)}
+  body.canvas-mode .slide{padding:0;align-items:stretch;justify-content:stretch}
+  body.canvas-mode .canvas-card{width:100%;height:100%;max-width:100%;max-height:100%}
   canvas.ascii-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:.92}
   .canvas-card>*{position:relative;z-index:1}
   .chrome-min{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-helper);flex:0 0 auto;margin-bottom:var(--sp-9)}
@@ -76,9 +79,40 @@
   .brand-mark{width:5.8em;height:1.05em;display:inline-block;flex:0 0 auto;background:currentColor;opacity:.9;-webkit-mask:var(--brand-logo) center/contain no-repeat;mask:var(--brand-logo) center/contain no-repeat}
   .slide.accent .brand-mark,.slide.dark .brand-mark,.split-half .half.b-ink .brand-mark{opacity:.86}
   .slide.accent .brand-lockup,.slide.accent .canvas-card .brand-lockup{color:rgba(255,255,255,.86)!important}
+  /* L11 evidence page: classroom-redrawn GitHub pull request UI. */
+  .github-pr-board{flex:1;min-height:0;display:grid;grid-template-columns:minmax(250px,.65fr) minmax(0,1.35fr);gap:2.4vw;align-items:stretch}
+  .github-pr-copy{display:flex;flex-direction:column;padding:2.8vh 2vw;background:var(--ink);color:var(--paper)}
+  .github-pr-copy .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#7ee787}
+  .github-pr-copy h2{margin-top:2.2vh;font-family:var(--sans),var(--sans-zh);font-size:clamp(32px,3.4vw,64px);font-weight:250;line-height:.98;letter-spacing:-.03em}
+  .github-pr-copy p{margin-top:2vh;font-family:var(--sans),var(--sans-zh);font-size:clamp(15px,.95vw,19px);line-height:1.55;color:rgba(255,255,255,.68)}
+  .github-pr-copy ol{display:grid;gap:1.1vh;margin-top:auto;list-style:none}
+  .github-pr-copy li{display:grid;grid-template-columns:2em 1fr;gap:.8em;padding-top:1.1vh;border-top:1px solid rgba(255,255,255,.16);font-family:var(--sans),var(--sans-zh);font-size:clamp(14px,.88vw,18px);line-height:1.4}
+  .github-pr-copy li span{font-family:var(--mono);color:#7ee787}
+  .github-window{min-width:0;background:#fff;color:#24292f;border:1px solid #d0d7de;box-shadow:0 18px 50px rgba(10,10,10,.1);display:flex;flex-direction:column}
+  .github-window-bar{height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#f6f8fa;border-bottom:1px solid #d0d7de}
+  .github-window-bar i{width:9px;height:9px;border-radius:50%;background:#d0d7de}
+  .github-window-bar code{margin-left:8px;font:12px var(--mono);color:#57606a}
+  .github-pr-header{padding:2.4vh 1.8vw 1.8vh;border-bottom:1px solid #d8dee4}
+  .github-pr-title{font-family:var(--sans),var(--sans-zh);font-size:clamp(21px,1.65vw,32px);font-weight:500;line-height:1.2}
+  .github-open{display:inline-flex;align-items:center;margin-top:1.2vh;padding:5px 10px;border-radius:20px;background:#1a7f37;color:#fff;font:12px var(--mono)}
+  .github-pr-meta{display:inline;margin-left:10px;font-family:var(--sans),var(--sans-zh);font-size:14px;color:#57606a}
+  .github-tabs{display:flex;gap:1.8vw;padding:1.4vh 1.8vw 0;border-bottom:1px solid #d8dee4;font:600 13px var(--sans)}
+  .github-tabs span{padding-bottom:1.2vh}
+  .github-tabs .active{border-bottom:2px solid #fd8c73}
+  .github-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:1.6vw;padding:2vh 1.8vw}
+  .github-comment{border:1px solid #d0d7de;border-radius:6px;overflow:hidden}
+  .github-comment-head{padding:1.1vh 1vw;background:#f6f8fa;border-bottom:1px solid #d0d7de;font:13px var(--sans);color:#57606a}
+  .github-comment-body{padding:1.5vh 1vw;font:clamp(14px,.84vw,17px)/1.55 var(--sans),var(--sans-zh)}
+  .github-checks{margin-top:1.5vh;border:1px solid #d0d7de;border-radius:6px;padding:1.4vh 1vw;display:grid;gap:.8vh;font:13px var(--sans)}
+  .github-checks strong{color:#1a7f37}
+  .github-side{font:13px/1.5 var(--sans);color:#57606a}
+  .github-side div{padding:1.2vh 0;border-bottom:1px solid #d8dee4}
+  .github-side strong{display:block;color:#24292f}
+  /* The generated deck has no __playSlide handler; keep teaching content visible. */
+  [data-anim]{opacity:1!important;transform:none!important}
 </style>
 </head>
-<body class="canvas-mode">
+<body class="canvas-mode" data-course="L11">
 <canvas id="bg-grid" class="bg"></canvas>
 <div id="hint">← → 翻页 · B 静态 · ESC 索引 · N 讲师提示</div>
 <div id="deck">
@@ -138,44 +172,53 @@
 <section class="slide grey" data-layout="S03">
   <div class="canvas-card">
     <div class="chrome-min">
-      <div class="l">L11 · 03 / 08</div>
+      <div class="l brand-lockup"><span class="brand-mark" aria-hidden="true"></span><span>O001 · L11</span></div>
       <div class="r">COLLABORATION</div>
     </div>
-    <div style="flex:1;display:flex;flex-direction:column">
-      <div class="t-cat accent" style="margin-bottom:2vh">PR 工作流</div>
-      <div class="timeline-h" style="margin-top:4vh">
-        <div class="tl-row">
-          <div class="th-node" data-anim="scale-in">
-            <div class="dot"></div>
-            <div class="label down">
-              <div class="yr">Step 1</div>
-              <div class="name">Fork 仓库</div>
-              <div class="desc">把项目复制到自己账号</div>
+    <div class="github-pr-board">
+      <div class="github-pr-copy" data-anim="slide-left">
+        <div class="eyebrow">Demo · Pull Request</div>
+        <h2>PR 不是<br>“上传代码”</h2>
+        <p>它是一张可讨论、可检查、可批准的改动申请单。</p>
+        <ol>
+          <li><span>01</span><div>开分支并提交一个明确改动</div></li>
+          <li><span>02</span><div>解释 What / Why / How</div></li>
+          <li><span>03</span><div>等待检查通过与 Reviewer 批准</div></li>
+          <li><span>04</span><div>合并后删除临时分支</div></li>
+        </ol>
+      </div>
+      <div class="github-window" data-anim="slide-right">
+        <div class="github-window-bar">
+          <i></i><i></i><i></i><code>github.com/shenicest/project/pull/24</code>
+        </div>
+        <div class="github-pr-header">
+          <div class="github-pr-title">Add mobile navigation and empty state <span style="color:#57606a;font-weight:300">#24</span></div>
+          <span class="github-open">Open</span>
+          <span class="github-pr-meta"><strong>desal</strong> wants to merge 3 commits into <code>main</code></span>
+        </div>
+        <div class="github-tabs">
+          <span class="active">Conversation</span><span>Commits 3</span><span>Checks 2</span><span>Files changed 6</span>
+        </div>
+        <div class="github-body">
+          <div>
+            <div class="github-comment">
+              <div class="github-comment-head"><strong>desal</strong> commented now</div>
+              <div class="github-comment-body">
+                <strong>What</strong><br>为移动端增加导航，并补齐无数据状态。<br><br>
+                <strong>Why</strong><br>手机端无法进入项目详情，首次使用时页面为空。<br><br>
+                <strong>How tested</strong><br>Chrome iPhone 14 模拟器 + 真实安卓设备。
+              </div>
+            </div>
+            <div class="github-checks">
+              <div><strong>✓</strong> build / production</div>
+              <div><strong>✓</strong> visual regression</div>
             </div>
           </div>
-          <div class="th-node accent" data-anim="scale-in" data-delay="100">
-            <div class="dot"></div>
-            <div class="label down">
-              <div class="yr">Step 2</div>
-              <div class="name">开新分支</div>
-              <div class="desc">git checkout -b feature/xxx</div>
-            </div>
-          </div>
-          <div class="th-node accent" data-anim="scale-in" data-delay="200">
-            <div class="dot"></div>
-            <div class="label down">
-              <div class="yr">Step 3</div>
-              <div class="name">提交代码</div>
-              <div class="desc">git commit + git push</div>
-            </div>
-          </div>
-          <div class="th-node accent" data-anim="scale-in" data-delay="300">
-            <div class="dot"></div>
-            <div class="label down">
-              <div class="yr">Step 4</div>
-              <div class="name">发起 PR</div>
-              <div class="desc">GitHub 网页上点 New Pull Request</div>
-            </div>
+          <div class="github-side">
+            <div><strong>Reviewers</strong>vivian ✓</div>
+            <div><strong>Assignees</strong>desal</div>
+            <div><strong>Labels</strong>enhancement</div>
+            <div><strong>Development</strong>Closes #18</div>
           </div>
         </div>
       </div>
